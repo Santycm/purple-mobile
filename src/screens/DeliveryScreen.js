@@ -11,7 +11,7 @@ export default function DeliveryModal({ visible, onClose }) {
       transparent={true}
       onRequestClose={onClose}
     >
-      <View style={AppStyles.modalContainer}>
+      <View style={AppStyles.modalContainerDelivery}>
         <TouchableOpacity style={AppStyles.backButtonModal} onPress={onClose}>
           <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
         </TouchableOpacity>
