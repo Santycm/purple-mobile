@@ -1,38 +1,31 @@
 import React from 'react';
 import {View, Image, FlatList, TouchableOpacity, Text} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
+
 const categories = [
   {
-    name: 'Electrónicos',
-    img: require('../assets/provIcons/alarm-outline.svg'),
+    name: 'Accesorios para vehiculos',
+    img: require('../assets/categoryIcons/screwdriver.png'),
   },
   {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
+    name: 'Hogar y muebles',
+    img: require('../assets/categoryIcons/house.png'),
   },
   {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
+    name: 'Juegos y juguetes',
+    img: require('../assets/categoryIcons/storage-box.png'),
   },
   {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
+    name: 'Electrodomésticos',
+    img: require('../assets/categoryIcons/electric-appliance.png'),
   },
   {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
+    name: 'Celulares y accesorios',
+    img: require('../assets/categoryIcons/call.png'),
   },
   {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
-  },
-  {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
-  },
-  {
-    name: 'Ferretería',
-    img: require('../assets/provIcons/alarm-outline.svg'),
+    name: 'Computación',
+    img: require('../assets/categoryIcons/computer.png'),
   },
 ];
 
@@ -43,9 +36,9 @@ export const InitialCategories = () => {
       renderItem={({item}) => (
         <TouchableOpacity style={styles2.categoryItem}>
           <View style={styles2.btnCategoryImg}>
-            <Image source={item.img} />
+            <Image source={item.img} style={styles2.categoryImg} />
           </View>
-          <Text style={{color: 'white'}}>{item.name}</Text>
+          <Text style={[styles2.textTitle, styles2.textTitleCenter]}>{item.name}</Text>
         </TouchableOpacity>
       )}
       horizontal
