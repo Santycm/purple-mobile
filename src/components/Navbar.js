@@ -3,7 +3,7 @@ import {View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Text
 import Icon from 'react-native-ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 
-export const Navbar = () => {
+export const Navbar = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const slideAnim = useRef(new Animated.Value(-300)).current;
 
@@ -60,7 +60,10 @@ export const Navbar = () => {
                   </Text>
                 </View>
               </View>
-              <TouchableOpacity style={styles2.btnPrimary}>
+              <TouchableOpacity style={styles2.btnPrimary} onPress={()=>{
+                toggleMenu();
+                navigation.navigate('Login');
+              }}>
                 <Text style={styles2.textTitle}>INGRESAR</Text>
               </TouchableOpacity>
             </View>

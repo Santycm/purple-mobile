@@ -193,11 +193,27 @@ const styles2 = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
   },
-  textProductContainer:{
+  textProductContainer: {
     display: 'flex',
     flexDirection: 'column',
     paddingHorizontal: 10,
-  }
+  },
+  bgScreen: {
+    backgroundColor: '#2B2B2B',
+    height: '100%',
+    width: '100%',
+  },
+  btnBack: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    padding: 10,
+    backgroundColor: '#6A0DAD',
+    borderRadius: 100,
+    margin: 10,
+    alignSelf: 'flex-start',
+  },
 });
 
 export {styles2};

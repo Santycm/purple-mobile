@@ -6,7 +6,6 @@ import {InitialCategories} from '../components/InitialCategories.js';
 import {ProductComponent} from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
 
-
 export const Home = () => {
   const sale = [
     {
@@ -38,7 +37,6 @@ export const Home = () => {
 
   return (
     <SafeAreaView style={styles2.homeContainer}>
-      <Navbar />
       <ScrollView>
         <Slider />
         <InitialCategories />
@@ -64,6 +62,17 @@ export const Home = () => {
                 <ProductComponent {...item} />
               </View>
             ))}
+          </View>
+        </View>
+        <View style={styles2.sectionContainer}>
+          <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
+            ¿Necesitas ayuda?
+          </Text>
+          <View style={styles2.sectionBg}>
+            <Text style={styles2.textTitle}>Contactanos</Text>
+            <Text style={styles2.textTitle}>Preguntas frecuentes</Text>
+            <Text style={styles2.textTitle}>Términos y condiciones</Text>
+            <Text style={styles2.textTitle}>Políticas de privacidad</Text>
           </View>
         </View>
       </ScrollView>
