@@ -1,35 +1,23 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Text, Animated, Easing} from 'react-native';
-import Icon from 'react-native-ionicons';
+import {View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 
 export const Navbar = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const slideAnim = useRef(new Animated.Value(-300)).current;
 
   const toggleMenu = () => {
     if (menuVisible) {
-      Animated.timing(slideAnim, {
-        toValue: -300, 
-        duration: 300,
-        easing: Easing.out(Easing.ease),
-        useNativeDriver: true,
-      }).start(() => setMenuVisible(false));
+      setMenuVisible(false);
     } else {
       setMenuVisible(true);
-      Animated.timing(slideAnim, {
-        toValue: 0, 
-        duration: 300,
-        easing: Easing.out(Easing.ease),
-        useNativeDriver: true,
-      }).start();
     }
   };
 
   return (
     <View style={styles2.navbar}>
       <TouchableOpacity onPress={toggleMenu}>
-        <Icon name="menu" size={25} color="white" />
+        <Icon name="arrow-undo-circle-outline" size={25} color="white" />
       </TouchableOpacity>
 
       <TextInput

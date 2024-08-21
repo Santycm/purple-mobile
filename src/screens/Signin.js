@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Touchable } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import Icon from 'react-native-ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { styles2 } from '../styles/AppStyles2';
 
 export const Sigin = ({navigation}) => {
