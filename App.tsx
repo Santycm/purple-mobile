@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+
 import { Home } from './src/screens/Home.js';
 import {Cart} from './src/screens/Cart.js';
 import { Sigin } from './src/screens/Signin.js';
+import { Signup } from './src/screens/Signup.js';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Navbar } from './src/components/Navbar.js';
@@ -24,7 +27,12 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={Sigin}
-          options={{headerShown: false }}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{headerShown: false}}
         />
         <Stack.Screen name="Cart" component={Cart} />
       </Stack.Navigator>
