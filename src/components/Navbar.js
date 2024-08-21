@@ -17,7 +17,7 @@ export const Navbar = ({navigation}) => {
   return (
     <View style={styles2.navbar}>
       <TouchableOpacity onPress={toggleMenu}>
-        <Icon name="arrow-undo-circle-outline" size={25} color="white" />
+        <Icon name="menu" size={25} color="white" />
       </TouchableOpacity>
 
       <TextInput
