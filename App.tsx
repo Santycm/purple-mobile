@@ -9,7 +9,7 @@ import { Navbar } from './src/components/Navbar.js';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+export default function PaymentModal({ visible, onClose }) {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
