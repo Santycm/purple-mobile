@@ -25,7 +25,10 @@ export const Navbar = ({navigation}) => {
         placeholder="Buscar en Purple Store"
       />
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Cart');
+        }}>
         <Icon name="cart" size={25} color="white" />
       </TouchableOpacity>
 
@@ -48,10 +51,12 @@ export const Navbar = ({navigation}) => {
                   </Text>
                 </View>
               </View>
-              <TouchableOpacity style={styles2.btnPrimary} onPress={()=>{
-                toggleMenu();
-                navigation.navigate('Login');
-              }}>
+              <TouchableOpacity
+                style={styles2.btnPrimary}
+                onPress={() => {
+                  toggleMenu();
+                  navigation.navigate('Login');
+                }}>
                 <Text style={styles2.textTitle}>INGRESAR</Text>
               </TouchableOpacity>
             </View>
