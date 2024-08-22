@@ -1,35 +1,71 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { styles2 } from '../styles/AppStyles2';
+import {styles2} from '../styles/AppStyles2';
+import colombiaData from '../assets/colombia.min.json';
 
-export const Infouserform = ({nextStep}) => {
-    const [dateTime, setDateTime] = useState(new Date());
-    const [show, setShow] = useState(false);
+export const Infouserform = ({nextStep, userState}) => {
+  
+  const [dateTime, setDateTime] = useState(new Date());
+  const [show, setShow] = useState(false);
 
-    const [selectedCountry, setSelectedCountry] = useState('');
-    const countries = ['Colombia', 'Perú', 'México'];
+  const countries = ['Colombia'];
 
-    const onChangeDateTime = (event, selectedDate) => {
-      const currentDate = selectedDate || date;
-      setShow(false);
-      setDateTime(currentDate);
-    };
+  const onChangeDateTime = (event, selectedDate) => {
+    const today = new Date();
+    const birthDate = new Date(selectedDate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    userState.setAge(age);
+    const currentDate = selectedDate || date;
+    setShow(false);
+    setDateTime(currentDate);
+    if (!validateAge(selectedDate)) {
+      Alert.alert(
+        'Edad no permitida',
+        'La edad debe ser mayor de 18 años y máximo 50 años',
+      );
+    }
+  };
 
-    const showDatepicker = () => {
-      setShow(true);
-    };
+  const validateAge = selectedDate => {
+    const today = new Date();
+    const birthDate = new Date(selectedDate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    if (age < 18 || age > 50) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
 
   return (
     <View style={styles2.formSection}>
       <View style={styles2.inputSection}>
-        <Text style={styles2.textInputLabel}>Nombre completo</Text>
-        <TextInput style={styles2.textInput2}></TextInput>
+        <Text style={styles2.textInputLabel}>Nombre de usuario</Text>
+        <TextInput
+          style={styles2.textInput2}
+          maxLength={10}
+          value={userState.userName}
+          onChangeText={userState.setUsername}></TextInput>
       </View>
       <View style={styles2.inputSection}>
         <Text style={styles2.textInputLabel}>Dirección</Text>
-        <TextInput style={styles2.textInput2}></TextInput>
+        <TextInput
+          style={styles2.textInput2}
+          maxLength={30}
+          value={userState.addres}
+          onChangeText={userState.setAddress}></TextInput>
       </View>
       <View style={styles2.rowInputsContainer}>
         <View style={[styles2.inputSection, styles2.inputSectionMid]}>
@@ -52,16 +88,19 @@ export const Infouserform = ({nextStep}) => {
         </View>
         <View style={[styles2.inputSection, styles2.inputSectionMid]}>
           <Text style={styles2.textInputLabel}>Tu edad</Text>
-          <TextInput style={styles2.btnDate} editable={false}></TextInput>
+          <TextInput
+            style={[styles2.btnDate, styles2.ageInput]}
+            editable={false}
+            value={userState.age.toString()}></TextInput>
         </View>
       </View>
       <View style={styles2.inputSection}>
         <Text style={styles2.textInputLabel}>País</Text>
         <View style={styles2.picker}>
           <Picker
-            selectedValue={selectedCountry}
+            selectedValue={userState.selectedCountry}
             onValueChange={itemValue => {
-              setSelectedCountry(itemValue);
+              userState.setSelectedCountry(itemValue);
             }}>
             <Picker.Item label="Seleccione un país" />
             {countries.map(country => (
@@ -75,13 +114,17 @@ export const Infouserform = ({nextStep}) => {
           <Text style={styles2.textInputLabel}>Departamento</Text>
           <View style={styles2.picker}>
             <Picker
-              selectedValue={selectedCountry}
+              selectedValue={userState.selectedDepartment}
               onValueChange={itemValue => {
-                setSelectedCountry(itemValue);
+                userState.setSelectedDepartment(itemValue);
               }}>
-              <Picker.Item label="Seleccione un país" />
-              {countries.map(country => (
-                <Picker.Item key={country} label={country} value={country} />
+              <Picker.Item label="Seleccione un departamento" />
+              {colombiaData.map(data => (
+                <Picker.Item
+                  key={data.deparment}
+                  label={data.deparment}
+                  value={data.deparment}
+                />
               ))}
             </Picker>
           </View>
@@ -90,14 +133,16 @@ export const Infouserform = ({nextStep}) => {
           <Text style={styles2.textInputLabel}>Municipio</Text>
           <View style={styles2.picker}>
             <Picker
-              selectedValue={selectedCountry}
+              selectedValue={userState.selectedCity}
               onValueChange={itemValue => {
-                setSelectedCountry(itemValue);
+                userState.setSelectedCity(itemValue);
               }}>
               <Picker.Item label="Seleccione un país" />
-              {countries.map(country => (
-                <Picker.Item key={country} label={country} value={country} />
-              ))}
+              {colombiaData
+                .find(data => data.deparment === userState.selectedDepartment)
+                ?.cities.map(city => (
+                  <Picker.Item key={city} label={city} value={city} />
+                ))}
             </Picker>
           </View>
         </View>
@@ -108,4 +153,4 @@ export const Infouserform = ({nextStep}) => {
       </TouchableOpacity>
     </View>
   );
-}
+};

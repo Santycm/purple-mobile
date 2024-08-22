@@ -10,10 +10,6 @@ export const Accountform = () => {
         <TextInput style={styles2.textInput2}></TextInput>
       </View>
       <View style={styles2.inputSection}>
-        <Text style={styles2.textInputLabel}>Usuario</Text>
-        <TextInput style={styles2.textInput2}></TextInput>
-      </View>
-      <View style={styles2.inputSection}>
         <Text style={styles2.textInputLabel}>Contraseña</Text>
         <TextInput style={styles2.textInput2}></TextInput>
       </View>

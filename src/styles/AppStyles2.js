@@ -335,6 +335,15 @@ const styles2 = StyleSheet.create({
     color: 'black',
     borderRadius:10,
   },
+  inputError:{
+    color: 'red',
+    fontSize: 10,
+  },
+  ageInput:{
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
 
 export {styles2};
