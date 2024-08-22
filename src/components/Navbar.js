@@ -1,10 +1,30 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Text} from 'react-native';
+import React, {useState, useCallback, useRef} from 'react';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Modal,
+  Text,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
+import {useFocusEffect, useNavigationState} from '@react-navigation/native';
 
 export const Navbar = ({navigation}) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const routeName = useNavigationState(state => state.routes[state.index].name);
+
+  const searchInputRef = useRef(null);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (searchInputRef.current && routeName === 'SearchProduct') {
+        searchInputRef.current.focus();
+      }
+    }, []),
+  );
 
   const toggleMenu = () => {
     if (menuVisible) {
@@ -13,6 +33,14 @@ export const Navbar = ({navigation}) => {
       setMenuVisible(true);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setMenuVisible(false);
+      };
+    }, []),
+  );
 
   return (
     <View style={styles2.navbar}>
@@ -23,6 +51,18 @@ export const Navbar = ({navigation}) => {
       <TextInput
         style={styles2.navbarSearch}
         placeholder="Buscar en Purple Store"
+        ref={searchInputRef}
+        onFocus={() => {
+          if (routeName !== 'SearchProduct') {
+            navigation.navigate('SearchProduct');
+          }
+          navigation.navigate('SearchProduct');
+        }}
+        value={searchTerm}
+        onChangeText={(text) => {
+          setSearchTerm(text);
+          navigation.navigate('SearchProduct', {searchTerm: text});
+        }}
       />
 
       <TouchableOpacity
@@ -61,7 +101,11 @@ export const Navbar = ({navigation}) => {
               </TouchableOpacity>
             </View>
             <View style={styles2.sideBarOptions}>
-              <TouchableOpacity style={styles2.sideBarOption}>
+              <TouchableOpacity
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('Home');
+                }}>
                 <Icon name="home" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Inicio</Text>
               </TouchableOpacity>
@@ -77,7 +121,11 @@ export const Navbar = ({navigation}) => {
                 <Icon name="pricetags" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Ofertas</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}>
+              <TouchableOpacity
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('MyProfile');
+                }}>
                 <Icon name="person" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Mi cuenta</Text>
               </TouchableOpacity>

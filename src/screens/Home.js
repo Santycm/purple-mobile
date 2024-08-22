@@ -5,38 +5,11 @@ import {Slider} from '../components/Slider.js';
 import {InitialCategories} from '../components/InitialCategories.js';
 import {ProductComponent} from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
+import {products} from '../assets/dbProducts.js';
 
 export const Home = () => {
-  const sale = [
-    {
-      img: require('../assets/provImgProduct/product1.webp'),
-      name: 'Producto 1',
-      price: 10000,
-    },
-    {
-      img: require('../assets/provImgProduct/product1.webp'),
-      name: 'Producto 2',
-      price: 10000,
-    },
-    {
-      img: require('../assets/provImgProduct/product1.webp'),
-      name: 'Producto 2',
-      price: 10000,
-    },
-    {
-      img: require('../assets/provImgProduct/product1.webp'),
-      name: 'Producto 2',
-      price: 10000,
-    },
-    {
-      img: require('../assets/provImgProduct/product1.webp'),
-      name: 'Producto 2',
-      price: 10000,
-    },
-  ];
-
   return (
-    <SafeAreaView style={styles2.homeContainer}>
+    <View style={styles2.homeContainer}>
       <ScrollView>
         <Slider />
         <InitialCategories />
@@ -45,11 +18,13 @@ export const Home = () => {
             ¡En Oferta HOY!
           </Text>
           <View style={styles2.sectionBg}>
-            {sale.map((item, index) => (
-              <View key={index}>
-                <ProductComponent {...item} />
-              </View>
-            ))}
+            {products
+              .filter(item => item.offer)
+              .map((item, index) => (
+                <View key={index}>
+                  <ProductComponent {...item} />
+                </View>
+              ))}
           </View>
         </View>
         <View style={styles2.sectionContainer}>
@@ -57,7 +32,7 @@ export const Home = () => {
             ¡En Oferta HOY!
           </Text>
           <View style={styles2.sectionBg}>
-            {sale.map((item, index) => (
+            {products.map((item, index) => (
               <View key={index}>
                 <ProductComponent {...item} />
               </View>
@@ -76,6 +51,6 @@ export const Home = () => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };

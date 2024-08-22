@@ -1,33 +1,58 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import {styles2} from '../styles/AppStyles2';
+import {styles2} from '../styles/AppStyles2.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
-import { Infouserform } from '../components/Infouserform.js';
-import { Accountform } from '../components/Accountform.js';
+import {InfoUserForm} from '../components/InfoUserForm.js';
+import {Accountform} from '../components/AccountForm.js';
 import {users} from '../assets/dbUsers.js';
 
-export const Signup = ({navigation}) => {
+export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
 
   const [userName, setUsername] = useState('');
   const [addres, setAddress] = useState('');
-  const [age, setAge] = useState(0);
+  const [birthDate, setBirthDate] = useState(0);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [passwordAccount, setPasswordAccount] = useState('');
   const [confirmPasswordAccount, setConfirmPasswordAccount] = useState('');
 
-  const validateFirstForm = ()=>{
-    if(userName === '' || addres === '' || age === 0 || selectedCountry === '' || selectedDepartment === '' || selectedCity === ''){
+  const validateFirstForm = () => {
+    if (
+      userName === '' ||
+      addres === '' ||
+      selectedCountry === '' ||
+      selectedDepartment === '' ||
+      selectedCity === ''
+    ) {
       return false;
     }
     return true;
-  }
+  };
 
-  const validateFinalForm = ()=>{
+  const nameRegex = /^[A-Za-z ]+$/;
+
+  const validateFinalForm = () => {
+    if (name === '' || lastName === '' || email === '' || passwordAccount === '') {
+      alert('Por favor llena todos los campos');
+      return false;
+    }
+
+    if (!nameRegex.test(name)) {
+      alert('El nombre solo puede contener letras');
+      return false;
+    }
+
+    if (!nameRegex.test(lastName)) {
+      alert('El apellido solo puede contener letras');
+      return false;
+    }
+
     if (!email.includes('@')) {
       alert('El correo debe contener un "@"');
       return false;
@@ -55,10 +80,21 @@ export const Signup = ({navigation}) => {
       return false;
     }
 
-    users.push({userName:userName, addres:addres, age:age, country:selectedCountry, department:selectedDepartment, city:selectedCity, email:email, password:passwordAccount});
+    users.push({
+      userName: userName,
+      addres: addres,
+      birthDate: birthDate,
+      country: selectedCountry,
+      department: selectedDepartment,
+      city: selectedCity,
+      email: email,
+      password: passwordAccount,
+      name: name,
+      lastName: lastName,
+    });
 
     return true;
-  }
+  };
 
   return (
     <View style={styles2.signUpScreen}>
@@ -73,10 +109,50 @@ export const Signup = ({navigation}) => {
         <Text style={styles2.textPrincipal}>
           ¡VAMOS A CREAR TU CUENTA PURPLE!
         </Text>
-        {!ShowAccountForm && <Infouserform userState={{userName, setUsername, addres, setAddress, age, setAge, selectedCountry, setSelectedCountry, selectedCity, setSelectedCity, selectedDepartment, setSelectedDepartment}} nextStep={()=> 
-        validateFirstForm()? setShowAccountForm(true): alert('Por favor llena todos los campos')
-         } />}
-        {ShowAccountForm && <Accountform userState2={{email, setEmail, passwordAccount, setPasswordAccount, confirmPasswordAccount, setConfirmPasswordAccount}} createAccount={()=> validateFinalForm()? navigation.navigate('Login'): alert('Algo salió mal')}/>}
+        {!ShowAccountForm && (
+          <InfoUserForm
+            userState={{
+              userName,
+              setUsername,
+              addres,
+              setAddress,
+              birthDate,
+              setBirthDate,
+              selectedCountry,
+              setSelectedCountry,
+              selectedCity,
+              setSelectedCity,
+              selectedDepartment,
+              setSelectedDepartment,
+            }}
+            nextStep={() =>
+              validateFirstForm()
+                ? setShowAccountForm(true)
+                : alert('Por favor llena todos los campos')
+            }
+          />
+        )}
+        {ShowAccountForm && (
+          <Accountform
+            userState2={{
+              name,
+              setName,
+              lastName,
+              setLastName,
+              email,
+              setEmail,
+              passwordAccount,
+              setPasswordAccount,
+              confirmPasswordAccount,
+              setConfirmPasswordAccount,
+            }}
+            createAccount={() =>
+              validateFinalForm()
+                ? navigation.navigate('Login')
+                : alert('Algo salió mal')
+            }
+          />
+        )}
       </ScrollView>
     </View>
   );

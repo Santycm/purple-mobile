@@ -5,10 +5,11 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles2} from '../styles/AppStyles2';
 import colombiaData from '../assets/colombia.min.json';
 
-export const Infouserform = ({nextStep, userState}) => {
+export const InfoUserForm = ({nextStep, userState}) => {
   
   const [dateTime, setDateTime] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [age, setAge] = useState(0);
 
   const countries = ['Colombia'];
 
@@ -21,7 +22,7 @@ export const Infouserform = ({nextStep, userState}) => {
       const today = new Date();
       const birthDate = new Date(currentDate);
       let age = today.getFullYear() - birthDate.getFullYear();
-      userState.setAge(age);
+      setAge(age);
       Alert.alert(
         'Edad no permitida',
         'La edad debe ser mayor de 18 años y máximo 50 años',
@@ -29,8 +30,9 @@ export const Infouserform = ({nextStep, userState}) => {
     } else {
       const today = new Date();
       const birthDate = new Date(currentDate);
+      userState.setBirthDate(birthDate);
       let age = today.getFullYear() - birthDate.getFullYear();
-      userState.setAge(age);
+      setAge(age);
     }
   };
 
@@ -97,7 +99,7 @@ export const Infouserform = ({nextStep, userState}) => {
           <TextInput
             style={[styles2.btnDate, styles2.ageInput]}
             editable={false}
-            value={userState.age.toString()}></TextInput>
+            value={age.toString()}></TextInput>
         </View>
       </View>
       <View style={styles2.inputSection}>

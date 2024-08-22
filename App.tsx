@@ -1,16 +1,17 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-import { Home } from './src/screens/Home.js';
+import {Home} from './src/screens/Home.js';
 import {Cart} from './src/screens/Cart.js';
-import { Sigin } from './src/screens/Signin.js';
-import { Signup } from './src/screens/Signup.js';
-import { MyProfile } from './src/screens/MyProfile.js';
+import {SigIn} from './src/screens/SignIn.js';
+import {SignUp} from './src/screens/SignUp.js';
+import {MyProfile} from './src/screens/MyProfile.js';
+import {ProductInfo} from './src/screens/ProductInfo.js';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Navbar } from './src/components/Navbar.js';
-
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {Navbar} from './src/components/Navbar.js';
+import { SearchProduct } from './src/screens/SearchProduct.js';
 
 const Stack = createStackNavigator();
 
@@ -21,11 +22,20 @@ export default function App() {
         <Stack.Screen
           name="MyProfile"
           component={MyProfile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ProductInfo"
+          component={ProductInfo}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SearchProduct"
+          component={SearchProduct}
           options={{
             header: ({navigation}) => <Navbar navigation={navigation} />,
           }}
         />
-
         <Stack.Screen
           name="Home"
           component={Home}
@@ -35,12 +45,12 @@ export default function App() {
         />
         <Stack.Screen
           name="Login"
-          component={Sigin}
+          component={SigIn}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Signup"
-          component={Signup}
+          name="SignUp"
+          component={SignUp}
           options={{headerShown: false}}
         />
         <Stack.Screen name="Cart" component={Cart} />

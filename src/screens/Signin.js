@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {View, Text, Touchable, Image} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {styles2} from '../styles/AppStyles2';
+import {styles2} from '../styles/AppStyles2.js';
 import {users} from '../assets/dbUsers.js';
 
-export const Sigin = ({navigation}) => {
+export const SigIn = ({navigation}) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
@@ -45,16 +45,20 @@ export const Sigin = ({navigation}) => {
             maxLength={8}
             value={password}></TextInput>
         </View>
-        <TouchableOpacity style={styles2.btnSecondary} onPress={()=>{
-          let userFound = users.find((userItem)=>{
-            return userItem.userName === user && userItem.password === password;
-          });
-          if(userFound){
-            navigation.navigate('MyProfile');
-          }else{
-            alert('Usuario o contraseña incorrectos');
-          }
-        }}>
+        <TouchableOpacity
+          style={styles2.btnSecondary}
+          onPress={() => {
+            let userFound = users.find(userItem => {
+              return (
+                userItem.userName === user && userItem.password === password
+              );
+            });
+            if (userFound) {
+              navigation.navigate('MyProfile');
+            } else {
+              alert('Usuario o contraseña incorrectos');
+            }
+          }}>
           <Text style={styles2.textTitle}>Iniciar Sesión</Text>
         </TouchableOpacity>
         <View style={styles2.btnSection}>
@@ -62,7 +66,7 @@ export const Sigin = ({navigation}) => {
           <TouchableOpacity
             style={styles2.btnThird}
             onPress={() => {
-              navigation.navigate('Signup');
+              navigation.navigate('SignUp');
             }}>
             <Text style={styles2.textTitle}>Crear cuenta</Text>
             <Icon
