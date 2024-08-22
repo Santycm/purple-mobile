@@ -10,6 +10,10 @@ import { DeliveryScreen } from './src/screens/DeliveryScreen.js';
 import { Payment } from './src/screens/Payment.js';
 import { Arrival } from './src/screens/ArrivalDay.js';
 import { MyPurchases } from './src/screens/MyPurchases.js';
+import { MyFavorites } from './src/screens/MyFavorites.js';
+
+
+MyFavorites
 
 
 
@@ -55,6 +59,12 @@ export default function App() {
         <Stack.Screen 
         name="MyPurchases" 
         component={MyPurchases}
+        options={{headerShown: false }} 
+        />
+        
+        <Stack.Screen 
+        name="MyFavorites" 
+        component={MyFavorites}
         options={{headerShown: false }} 
         />
 

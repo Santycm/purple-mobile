@@ -496,7 +496,34 @@ const AppStyles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 5,
   },
-  });
+
+  //----------------------------------------------------------------------------
+
+  imageSmall: {
+    width: 80,
+    height: 80,
+    resizeMode: 'cover',
+  },
+  statusDisponible: {
+    color: 'green',
+  },
+  statusNoDisponible: {
+    color: 'red',
+  },
+  productDescriptionFavorite: {
+    color: '#FFFFFF',
+    marginVertical: 5,
+  },
+  productPrice: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    marginVertical: 5,
+  },
+
+
+
+
+});
   
 
 

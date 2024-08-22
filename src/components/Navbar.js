@@ -76,6 +76,13 @@ export const Navbar = ({navigation}) => {
                 <Icon name="basket" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Mis compras</Text>
               </TouchableOpacity>
+              <TouchableOpacity style={styles2.sideBarOption}
+              onPress={() => {
+                navigation.navigate('MyFavorites');
+              }}>
+                <Icon name="heart" size={30} color="white"></Icon>
+                <Text style={styles2.textTitle}>Favoritos</Text>
+              </TouchableOpacity>
               <TouchableOpacity style={styles2.sideBarOption}>
                 <Icon name="pricetags" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Ofertas</Text>
