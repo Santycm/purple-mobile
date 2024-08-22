@@ -139,7 +139,7 @@ const AppStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
   },
   backButtonModal: {
     position: 'absolute',
@@ -149,7 +149,8 @@ const AppStyles = StyleSheet.create({
   },
   modalContent: {
     width: '80%',
-    backgroundColor: '#000000',
+    height: 100 ,
+    backgroundColor: '#000000', 
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
@@ -158,7 +159,7 @@ const AppStyles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#D4A5FF',
+    color: '#D4A5FF', 
     marginBottom: 20,
   },
   selectionContainer: {
@@ -166,7 +167,7 @@ const AppStyles = StyleSheet.create({
   },
   drawer: {
     width: '100%',
-    backgroundColor: '#2B2B2B',
+    backgroundColor: '#2B2B2B', 
     borderRadius: 8,
     padding: 15,
     marginBottom: 20,
@@ -178,20 +179,20 @@ const AppStyles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#B388FF',
+    color: '#B388FF', 
   },
   addressText: {
     fontSize: 16,
-    color: '#FFFFFF',
+    color: '#FFFFFF', 
     marginTop: 5,
   },
   pickupDetails: {
     fontSize: 16,
-    color: '#B0B0B0',
+    color: '#FFFFFF', 
     marginBottom: 5,
   },
   editButton: {
-    backgroundColor: '#B388FF',
+    backgroundColor: '#B388FF', 
     padding: 10,
     borderRadius: 5,
     marginVertical: 10,
@@ -199,7 +200,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   mapButton: {
-    backgroundColor: '#B388FF',
+    backgroundColor: '#B388FF', 
     padding: 10,
     borderRadius: 5,
     marginVertical: 10,
@@ -207,7 +208,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   closeButton: {
-    backgroundColor: '#6A0DAD',
+    backgroundColor: '#6A0DAD', 
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
@@ -215,7 +216,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: '#FFFFFF', 
     fontWeight: 'bold',
   },
   advanceButton: {
@@ -225,6 +226,7 @@ const AppStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  
   //-------------------------------------ESTILOS ARRIVALDAY -------------------------------
   container: {
     flex: 1,
@@ -401,7 +403,102 @@ const AppStyles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
-});
+    //------------------------------------ESTILOS MyPurchases--------------------------------------
+
+    container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    padding: 10,
+  },
+  listContainer: {
+    paddingBottom: 20,
+  },
+  purchaseItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#2B2B2B',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+  },
+  imageContainer: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    marginRight: 10,
+  },
+  image: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+  },
+  purchaseDetails: {
+    flex: 1,
+  },
+  productName: {
+    color: '#D4A5FF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  productPrice: {
+    color: '#B0B0B0',
+    fontSize: 14,
+  },
+  productStatus: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  reorderButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  },
+  reorderButton: {
+    backgroundColor: '#6A0DAD', 
+    width: 100, 
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  reorderButtonText: {
+    color: '#FFFFFF', 
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  productStatus: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  statusEntregado: {
+    color: '#B388FF', 
+  },
+  statusEnTransito: {
+    color: '#B388FF', 
+  },
+  statusCancelado: {
+    color: 'red', 
+  },
+  productStatusLabel: {
+    color: '#FFFFFF', 
+    fontSize: 14,
+  },
+  productStatusValue: {
+    color: '#6A0DAD', 
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  dateText: {
+    color: '#B0B0B0', 
+    fontSize: 12,
+    marginBottom: 5,
+  },
+  });
+  
+
 
 
 

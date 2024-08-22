@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Picker } from '@react-native-picker/picker';
-import AppStyles from './styles/AppStyles'; 
+import AppStyles from '../styles/AppStyles.js';
 
 const initialProducts = [
   { id: '1', name: 'Samsung Galaxy S21', image: 'https://www.clevercel.co/cdn/shop/products/samsung-galaxy-s21-5g-0.jpg?v=1634321179', shipping: 'Envío 1' },
   { id: '2', name: 'PlayStation 5', image: 'https://exitocol.vtexassets.com/arquivos/ids/9154830/consola-sony-playstation-5-ps5-825gb-lector-de-disco.jpg?v=637631028235770000', shipping: 'Envío 2' },
 ];
 
-export default function DeliveryPage() {
+export const Arrival = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState({ '1': 'Jueves', '2': 'Viernes' });
 
   const handleDateChange = (productId, date) => {
@@ -20,7 +20,10 @@ export default function DeliveryPage() {
     <View style={AppStyles.container}>
       <ScrollView contentContainerStyle={AppStyles.scrollContainer}>
         <View style={AppStyles.header}>
-          <TouchableOpacity style={AppStyles.backButtonArrival}>
+          <TouchableOpacity style={AppStyles.backButtonArrival}
+           onPress={() => {
+            navigation.navigate('Delivery');
+          }}>
             <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
           </TouchableOpacity>
           <Text style={AppStyles.headerTitle}>Revisa cuando llega tu compra</Text>
@@ -59,8 +62,12 @@ export default function DeliveryPage() {
         </View>
       </ScrollView>
       <View style={AppStyles.footer}>
-        <TouchableOpacity style={AppStyles.continueButton}>
+        <TouchableOpacity style={AppStyles.continueButton}
+         onPress={() => {
+          navigation.navigate('Payment');
+        }}>
           <Text style={AppStyles.continueButtonText}>Continuar</Text>
+          
         </TouchableOpacity>
       </View>
     </View>

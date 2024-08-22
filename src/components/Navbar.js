@@ -69,7 +69,10 @@ export const Navbar = ({navigation}) => {
                 <Icon name="search" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Buscar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}>
+              <TouchableOpacity style={styles2.sideBarOption}
+              onPress={() => {
+                navigation.navigate('MyPurchases');
+              }}>
                 <Icon name="basket" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Mis compras</Text>
               </TouchableOpacity>
@@ -85,6 +88,7 @@ export const Navbar = ({navigation}) => {
                 <Icon name="list" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Categorías</Text>
               </TouchableOpacity>
+              
             </View>
           </View>
         </TouchableWithoutFeedback>

@@ -99,8 +99,13 @@ export const Cart = ({ navigation }) => {
         <Text style={AppStyles.detailsText}>Detalles de compra</Text>
         <Text style={AppStyles.detailsText}>Cantidad de productos: {getTotalItems()}</Text>
         <Text style={AppStyles.totalText}>Total: {formatPrice(getTotalPrice())}</Text>
-        <TouchableOpacity style={AppStyles.checkoutButton}>
+        <TouchableOpacity style={AppStyles.checkoutButton}
+        onPress={() => {
+          navigation.navigate('Delivery');
+        }}>
+          
           <Text style={AppStyles.checkoutButtonText}>Continuar compra</Text>
+        
         </TouchableOpacity>
       </View>
     </View>

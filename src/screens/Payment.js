@@ -1,18 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, Modal } from 'react-native';
-import AppStyles from './styles/AppStyles'; 
+import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function PaymentModal({ visible, onClose }) {
+export const Payment = ({ navigation }) => {
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onClose}
-    >
+    
       <View style={AppStyles.modalContainerPayment}>
-      <TouchableOpacity style={AppStyles.backButtonPayment}>
+      <TouchableOpacity style={AppStyles.backButtonPayment}
+       onPress={() => {
+        navigation.navigate('Arrival');
+      }}>
             <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
           </TouchableOpacity>
 
@@ -50,11 +48,9 @@ export default function PaymentModal({ visible, onClose }) {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={AppStyles.closeButton} onPress={onClose}>
-            <Text style={AppStyles.buttonText}>Continuar</Text>
-          </TouchableOpacity>
+          
         </View>
       </View>
-    </Modal>
+   
   );
 }

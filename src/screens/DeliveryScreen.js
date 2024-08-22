@@ -1,18 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AppStyles from './styles/AppStyles'; 
+import AppStyles from '../styles/AppStyles.js';
 
-export default function DeliveryModal({ visible, onClose }) {
+export const DeliveryScreen = ({ navigation }) => {
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onClose}
-    >
+    
       <View style={AppStyles.modalContainerDelivery}>
-        <TouchableOpacity style={AppStyles.backButtonModal} onPress={onClose}>
+        <TouchableOpacity style={AppStyles.backButtonModal}
+        onPress={() => {
+          navigation.navigate('Cart');
+        }}>
           <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
         </TouchableOpacity>
 
@@ -25,7 +23,10 @@ export default function DeliveryModal({ visible, onClose }) {
                 <Text style={AppStyles.sectionTitle}>Entrega a domicilio</Text>
                 <Text style={AppStyles.addressText}>Dirección: Calle X #123, Ciudad</Text>
               </View>
-              <TouchableOpacity style={AppStyles.advanceButton} onPress={() => { }}>
+              <TouchableOpacity style={AppStyles.advanceButton}
+              onPress={() => {
+                navigation.navigate('Arrival');
+              }}>
                 <Icon name="arrow-forward-circle" size={30} color="#FFFFFF" />
               </TouchableOpacity>
               <TouchableOpacity style={AppStyles.editButton}>
@@ -48,11 +49,14 @@ export default function DeliveryModal({ visible, onClose }) {
             </View>
           </View>
 
-          <TouchableOpacity style={AppStyles.closeButton} onPress={onClose}>
+          <TouchableOpacity style={AppStyles.closeButton}
+          onPress={() => {
+            navigation.navigate('Cart');
+          }}>
             <Text style={AppStyles.buttonText}>Cerrar</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </Modal>
+   
   );
 }
