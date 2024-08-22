@@ -1,10 +1,14 @@
-import React from 'react'
-import { View, Text, Touchable, Image } from 'react-native'
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import React, {useState} from 'react';
+import {View, Text, Touchable, Image} from 'react-native';
+import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { styles2 } from '../styles/AppStyles2';
+import {styles2} from '../styles/AppStyles2';
+import {users} from '../assets/dbUsers.js';
 
 export const Sigin = ({navigation}) => {
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <View style={styles2.bgScreen}>
       <TouchableOpacity
@@ -23,18 +27,34 @@ export const Sigin = ({navigation}) => {
       </View>
 
       <View style={styles2.signInContainer}>
-        <Text style={styles2.textTitle}>
-          Ingresa tu cuenta de Purple Store
-        </Text>
+        <Text style={styles2.textTitle}>Ingresa tu cuenta de Purple Store</Text>
         <View style={styles2.inputSection}>
           <Text style={styles2.textInputLabel}>Usuario</Text>
-          <TextInput style={styles2.textInput}></TextInput>
+          <TextInput
+            style={styles2.textInput}
+            maxLength={10}
+            onChangeText={setUser}
+            value={user}></TextInput>
         </View>
         <View style={styles2.inputSection}>
           <Text style={styles2.textInputLabel}>Contraseña</Text>
-          <TextInput style={styles2.textInput}></TextInput>
+          <TextInput
+            secureTextEntry={true}
+            style={styles2.textInput}
+            onChangeText={setPassword}
+            maxLength={8}
+            value={password}></TextInput>
         </View>
-        <TouchableOpacity style={styles2.btnSecondary}>
+        <TouchableOpacity style={styles2.btnSecondary} onPress={()=>{
+          let userFound = users.find((userItem)=>{
+            return userItem.userName === user && userItem.password === password;
+          });
+          if(userFound){
+            navigation.navigate('MyProfile');
+          }else{
+            alert('Usuario o contraseña incorrectos');
+          }
+        }}>
           <Text style={styles2.textTitle}>Iniciar Sesión</Text>
         </TouchableOpacity>
         <View style={styles2.btnSection}>
@@ -45,10 +65,13 @@ export const Sigin = ({navigation}) => {
               navigation.navigate('Signup');
             }}>
             <Text style={styles2.textTitle}>Crear cuenta</Text>
-            <Icon name="arrow-forward-circle-outline" size={20} color="white"></Icon>
+            <Icon
+              name="arrow-forward-circle-outline"
+              size={20}
+              color="white"></Icon>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-}
+};

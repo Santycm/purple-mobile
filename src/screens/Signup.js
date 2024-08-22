@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import { Infouserform } from '../components/Infouserform.js';
 import { Accountform } from '../components/Accountform.js';
+import {users} from '../assets/dbUsers.js';
 
 export const Signup = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
@@ -15,11 +16,47 @@ export const Signup = ({navigation}) => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [email, setEmail] = useState('');
+  const [passwordAccount, setPasswordAccount] = useState('');
+  const [confirmPasswordAccount, setConfirmPasswordAccount] = useState('');
 
   const validateFirstForm = ()=>{
     if(userName === '' || addres === '' || age === 0 || selectedCountry === '' || selectedDepartment === '' || selectedCity === ''){
       return false;
     }
+    return true;
+  }
+
+  const validateFinalForm = ()=>{
+    if (!email.includes('@')) {
+      alert('El correo debe contener un "@"');
+      return false;
+    }
+
+    if (passwordAccount !== confirmPasswordAccount) {
+      alert('Las contraseñas no coinciden');
+      return false;
+    }
+
+    if (passwordAccount.length > 8) {
+      alert('La contraseña debe tener un máximo de 8 caracteres');
+      return false;
+    }
+
+    const hasUpperCase = /[A-Z]/.test(passwordAccount);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(passwordAccount);
+    const hasNumber = /\d/.test(passwordAccount);
+    const hasLetter = /[a-z]/i.test(passwordAccount);
+
+    if (!hasUpperCase || !hasSpecialChar || !hasNumber || !hasLetter) {
+      alert(
+        'La contraseña debe incluir una letra mayuscula, un caracter especial, un número y una letra minúscula',
+      );
+      return false;
+    }
+
+    users.push({userName:userName, addres:addres, age:age, country:selectedCountry, department:selectedDepartment, city:selectedCity, email:email, password:passwordAccount});
+
     return true;
   }
 
@@ -39,7 +76,7 @@ export const Signup = ({navigation}) => {
         {!ShowAccountForm && <Infouserform userState={{userName, setUsername, addres, setAddress, age, setAge, selectedCountry, setSelectedCountry, selectedCity, setSelectedCity, selectedDepartment, setSelectedDepartment}} nextStep={()=> 
         validateFirstForm()? setShowAccountForm(true): alert('Por favor llena todos los campos')
          } />}
-        {ShowAccountForm && <Accountform/>}
+        {ShowAccountForm && <Accountform userState2={{email, setEmail, passwordAccount, setPasswordAccount, confirmPasswordAccount, setConfirmPasswordAccount}} createAccount={()=> validateFinalForm()? navigation.navigate('Login'): alert('Algo salió mal')}/>}
       </ScrollView>
     </View>
   );

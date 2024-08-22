@@ -5,6 +5,7 @@ import { Home } from './src/screens/Home.js';
 import {Cart} from './src/screens/Cart.js';
 import { Sigin } from './src/screens/Signin.js';
 import { Signup } from './src/screens/Signup.js';
+import { MyProfile } from './src/screens/MyProfile.js';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,6 +18,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="MyProfile"
+          component={MyProfile}
+          options={{
+            header: ({navigation}) => <Navbar navigation={navigation} />,
+          }}
+        />
+
         <Stack.Screen
           name="Home"
           component={Home}

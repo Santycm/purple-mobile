@@ -13,18 +13,24 @@ export const Infouserform = ({nextStep, userState}) => {
   const countries = ['Colombia'];
 
   const onChangeDateTime = (event, selectedDate) => {
-    const today = new Date();
-    const birthDate = new Date(selectedDate);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    userState.setAge(age);
-    const currentDate = selectedDate || date;
-    setShow(false);
+    const currentDate = selectedDate || dateTime;
     setDateTime(currentDate);
-    if (!validateAge(selectedDate)) {
+    setShow(false);
+
+    if (!validateAge(currentDate)) {
+      const today = new Date();
+      const birthDate = new Date(currentDate);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      userState.setAge(age);
       Alert.alert(
         'Edad no permitida',
         'La edad debe ser mayor de 18 años y máximo 50 años',
       );
+    } else {
+      const today = new Date();
+      const birthDate = new Date(currentDate);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      userState.setAge(age);
     }
   };
 
