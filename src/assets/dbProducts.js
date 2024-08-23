@@ -42,7 +42,7 @@ export let products = [
     img: require('../assets/provImgProduct/product4.webp'),
     name: 'Productos de IMCOVALLE',
     description:
-      'Para trabajar desde casa con la computadora o aprovechar los momentos de ocio, necesitas comodidad y facilidad de movimiento. Con tu Soon Go 8541645613 encuentra eso que buscas en un solo aparato con la mejor tecnología. Apto para fácil traslado Navega rápidamente por documentos y páginas web gracias su diseño ultra delgado, ergonómico, liviano y conveniente para llevar a donde quieras o viajar.',
+      'Lo que tienes que saber de este productoCantidad de llantas: 1Índice de carga: 54Posición: DelanteraTipo de montaje: Sin cámaraEl ancho de sección es de 110mm.Tiene un diámetro de 17".La relación entre alto y ancho es de 70.Para moto deportiva.Fabricada en Japón.Diseñada para lograr la firmeza que necesitas al conducir.No incluye rin.Apta para motos Sport.',
     characteristics: ['Marca: Dunlop', 'Línea: Arrowmax', 'Tamaño: 110/70-17'],
     paymentAccepted: ['Tarjeta', 'Efectivo'],
     questions: [
