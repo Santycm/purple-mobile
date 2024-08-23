@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, Image, TextInput, ScrollViewBase} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -29,55 +29,73 @@ export const ProductInfo = ({route, navigation}) => {
         }}>
         <Icon name="arrow-back" size={30} color="white" />
       </TouchableOpacity>
-      <ScrollView
-        style={styles2.productContainer}
-        contentContainerStyle={styles2.scrollContent}>
-        <View style={styles2.bgImgProduct}>
-          <Image source={product.img} style={styles2.imgProductPage} />
-          {product.offer && (
-            <View style={styles2.discountContainer}>
-              <Text style={styles2.textDiscount}>
-                -{product.offer.discount}%
-              </Text>
-            </View>
-          )}
-        </View>
-        <View>
-          <Text style={styles2.titleTextPageProduct}>
-            {product.description}
-          </Text>
-          <Text style={styles2.textCategory}>{product.category}</Text>
-          <View style={styles2.containerRow}>
-            <Text style={styles2.textPricePageProduct}>$ {product.price}</Text>
-            <TouchableOpacity style={styles2.btnAddCart}>
-              <Text style={styles2.textBtn}>Agregar al carrito</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles2.textCharacteristics}>
-            {product.characteristics}
-          </Text>
-          <Text style={styles2.textTitle}>Medios de pago aceptados</Text>
-          <View style={[styles2.containerRow, styles2.containerRowWrap]}>
-            {product.paymentAccepted.map((payment, index) => (
-              <View
-                key={index}
-                style={[styles2.containerRow, styles2.containerPayment]}>
-                <Icon name={getPaymentIcon(payment)} size={20} color="white" />
-                <Text style={styles2.textPayment}>{payment}</Text>
+      <ScrollView>
+        <View style={styles2.productContainer}>
+          <View style={styles2.bgImgProduct}>
+            <Image source={product.img} style={styles2.imgProductPage} />
+            {product.offer && (
+              <View style={styles2.discountContainer}>
+                <Text style={styles2.textDiscount}>
+                  -{product.offer.discount}%
+                </Text>
               </View>
-            ))}
+            )}
           </View>
           <View>
-            <Text style={styles2.textTitle}>Haz una pregunta</Text>
-            <TextInput
-              style={styles2.textArea}
-              placeholder="Escribe tu pregunta aquí..."
-              multiline={true}
-              numberOfLines={4}
-            />
-            <TouchableOpacity style={styles2.btnAddCart}>
-              <Text style={styles2.textBtn}>Enviar</Text>
-            </TouchableOpacity>
+            <Text style={styles2.titleTextPageProduct}>
+              {product.description}
+            </Text>
+            <Text style={styles2.textCategory}>{product.category}</Text>
+            <View style={styles2.containerRow}>
+              <Text style={styles2.textPricePageProduct}>
+                $ {product.price}
+              </Text>
+              <TouchableOpacity style={styles2.btnAddCart}>
+                <Text style={styles2.textBtn}>Agregar al carrito</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles2.textCharacteristics}>
+              {product.characteristics}
+            </Text>
+            <Text style={styles2.textTitle}>Medios de pago aceptados</Text>
+            <View style={[styles2.containerRow, styles2.containerRowWrap]}>
+              {product.paymentAccepted.map((payment, index) => (
+                <View
+                  key={index}
+                  style={[styles2.containerRow, styles2.containerPayment]}>
+                  <Icon
+                    name={getPaymentIcon(payment)}
+                    size={20}
+                    color="white"
+                  />
+                  <Text style={styles2.textPayment}>{payment}</Text>
+                </View>
+              ))}
+            </View>
+            <View>
+              <Text style={styles2.textTitle}>Haz una pregunta</Text>
+              <TextInput
+                style={styles2.textArea}
+                placeholder="Escribe tu pregunta aquí..."
+                multiline={true}
+                numberOfLines={3}
+              />
+              <TouchableOpacity style={styles2.btnAddCart}>
+                <Text style={styles2.textBtn}>Enviar</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Text style={styles2.textTitle}>Comentarios</Text>
+              <Text>Dejar un comentario</Text>
+              <TextInput
+                style={styles2.textArea}
+                placeholder="Escribe tu comentario aquí..."
+                multiline={true}
+                numberOfLines={3}/>
+              <TouchableOpacity style={styles2.btnAddCart}>
+                <Text style={styles2.textBtn}>Enviar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </ScrollView>

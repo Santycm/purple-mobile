@@ -479,7 +479,8 @@ const styles2 = StyleSheet.create({
     padding: 10,
   },
   textArea: {
-    height: 100,
+    marginBottom: 10,
+    height: 80,
     justifyContent: 'flex-start',
     borderColor: 'gray',
     borderWidth: 1,
@@ -487,6 +488,7 @@ const styles2 = StyleSheet.create({
     marginTop: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
+    color: 'black',
   },
   scrollContent: {
     flexGrow: 1,
