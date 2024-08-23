@@ -20,6 +20,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Navbar} from './src/components/Navbar.js';
 import {SearchProduct} from './src/screens/SearchProduct.js';
+import {Offerts} from './src/screens/Offers.js';
 import { Categories } from './src/screens/Categories.js';
 
 const Stack = createStackNavigator();
@@ -111,6 +112,15 @@ export default function App() {
           name="ConfirmPurchase"
           component={ConfirmPurchase}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Offerts"
+          component={Offerts}
+          options={{
+            header: ({navigation}: {navigation: any}) => (
+              <Navbar navigation={navigation} />
+            ),
+          }}
         />
         <Stack.Screen
           name="CategoryScreen"

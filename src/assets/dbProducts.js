@@ -35,11 +35,23 @@ export let products = [
     },
   },
   {
-    id: 2,
-    img: require('../assets/provImgProduct/product1.webp'),
-    description: 'Celular Samsung Galaxy A32',
-    characteristics: 'Caracteristicas del producto',
-    paymentAccepted: ['Tarjeta', 'Efectivo'],
+  id: 2,
+  img: require('../assets/provImgProduct/product2.webp'),
+  description: 'Celular Samsung Galaxy A32',
+  characteristics: `Adata empresa taiwanesa de renombre internacional, se encarga de producir dispositivos de almacenamiento con un alto estándar de calidad. Estos te permiten resguardar tus archivos de manera segura.
+
+    HD710 Pro AHD710P-1TU31 se caracteriza por su eficiencia y buen funcionamiento, que, sumado a su reducido consumo energético, lo vuelven un disco indispensable para funciones estándar.
+
+    Resistencia extrema:  
+    Imagínate un disco de almacenamiento de gran calidad, resistente al agua y al polvo... irrompible. Este producto cumple todas estas funciones esenciales, ya que es ideal para transportarlo en cualquier ambiente.
+
+    Confianza ante todo: 
+    Resguarda todo tipo de información sensible a través de su sistema de seguridad incorporado. Su defensa es inquebrantable.
+
+    Más velocidad a tu alcance: 
+    Este disco transfiere datos a través de una interfaz USB 3.2 Gen 1, lo que te brindará transmitir una mayor cantidad de información.
+  `,
+  paymentAccepted: ['Tarjeta', 'Efectivo'],
     questions: [
       {
         question: 'Pregunta 1',
@@ -71,9 +83,21 @@ export let products = [
   },
   {
     id: 3,
-    img: require('../assets/provImgProduct/product1.webp'),
-    description: 'Carro',
-    characteristics: 'Caracteristicas del producto',
+    img: require('../assets/provImgProduct/product3.webp'),
+    description: 'Disco duro externo Adata HD710 Pro AHD710P-1TU31 1TB negro',
+    characteristics: `Adata, empresa taiwanesa de renombre internacional, se encarga de producir dispositivos de almacenamiento con un alto estándar de calidad. Estos te permiten resguardar tus archivos de manera segura.
+    
+    HD710 Pro AHD710P-1TU31** se caracteriza por su eficiencia y buen funcionamiento, que, sumado a su reducido consumo energético, lo vuelven un disco indispensable para funciones estándar.
+
+    Resistencia extrema:  
+    Imagínate un disco de almacenamiento de gran calidad, resistente al agua y al polvo... irrompible. Este producto cumple todas estas funciones esenciales, ya que es ideal para transportarlo en cualquier ambiente.
+
+    **Confianza ante todo:
+    Resguarda todo tipo de información sensible a través de su sistema de seguridad incorporado. Su defensa es inquebrantable.
+
+    **Más velocidad a tu alcance:
+    Este disco transfiere datos a través de una interfaz USB 3.2 Gen 1, lo que te brindará transmitir una mayor cantidad de información.
+  `,
     paymentAccepted: ['Tarjeta', 'Efectivo'],
     questions: [
       {
@@ -97,7 +121,7 @@ export let products = [
         score: 5,
       },
     ],
-    price: 10000,
+    price: 51500000,
     category: 'Celulares',
     offer: {
       isOffer: true,

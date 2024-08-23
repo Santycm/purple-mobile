@@ -49,17 +49,15 @@ const AppStyles = StyleSheet.create({
     elevation: 5,
   },
   imageContainer: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 45,
+    flex: 1,
+    justifyContent: 'flex-end', 
+    alignItems: 'center', 
+    marginRight: 10,
   },
   cartItemImage: {
-    width: 60,
-    height: 60,
-    resizeMode: 'contain',
+    width: 100,
+    height: 100,
+    resizeMode: 'contain', 
   },
   cartItemDetails: {
     flex: 1,
@@ -503,7 +501,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#B0B0B0', // Gris para las opciones no seleccionadas
+    backgroundColor: '#B0B0B0', 
     marginVertical: 5,
     marginHorizontal: 10,
   },
@@ -513,17 +511,17 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#6A0DAD', // Morado para la opción seleccionada
+    backgroundColor: '#6A0DAD', 
     marginVertical: 5,
     marginHorizontal: 10,
   },
   
   paymentTextScreen: {
     marginLeft: 10,
-    color: '#FFFFFF', // Blanco para el texto en opciones seleccionadas
+    color: '#FFFFFF', 
   },
   captchaContainerScreen: {
-    marginVertical: 20,
+    marginVertical: 50,
     alignItems: 'center',
   },
   captchaImageScreen: {

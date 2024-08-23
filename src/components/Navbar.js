@@ -133,9 +133,12 @@ export const Navbar = ({navigation}) => {
                 <Icon name="heart" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Favoritos</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}>
+              <TouchableOpacity style={styles2.sideBarOption}
+               onPress={() => {
+                navigation.navigate('Offerts');
+              }}>
                 <Icon name="pricetags" size={30} color="white"></Icon>
-                <Text style={styles2.textTitle}>Ofertas</Text>
+                <Text style={styles2.textTitle}>Ofertas</Text> 
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles2.sideBarOption}
