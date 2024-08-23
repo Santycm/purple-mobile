@@ -229,7 +229,6 @@ const styles2 = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
     padding: 10,
     alignSelf: 'flex-start',
   },

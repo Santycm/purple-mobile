@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text, TouchableOpacity} from 'react-native';
+import {View, ScrollView, Text, Pressable} from 'react-native';
 import {Slider} from '../components/Slider.js';
 import {InitialCategories} from '../components/InitialCategories.js';
 import {ProductComponent} from '../components/ProductComponent.js';
@@ -45,9 +45,9 @@ export const Home = () => {
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
             ¿Necesitas ayuda?
           </Text>
-          <TouchableOpacity style={styles2.btnPrimary}>
+          <Pressable style={styles2.btnPrimary}>
             <Text style={styles2.textTitle}>Ayuda y soporte PQRD</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </View>

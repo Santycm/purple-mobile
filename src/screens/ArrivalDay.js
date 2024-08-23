@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, Pressable, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Picker } from '@react-native-picker/picker';
 import AppStyles from '../styles/AppStyles.js';
@@ -32,13 +32,13 @@ export const Arrival = ({ route, navigation }) => {
     <View style={AppStyles.container}>
       <ScrollView contentContainerStyle={AppStyles.scrollContainer}>
         <View style={AppStyles.header}>
-          <TouchableOpacity
+          <Pressable
             style={AppStyles.backButtonArrival}
             onPress={() => {
               navigation.goBack();
             }}>
             <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={AppStyles.headerTitle}>Revisa cuando llega tu compra</Text>
         </View>
         <View style={AppStyles.deliveryInfo}>
@@ -75,13 +75,13 @@ export const Arrival = ({ route, navigation }) => {
         </View>
       </ScrollView>
       <View style={AppStyles.footer}>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.continueButton}
           onPress={() => {
             navigation.navigate('Payment', { cart });
           }}>
           <Text style={AppStyles.continueButtonText}>Continuar</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

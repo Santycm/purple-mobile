@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TextInput, Pressable} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 
 export const Accountform = ({userState2, createAccount}) => {
@@ -51,9 +51,9 @@ export const Accountform = ({userState2, createAccount}) => {
           Verifica que sea igual a la que ingresaste anteriormente
         </Text>
       </View>
-      <TouchableOpacity style={styles2.btnSecondary} onPress={createAccount}>
+      <Pressable style={styles2.btnSecondary} onPress={createAccount}>
         <Text style={styles2.textTitle}>Crear cuenta</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

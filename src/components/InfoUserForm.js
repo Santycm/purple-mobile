@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
+import {View, Text, Pressable, TextInput, Alert} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles2} from '../styles/AppStyles2';
 import colombiaData from '../assets/colombia.min.json';
@@ -78,13 +78,13 @@ export const InfoUserForm = ({nextStep, userState}) => {
       <View style={styles2.rowInputsContainer}>
         <View style={[styles2.inputSection, styles2.inputSectionMid]}>
           <Text style={styles2.textInputLabel}>Fecha de nacimiento</Text>
-          <TouchableOpacity onPress={showDatepicker} style={styles2.btnDate}>
+          <Pressable onPress={showDatepicker} style={styles2.btnDate}>
             <TextInput
               style={styles2.dateTimeText}
               value={dateTime.toLocaleDateString()}
               editable={false}
             />
-          </TouchableOpacity>
+          </Pressable>
           {show && (
             <DateTimePicker
               value={dateTime}
@@ -156,9 +156,9 @@ export const InfoUserForm = ({nextStep, userState}) => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles2.btnSecondary} onPress={nextStep}>
+      <Pressable style={styles2.btnSecondary} onPress={nextStep}>
         <Text style={styles2.textTitle}>Siguiente paso</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

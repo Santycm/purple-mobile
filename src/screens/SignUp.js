@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -98,13 +98,13 @@ export const SignUp = ({navigation}) => {
 
   return (
     <View style={styles2.signUpScreen}>
-      <TouchableOpacity
+      <Pressable
         style={styles2.btnBack}
         onPress={() => {
           navigation.navigate('Home');
         }}>
         <Icon name="arrow-back" size={30} color="white" />
-      </TouchableOpacity>
+      </Pressable>
       <ScrollView style={styles2.signUpScreenContainer}>
         <Text style={styles2.textPrincipal}>
           ¡VAMOS A CREAR TU CUENTA PURPLE!

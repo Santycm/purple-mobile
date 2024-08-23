@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
@@ -39,10 +39,10 @@ export const MyPurchases = ({ navigation }) => {
           <Text style={AppStyles.productStatusLabel}>Estado:</Text>
           <Text style={[AppStyles.productStatusValue, statusStyle]}>{item.status}</Text>
           {item.status === 'Cancelado' && (
-            <TouchableOpacity
+            <Pressable
               style={AppStyles.reorderButton}>
               <Text style={AppStyles.reorderButtonText}>Volver a comprar</Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       </View>
@@ -60,11 +60,11 @@ export const MyPurchases = ({ navigation }) => {
   return (
     <View style={AppStyles.container}>
       <View style={AppStyles.header}>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.backButton}
           onPress={() => navigation.goBack()}>
           <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={AppStyles.headerTitle}>Mis Compras</Text>
       </View>
       <FlatList

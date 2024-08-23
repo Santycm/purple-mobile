@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, TouchableOpacity} from 'react-native';
+import {View, Image, Text, Pressable} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -36,12 +36,12 @@ export const ProductComponent = item => {
         </Text>
       </View>
       <View style={styles2.containerRow}>
-        <TouchableOpacity style={styles2.btnPrimary} onPress={handlePress}>
+        <Pressable style={styles2.btnPrimary} onPress={handlePress}>
           <Text style={styles2.textBtn}>Ver más</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles2.btnFourth}>
+        </Pressable>
+        <Pressable style={styles2.btnFourth}>
           <Icon name="cart" size={25} color="white" />
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

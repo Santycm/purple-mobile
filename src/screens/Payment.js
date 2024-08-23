@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, TextInput } from 'react-native';
 import CheckBox from '@react-native-community/checkbox'; 
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -35,12 +35,12 @@ export const Payment = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={AppStyles.scrollViewContainerPaymentScreen}>
       <View style={AppStyles.modalContainerPaymentScreen}>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.backButtonPaymentScreen}
           onPress={() => navigation.goBack()}
         >
           <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-        </TouchableOpacity>
+        </Pressable>
 
         <View style={AppStyles.modalContentScreen}>
           <Text style={AppStyles.modalTitleScreen}>¿Cómo quieres pagar?</Text>
@@ -75,34 +75,34 @@ export const Payment = ({ navigation }) => {
           />
 
           <View style={AppStyles.paymentOptionsContainerScreen}>
-            <TouchableOpacity
+            <Pressable
               style={selectedPayment === 'Tarjeta de débito' ? AppStyles.paymentOptionActiveScreen : AppStyles.paymentOptionInactiveScreen}
               onPress={() => handlePress('Tarjeta de débito')}
             >
               <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1087/1087080.png' }} style={AppStyles.paymentImageScreen} />
               <Text style={AppStyles.paymentTextScreen}>Tarjeta de débito</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               style={selectedPayment === 'Tarjeta de crédito' ? AppStyles.paymentOptionActiveScreen : AppStyles.paymentOptionInactiveScreen}
               onPress={() => handlePress('Tarjeta de crédito')}
             >
               <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/3393/3393981.png' }} style={AppStyles.paymentImageScreen} />
               <Text style={AppStyles.paymentTextScreen}>Tarjeta de crédito</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               style={selectedPayment === 'Efecty' ? AppStyles.paymentOptionActiveScreen : AppStyles.paymentOptionInactiveScreen}
               onPress={() => handlePress('Efecty')}
             >
               <Image source={{ uri: 'https://seeklogo.com/images/E/efecty-colombia-logo-C4C6532B80-seeklogo.com.png' }} style={AppStyles.paymentImageScreen} />
               <Text style={AppStyles.paymentTextScreen}>Efecty</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </Pressable>
+            <Pressable
               style={selectedPayment === 'Transferencia con PSE' ? AppStyles.paymentOptionActiveScreen : AppStyles.paymentOptionInactiveScreen}
               onPress={() => handlePress('Transferencia con PSE')}
             >
               <Image source={{ uri: 'https://seeklogo.com/images/P/pse-logo-B00717880A-seeklogo.com.png' }} style={AppStyles.paymentImageScreen} />
               <Text style={AppStyles.paymentTextScreen}>Transferencia con PSE</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View style={AppStyles.captchaContainerScreen}>
@@ -118,13 +118,13 @@ export const Payment = ({ navigation }) => {
             </View>
           </View>
 
-          <TouchableOpacity
+          <Pressable
             style={AppStyles.continueButtonScreen}
             onPress={() => {
               navigation.navigate('ConfirmPurchase');
             }}>
             <Text style={AppStyles.continueButtonTextScreen}>Continuar</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </ScrollView>

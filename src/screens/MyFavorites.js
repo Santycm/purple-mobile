@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
@@ -30,7 +30,7 @@ export const MyFavorites = ({ navigation }) => {
     }
 
     return (
-      <TouchableOpacity onPress={() => handlePress(item)} style={AppStyles.purchaseItem}>
+      <Pressable onPress={() => handlePress(item)} style={AppStyles.purchaseItem}>
         <View style={[AppStyles.imageContainer, { marginLeft: 20 }]}>
           <Image source={{ uri: item.image }} style={AppStyles.imageSmall} />
         </View>
@@ -40,12 +40,12 @@ export const MyFavorites = ({ navigation }) => {
           <Text style={AppStyles.productPrice}>Precio: {formatPrice(item.price)}</Text>
           <Text style={[AppStyles.productStatusLabel, statusStyle]}>Estado: {item.status}</Text>
           {item.status === 'Disponible' && (
-            <TouchableOpacity style={[AppStyles.reorderButton, { marginLeft: 30 }]}>
+            <Pressable style={[AppStyles.reorderButton, { marginLeft: 30 }]}>
               <Text style={AppStyles.reorderButtonText}>Agregar al carrito</Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -60,11 +60,11 @@ export const MyFavorites = ({ navigation }) => {
   return (
     <View style={AppStyles.container}>
       <View style={AppStyles.header}>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.backButton}
           onPress={() => navigation.goBack()}>
           <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={AppStyles.headerTitle}>Mis Favoritos</Text>
       </View>
       <FlatList

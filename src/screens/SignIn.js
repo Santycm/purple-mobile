@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Touchable, Image} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text, Image, TextInput, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 import {users} from '../assets/dbUsers.js';
@@ -11,13 +10,13 @@ export const SigIn = ({navigation}) => {
 
   return (
     <View style={styles2.bgScreen}>
-      <TouchableOpacity
+      <Pressable
         style={styles2.btnBack}
         onPress={() => {
           navigation.navigate('Home');
         }}>
         <Icon name="arrow-back" size={30} color="white" />
-      </TouchableOpacity>
+      </Pressable>
 
       <View style={styles2.sectionContainer}>
         <Image
@@ -45,7 +44,7 @@ export const SigIn = ({navigation}) => {
             maxLength={8}
             value={password}></TextInput>
         </View>
-        <TouchableOpacity
+        <Pressable
           style={styles2.btnSecondary}
           onPress={() => {
             let userFound = users.find(userItem => {
@@ -60,10 +59,10 @@ export const SigIn = ({navigation}) => {
             }
           }}>
           <Text style={styles2.textTitle}>Iniciar Sesión</Text>
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles2.btnSection}>
           <Text>¿No tienes una cuenta?</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles2.btnThird}
             onPress={() => {
               navigation.navigate('SignUp');
@@ -73,7 +72,7 @@ export const SigIn = ({navigation}) => {
               name="arrow-forward-circle-outline"
               size={20}
               color="white"></Icon>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>

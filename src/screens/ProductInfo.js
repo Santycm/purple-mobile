@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image, TextInput, ScrollViewBase} from 'react-native';
+import {View, Text, Pressable, Image, TextInput, ScrollViewBase} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -28,13 +28,13 @@ export const ProductInfo = ({route, navigation}) => {
 
   return (
     <View style={styles2.bgScreen2}>
-      <TouchableOpacity
+      <Pressable
         style={styles2.btnBack}
         onPress={() => {
           navigation.navigate('Home');
         }}>
         <Icon name="arrow-left" size={30} color="white" />
-      </TouchableOpacity>
+      </Pressable>
       <ScrollView>
         <View style={styles2.productContainer}>
           <View style={styles2.bgImgProduct}>
@@ -59,9 +59,9 @@ export const ProductInfo = ({route, navigation}) => {
                   ? product.price.toString().substring(0, 8) + '...'
                   : product.price}
               </Text>
-              <TouchableOpacity style={styles2.btnAddCart}>
+              <Pressable style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Agregar al carrito</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
             <Text style={styles2.textCharacteristics}>
               {product.characteristics}
@@ -89,9 +89,9 @@ export const ProductInfo = ({route, navigation}) => {
                 multiline={true}
                 numberOfLines={3}
               />
-              <TouchableOpacity style={styles2.btnAddCart}>
+              <Pressable style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Enviar</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
             <View>
               <Text style={styles2.textTitle}>Comentarios</Text>
@@ -106,7 +106,7 @@ export const ProductInfo = ({route, navigation}) => {
               <View
                 style={[styles2.containerRow, styles2.containerSectionProduct]}>
                 {[...Array(5)].map((_, i) => (
-                  <TouchableOpacity
+                  <Pressable
                     key={i}
                     onPress={() => handleStarPress(i + 1)}>
                     <Icon
@@ -115,14 +115,14 @@ export const ProductInfo = ({route, navigation}) => {
                       color="gold"
                       size={30}
                     />
-                  </TouchableOpacity>
+                  </Pressable>
                 ))}
               </View>
 
-              <TouchableOpacity
+              <Pressable
                 style={[styles2.btnAddCart, styles2.containerSectionProduct]}>
                 <Text style={styles2.textBtn}>Enviar</Text>
-              </TouchableOpacity>
+              </Pressable>
 
               <View>
                 <Text>Ultimos comentarios</Text>

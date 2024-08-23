@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, FlatList} from 'react-native';
+import {View, Image} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
 import LinearGradient from 'react-native-linear-gradient';
 import Swiper from 'react-native-swiper';

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, Image } from 'react-native'
+import { Text, View, Pressable, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { styles2 } from '../styles/AppStyles2'
 
@@ -17,24 +17,24 @@ export const MyProfile = ({navigation}) => {
           <Text style={styles2.birthDate}>12/02/2001</Text>
         </View>
         <View style={styles2.containerRow}>
-          <TouchableOpacity
+          <Pressable
             style={styles2.btnFourth}
             onPress={() => {
               navigation.navigate('Home');
             }}>
             <Icon name="home" size={30} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles2.btnFourth}>
+          </Pressable>
+          <Pressable style={styles2.btnFourth}>
             <Icon name="basket" size={30} color="white" />
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={styles2.btnFourth}
             onPress={() => {
               navigation.navigate('Home');
             }}>
             <Icon name="log-out" size={30} color="white" />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>

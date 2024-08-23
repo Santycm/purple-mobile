@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, ScrollView, Text} from 'react-native';
+import {View, ScrollView, Text} from 'react-native';
 import {Slider} from '../components/Slider.js';
 import {InitialCategories} from '../components/InitialCategories.js';
 import {ProductComponent} from '../components/ProductComponent.js';

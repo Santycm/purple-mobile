@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, FlatList, TouchableOpacity, Text} from 'react-native';
+import {View, Image, FlatList, Pressable, Text} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
 import { categories } from '../assets/dbCategories.js';
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +12,7 @@ export const InitialCategories = () => {
       <FlatList
         data={categories}
         renderItem={({item}) => (
-          <TouchableOpacity
+          <Pressable
             style={styles2.categoryItem}
             onPress={() => {
               navigation.navigate('CategoryScreen', {category: item});
@@ -23,7 +23,7 @@ export const InitialCategories = () => {
             <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
               {item.name}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         )}
         horizontal
         showsHorizontalScrollIndicator={false}

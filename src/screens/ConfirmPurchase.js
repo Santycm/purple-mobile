@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import AppStyles from '../styles/AppStyles';
 
 export const ConfirmPurchase = ({ navigation }) => {
@@ -11,13 +11,13 @@ export const ConfirmPurchase = ({ navigation }) => {
       />
       <View style={AppStyles.innerContainerConfirm}>
         <Text style={AppStyles.successMessageConfirm}>Su compra fue exitosa</Text>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.continueButtonScreen}
           onPress={() => {
             navigation.navigate('Home');
           }}>
           <Text style={AppStyles.continueButtonTextScreen}>Ir al inicio</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

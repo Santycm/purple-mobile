@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
@@ -17,12 +17,12 @@ export const DeliveryScreen = ({ navigation, route }) => {
 
   return (
     <View style={AppStyles.modalContainerDelivery}>
-      <TouchableOpacity style={AppStyles.backButtonModal}
+      <Pressable style={AppStyles.backButtonModal}
         onPress={() => {
           navigation.navigate('Cart');
         }}>
         <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-      </TouchableOpacity>
+      </Pressable>
 
       <View style={AppStyles.modalContent}>
         <Text style={AppStyles.modalTitle}>Selecciona la forma de entrega</Text>
@@ -33,13 +33,13 @@ export const DeliveryScreen = ({ navigation, route }) => {
               <Text style={AppStyles.sectionTitle}>Entrega a domicilio</Text>
               <Text style={AppStyles.addressText}>Dirección: Calle X #123, Ciudad</Text>
             </View>
-            <TouchableOpacity style={AppStyles.advanceButton}
+            <Pressable style={AppStyles.advanceButton}
               onPress={handleNext}>
               <Icon name="arrow-forward-circle" size={30} color="#FFFFFF" />
-            </TouchableOpacity>
-            <TouchableOpacity style={AppStyles.editButton}>
+            </Pressable>
+            <Pressable style={AppStyles.editButton}>
               <Text style={AppStyles.buttonText}>Editar o elegir otro domicilio</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View style={AppStyles.drawer}>
@@ -48,22 +48,22 @@ export const DeliveryScreen = ({ navigation, route }) => {
               <Text style={AppStyles.pickupDetails}>Dirección: Punto de entrega X</Text>
               <Text style={AppStyles.pickupDetails}>Horario: 9:00 AM - 6:00 PM</Text>
             </View>
-            <TouchableOpacity style={AppStyles.advanceButton}
+            <Pressable style={AppStyles.advanceButton}
             onPress={handleNext}>
               <Icon name="arrow-forward-circle" size={30} color="#FFFFFF" />
-            </TouchableOpacity>
-            <TouchableOpacity style={AppStyles.mapButton}>
+            </Pressable>
+            <Pressable style={AppStyles.mapButton}>
               <Text style={AppStyles.buttonText}>Ver punto en el mapa o elegir otro</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
 
-        <TouchableOpacity style={AppStyles.closeButton}
+        <Pressable style={AppStyles.closeButton}
           onPress={() => {
             navigation.navigate('Cart');
           }}>
           <Text style={AppStyles.buttonText}>Cerrar</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

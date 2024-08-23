@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { products } from '../assets/dbProducts.js';
 import AppStyles from '../styles/AppStyles.js';
@@ -58,16 +58,16 @@ export const Cart = ({ navigation }) => {
         </Text>
         <Text style={AppStyles.cartItemPrice}>{formatPrice(item.price)} x {item.quantity}</Text>
         <View style={AppStyles.quantityControls}>
-          <TouchableOpacity onPress={() => removeFromCart(item.id)} style={AppStyles.quantityButton}>
+          <Pressable onPress={() => removeFromCart(item.id)} style={AppStyles.quantityButton}>
             <Text style={AppStyles.quantityButtonText}>-</Text>
-          </TouchableOpacity>
+          </Pressable>
           <Text style={AppStyles.quantityText}>{item.quantity}</Text>
-          <TouchableOpacity onPress={() => addToCart(item)} style={AppStyles.quantityButton}>
+          <Pressable onPress={() => addToCart(item)} style={AppStyles.quantityButton}>
             <Text style={AppStyles.quantityButtonText}>+</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => deleteFromCart(item.id)} style={AppStyles.deleteButton}>
+          </Pressable>
+          <Pressable onPress={() => deleteFromCart(item.id)} style={AppStyles.deleteButton}>
             <Icon name="trash-outline" size={24} color="#D4A5FF" />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>
@@ -76,13 +76,13 @@ export const Cart = ({ navigation }) => {
   return (
     <View style={AppStyles.container}>
       <View style={AppStyles.header}>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.backButtoncart}
           onPress={() => {
             navigation.navigate('Home');
           }}>
           <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={AppStyles.headerTitle}>Carrito de compra</Text>
         <Text style={AppStyles.address}>Dirección: Calle X #123, Ciudad</Text>
       </View>
@@ -96,13 +96,13 @@ export const Cart = ({ navigation }) => {
         <Text style={AppStyles.detailsText}>Detalles de compra</Text>
         <Text style={AppStyles.detailsText}>Cantidad de productos: {getTotalItems()}</Text>
         <Text style={AppStyles.totalText}>Total: {formatPrice(getTotalPrice())}</Text>
-        <TouchableOpacity
+        <Pressable
           style={AppStyles.checkoutButton}
           onPress={() => {
             navigation.navigate('Delivery', { cart }); 
           }}>
           <Text style={AppStyles.checkoutButtonText}>Continuar compra</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );
