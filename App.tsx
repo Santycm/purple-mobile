@@ -11,6 +11,9 @@ import { Payment } from './src/screens/Payment.js';
 import { Arrival } from './src/screens/ArrivalDay.js';
 import { MyPurchases } from './src/screens/MyPurchases.js';
 import { MyFavorites } from './src/screens/MyFavorites.js';
+import { ConfirmPurchase } from './src/screens/ConfirmPurchase.js';
+
+
 
 
 MyFavorites
@@ -67,6 +70,13 @@ export default function App() {
         component={MyFavorites}
         options={{headerShown: false }} 
         />
+        <Stack.Screen 
+        name="ConfirmPurchase" 
+        component={ConfirmPurchase}
+        options={{headerShown: false }} 
+        />
+
+
 
       </Stack.Navigator>
     </NavigationContainer>
