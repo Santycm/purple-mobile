@@ -18,7 +18,7 @@ export const Arrival = ({ route, navigation }) => {
 
   useEffect(() => {
     const initialDates = cart.reduce((dates, item) => {
-      dates[item.id] = 'Lunes';
+      dates[item.id] = 'Lunes'; // Default value or initial date
       return dates;
     }, {});
     setSelectedDate(initialDates);
@@ -51,8 +51,10 @@ export const Arrival = ({ route, navigation }) => {
                 <Image source={product.img} style={AppStyles.productImage} />
               </View>
               <View style={AppStyles.productDetails}>
-                <Text style={AppStyles.productTitle}>{product.shipping}</Text>
-                <Text style={AppStyles.productName}>{product.description}</Text>
+                <Text style={AppStyles.productTitle}>{product.name}</Text>
+                <Text style={AppStyles.productDescription} numberOfLines={2}>
+                  {product.description}
+                </Text>
                 <View style={AppStyles.datePickerContainer}>
                   <Text style={AppStyles.dateLabel}>Fecha de entrega:</Text>
                   <Picker
@@ -66,6 +68,7 @@ export const Arrival = ({ route, navigation }) => {
                     <Picker.Item label="Jueves" value="Jueves" />
                     <Picker.Item label="Viernes" value="Viernes" />
                     <Picker.Item label="Sábado" value="Sábado" />
+                    <Picker.Item label="Domingo" value="Domingo" />
                   </Picker>
                 </View>
                 <Text style={AppStyles.freeShipping}>Envío: Gratis</Text>
@@ -78,7 +81,7 @@ export const Arrival = ({ route, navigation }) => {
         <Pressable
           style={AppStyles.continueButton}
           onPress={() => {
-            navigation.navigate('Payment', { cart });
+            navigation.navigate('Payment', { cart }); 
           }}>
           <Text style={AppStyles.continueButtonText}>Continuar</Text>
         </Pressable>

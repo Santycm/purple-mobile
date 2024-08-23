@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Image, ScrollView, TextInput } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, TextInput, StyleSheet } from 'react-native';
 import CheckBox from '@react-native-community/checkbox'; 
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export const Payment = ({ navigation }) => {
+export const Payment = ({ route, navigation }) => {
+  const { cart } = route.params || {};
   const [address, setAddress] = useState('');
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [captchaChecked, setCaptchaChecked] = useState(false); 
-  const products = [
-    { id: '1', name: 'Samsung Galaxy S21', description: 'Smartphone de última generación', price: 1000000, quantity: 1, image: 'https://www.clevercel.co/cdn/shop/products/samsung-galaxy-s21-5g-0.jpg?v=1634321179' },
-    { id: '2', name: 'PlayStation 5', description: 'Consola de videojuegos', price: 2000000, quantity: 1, image: 'https://exitocol.vtexassets.com/arquivos/ids/9154830/consola-sony-playstation-5-ps5-825gb-lector-de-disco.jpg?v=637631028235770000' },
-    { id: '3', name: 'Laptop HP', description: 'Laptop para trabajo', price: 3000000, quantity: 1, image: 'https://d34vmoxq6ylzee.cloudfront.net/catalog/product/3/0/308Z8LA-1_T1679063126.png' },
-  ];
 
   const calculateTotalAmount = () => {
-    return products.reduce((total, product) => total + (product.price * product.quantity), 0);
+    return cart.reduce((total, product) => total + (product.price * product.quantity), 0);
   };
 
   const handleNumericInputChange = (index) => (value) => {
     const numericValue = value.replace(/[^0-9]/g, '').slice(0, 2);
-    products[index].quantity = numericValue;
+    cart[index].quantity = numericValue;
   };
 
   const handlePress = (paymentMethod) => {
@@ -46,12 +42,15 @@ export const Payment = ({ navigation }) => {
           <Text style={AppStyles.modalTitleScreen}>¿Cómo quieres pagar?</Text>
 
           <View style={AppStyles.productsContainerScreen}>
-            {products.map((product, index) => (
+            {cart.map((product, index) => (
               <View key={product.id} style={AppStyles.productItemScreen}>
-                <Image source={{ uri: product.image }} style={AppStyles.productImageScreen} />
+                <Image source={product.img} style={AppStyles.productImageScreen} />
+                
                 <View style={AppStyles.productDetailsScreen}>
                   <Text style={AppStyles.productNameScreen}>{product.name}</Text>
-                  <Text style={AppStyles.productDescriptionScreen}>{product.description}</Text>
+                  <Text style={AppStyles.productDescriptionScreen} numberOfLines={2} ellipsizeMode="tail">
+                    {product.description}
+                  </Text>
                   <Text style={AppStyles.productPriceScreen}>Precio: {formatPrice(product.price)}</Text>
                   <TextInput
                     style={AppStyles.productQuantityInput}
@@ -121,7 +120,7 @@ export const Payment = ({ navigation }) => {
           <Pressable
             style={AppStyles.continueButtonScreen}
             onPress={() => {
-              navigation.navigate('ConfirmPurchase');
+              navigation.navigate('ConfirmPurchase'); 
             }}>
             <Text style={AppStyles.continueButtonTextScreen}>Continuar</Text>
           </Pressable>
@@ -138,3 +137,5 @@ const formatPrice = (price) => {
     minimumFractionDigits: 0,
   }).format(price);
 };
+
+

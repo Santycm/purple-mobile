@@ -156,6 +156,14 @@ export const Navbar = ({navigation}) => {
                 <Icon name="list" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Categorías</Text>
               </Pressable>
+              <Pressable
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('Help');
+                }}>
+                <Icon name="headset" size={30} color="white"></Icon>
+                <Text style={styles2.textTitle}>Ayuda y PQRS</Text>
+              </Pressable>
             </View>
           </View>
         </TouchableWithoutFeedback>

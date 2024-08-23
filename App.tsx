@@ -14,8 +14,9 @@ import {MyPurchases} from './src/screens/MyPurchases.js';
 import {MyFavorites} from './src/screens/MyFavorites.js';
 import {ConfirmPurchase} from './src/screens/ConfirmPurchase.js';
 import {CategoryScreen} from './src/screens/CategoryScreen.js';
+import {ConfirmHelp} from './src/screens/ConfirmHelp.js'
 
-
+import {Help} from './src/screens/HelpSupport.js';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Navbar} from './src/components/Navbar.js';
@@ -111,6 +112,17 @@ export default function App() {
         <Stack.Screen
           name="ConfirmPurchase"
           component={ConfirmPurchase}
+          options={{headerShown: false}}
+        />
+         
+        <Stack.Screen
+          name="Help"
+          component={Help}
+          options={{headerShown: false}}
+        />
+          <Stack.Screen
+          name="ConfirmHelp"
+          component={ConfirmHelp}
           options={{headerShown: false}}
         />
         <Stack.Screen

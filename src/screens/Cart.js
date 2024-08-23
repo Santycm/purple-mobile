@@ -52,9 +52,9 @@ export const Cart = ({ navigation }) => {
         <Image source={item.img} style={AppStyles.cartItemImage} />
       </View>
       <View style={AppStyles.cartItemDetails}>
-        <Text style={AppStyles.cartItemName}>{item.description}</Text>
+        <Text style={AppStyles.cartItemName}>{item.name}</Text>
         <Text style={AppStyles.cartItemDescription} numberOfLines={2}>
-          {item.characteristics}
+          {item.description}
         </Text>
         <Text style={AppStyles.cartItemPrice}>{formatPrice(item.price)} x {item.quantity}</Text>
         <View style={AppStyles.quantityControls}>
