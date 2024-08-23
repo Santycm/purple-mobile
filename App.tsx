@@ -18,6 +18,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Navbar} from './src/components/Navbar.js';
 import {SearchProduct} from './src/screens/SearchProduct.js';
+import {Offerts} from './src/screens/Offers.js';
+
+Offerts
 
 const Stack = createStackNavigator();
 
@@ -96,6 +99,13 @@ export default function App() {
           component={ConfirmPurchase}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="Offerts"
+          component={Offerts}
+          options={{headerShown: false}}
+        />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

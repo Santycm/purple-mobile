@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
-import CheckBox from '@react-native-community/checkbox'; // Importa CheckBox desde @react-native-community/checkbox
+import CheckBox from '@react-native-community/checkbox'; 
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export const Payment = ({ navigation }) => {
   const [address, setAddress] = useState('');
   const [selectedPayment, setSelectedPayment] = useState(null);
-  const [captchaChecked, setCaptchaChecked] = useState(false); // Estado para el CAPTCHA
-
+  const [captchaChecked, setCaptchaChecked] = useState(false); 
   const products = [
     { id: '1', name: 'Samsung Galaxy S21', description: 'Smartphone de última generación', price: 1000000, quantity: 1, image: 'https://www.clevercel.co/cdn/shop/products/samsung-galaxy-s21-5g-0.jpg?v=1634321179' },
     { id: '2', name: 'PlayStation 5', description: 'Consola de videojuegos', price: 2000000, quantity: 1, image: 'https://exitocol.vtexassets.com/arquivos/ids/9154830/consola-sony-playstation-5-ps5-825gb-lector-de-disco.jpg?v=637631028235770000' },
@@ -106,9 +105,8 @@ export const Payment = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          {/* Simulación de CAPTCHA */}
           <View style={AppStyles.captchaContainerScreen}>
-            <Image source={{ uri: 'https://example.com/captcha-image.jpg' }} style={AppStyles.captchaImageScreen} />
+            <Image source={{ uri: 'https://www.drupal.org/files/project-images/captcha.png' }} style={AppStyles.captchaImageScreen} />
             <View style={AppStyles.captchaCheckboxContainerScreen}>
               <CheckBox
                 value={captchaChecked}
@@ -120,7 +118,6 @@ export const Payment = ({ navigation }) => {
             </View>
           </View>
 
-          
           <TouchableOpacity
             style={AppStyles.continueButtonScreen}
             onPress={() => {
