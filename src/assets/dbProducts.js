@@ -1,6 +1,6 @@
 export let products = [
   {
-    id: 2,
+    id: 1,
     img: require('../assets/provImgProduct/product4.webp'),
     name: 'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
     description:
@@ -38,7 +38,7 @@ export let products = [
     },
   },
   {
-    id: 3,
+    id: 2,
     img: require('../assets/provImgProduct/product1.webp'),
     name: 'Batería Moto Magna Akt 125 Sl Mf Tt 125 Akt 150 Nkd Yb6.5lb',
     description:
