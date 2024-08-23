@@ -75,4 +75,84 @@ export let products = [
       discount: 0,
     },
   },
+  {
+    id: 3,
+    img: require('../assets/provImgProduct/product2.webp'),
+    name: 'Kit 4 Sillas Charles Eames Madera - Eiffel Colores',
+    description:
+      'Para quienes sueñan con un hogar hermoso y acogedor, la Silla Eames DKR es la pieza clave que transformará tus espacios en verdaderos oasis de estilo y confort. Su diseño sofisticado y su adaptabilidad la convierten en la elección ideal para profesionales, amantes del diseño, decoradores, emprendedores y personas que buscan crear ambientes excepcionales.',
+    characteristics: [
+      'Diseño Eiffel: Aporta un estilo moderno y sofisticado, Material Polipropileno: Durabilidad y fácil limpieza.',
+      'Material Polipropileno: Durabilidad y fácil limpieza.',
+      'Estructura Madera y Acero: Resistencia y estabilidad.',
+    ],
+    paymentAccepted: ['Tarjeta', 'Efectivo'],
+    questions: [
+      {
+        question: 'Pregunta 1',
+        answer: 'Respuesta 1',
+      },
+      {
+        question: 'Pregunta 2',
+        answer: 'Respuesta 2',
+      },
+    ],
+    comments: [
+      {
+        user: 'Usuario 1',
+        comment:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus',
+        score: 5,
+      },
+      {
+        user: 'Usuario 2',
+        comment: 'Comentario 1',
+        score: 5,
+      },
+    ],
+    price: 1160000,
+    category: 'Hogar',
+    offer: {
+      isOffer: true,
+      discount: 20,
+    },
+  },
+  {
+    id: 4,
+    img: require('../assets/provImgProduct/product3.webp'),
+    name: 'Rack Para Tunez 160 Rta Blanco',
+    description:
+      'Mesa para TV hasta 70" Elaborado en Madera aglomerada MDP, recubierta con láminas melamínicas de excelente calidad, en color Blanco y Café Claro.',
+    characteristics: ['Alto: 47 cm', 'Ancho: 160 cm', 'Fondo: 35 cm'],
+    paymentAccepted: ['Tarjeta', 'Efectivo'],
+    questions: [
+      {
+        question: 'Pregunta 1',
+        answer: 'Respuesta 1',
+      },
+      {
+        question: 'Pregunta 2',
+        answer: 'Respuesta 2',
+      },
+    ],
+    comments: [
+      {
+        user: 'Usuario 1',
+        comment:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus',
+        score: 5,
+      },
+      {
+        user: 'Usuario 2',
+        comment: 'Comentario 1',
+        score: 5,
+      },
+    ],
+    price: 1160000,
+    category: 'Hogar',
+    offer: {
+      isOffer: true,
+      discount: 5,
+    },
+  },
 ];
