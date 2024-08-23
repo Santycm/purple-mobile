@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Image, FlatList, TouchableOpacity, Text} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
-import { categories } from '../assets/dbCategories.js';
-import { useNavigation } from '@react-navigation/native';
+import {categories} from '../assets/dbCategories.js';
+import {useNavigation} from '@react-navigation/native';
 
-export const InitialCategories = () => {
+export const CategoriesList = () => {
   const navigation = useNavigation();
 
   return (
@@ -25,7 +25,7 @@ export const InitialCategories = () => {
             </Text>
           </TouchableOpacity>
         )}
-        horizontal
+        numColumns={2}
         showsHorizontalScrollIndicator={false}
         decelerationRate="fast"
         keyExtractor={(item, index) => index.toString()}

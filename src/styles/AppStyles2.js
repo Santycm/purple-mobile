@@ -100,8 +100,8 @@ const styles2 = StyleSheet.create({
     gap: 20,
     padding: 20,
   },
-  sliderContainer:{
-    height:250,
+  sliderContainer: {
+    height: 250,
   },
   slider: {
     width: width,
@@ -117,6 +117,14 @@ const styles2 = StyleSheet.create({
     height: 200,
     overflow: 'hidden',
     borderRadius: 15,
+  },
+  categoriesContainerPage: {
+    paddingTop: 50,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   initialProm: {
     backgroundColor: 'black',
@@ -422,23 +430,21 @@ const styles2 = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
   },
-  containerCenter:{
+  containerCenter: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  categoryContainerPage:{
+  categoryContainerPage: {
     backgroundColor: 'black',
-    height:'100%',
+    height: '100%',
   },
-  containerColumn2:{
+  containerColumn2: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
     paddingHorizontal: 20,
-
-
   },
   textDiscount: {
     color: 'white',

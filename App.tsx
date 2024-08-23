@@ -15,10 +15,12 @@ import {MyFavorites} from './src/screens/MyFavorites.js';
 import {ConfirmPurchase} from './src/screens/ConfirmPurchase.js';
 import {CategoryScreen} from './src/screens/CategoryScreen.js';
 
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Navbar} from './src/components/Navbar.js';
 import {SearchProduct} from './src/screens/SearchProduct.js';
+import { Categories } from './src/screens/Categories.js';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +50,15 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{
+            header: ({navigation}: {navigation: any}) => (
+              <Navbar navigation={navigation} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Categories"
+          component={Categories}
           options={{
             header: ({navigation}: {navigation: any}) => (
               <Navbar navigation={navigation} />

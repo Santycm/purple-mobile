@@ -10,10 +10,11 @@ const images = [
 ];
 
 export const Slider = () => {
-
   return (
-    <View style={styles2.sliderContainer}>
-      <LinearGradient colors={['#6A0DAD', '#000000']}>
+    <View>
+      <LinearGradient
+        colors={['#6A0DAD', '#000000']}
+        style={styles2.sliderContainer}>
         <Swiper autoplay autoplayTimeout={4} showsPagination={false}>
           {images.map((item, index) => (
             <View style={styles2.slider} key={index}>
@@ -21,10 +22,6 @@ export const Slider = () => {
             </View>
           ))}
         </Swiper>
-
-        <Text style={styles2.initialProm}>
-          Envío gratis en millones de productos desde $60.000
-        </Text>
       </LinearGradient>
     </View>
   );

@@ -54,7 +54,10 @@ export const ProductInfo = ({route, navigation}) => {
             <Text style={styles2.textCategory}>{product.category}</Text>
             <View style={styles2.containerRow}>
               <Text style={styles2.textPricePageProduct}>
-                $ {product.price}
+                ${' '}
+                {product.price.toString().length > 8
+                  ? product.price.toString().substring(0, 8) + '...'
+                  : product.price}
               </Text>
               <TouchableOpacity style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Agregar al carrito</Text>
@@ -100,7 +103,8 @@ export const ProductInfo = ({route, navigation}) => {
                 numberOfLines={3}
               />
               <Text>Calificar</Text>
-              <View style={[styles2.containerRow, styles2.containerSectionProduct]}>
+              <View
+                style={[styles2.containerRow, styles2.containerSectionProduct]}>
                 {[...Array(5)].map((_, i) => (
                   <TouchableOpacity
                     key={i}
@@ -115,7 +119,8 @@ export const ProductInfo = ({route, navigation}) => {
                 ))}
               </View>
 
-              <TouchableOpacity style={[styles2.btnAddCart, styles2.containerSectionProduct]}>
+              <TouchableOpacity
+                style={[styles2.btnAddCart, styles2.containerSectionProduct]}>
                 <Text style={styles2.textBtn}>Enviar</Text>
               </TouchableOpacity>
 

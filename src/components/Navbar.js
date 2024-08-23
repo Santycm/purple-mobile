@@ -59,7 +59,7 @@ export const Navbar = ({navigation}) => {
           navigation.navigate('SearchProduct');
         }}
         value={searchTerm}
-        onChangeText={(text) => {
+        onChangeText={text => {
           setSearchTerm(text);
           navigation.navigate('SearchProduct', {searchTerm: text});
         }}
@@ -109,21 +109,27 @@ export const Navbar = ({navigation}) => {
                 <Icon name="home" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Inicio</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}>
+              <TouchableOpacity
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('SearchProduct');
+                }}>
                 <Icon name="search" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Buscar</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}
-              onPress={() => {
-                navigation.navigate('MyPurchases');
-              }}>
+              <TouchableOpacity
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('MyPurchases');
+                }}>
                 <Icon name="basket" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Mis compras</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}
-              onPress={() => {
-                navigation.navigate('MyFavorites');
-              }}>
+              <TouchableOpacity
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('MyFavorites');
+                }}>
                 <Icon name="heart" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Favoritos</Text>
               </TouchableOpacity>
@@ -139,11 +145,14 @@ export const Navbar = ({navigation}) => {
                 <Icon name="person" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Mi cuenta</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles2.sideBarOption}>
+              <TouchableOpacity
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('Categories');
+                }}>
                 <Icon name="list" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Categorías</Text>
               </TouchableOpacity>
-              
             </View>
           </View>
         </TouchableWithoutFeedback>

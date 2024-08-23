@@ -11,6 +11,9 @@ export const Home = () => {
     <View style={styles2.homeContainer}>
       <ScrollView>
         <Slider />
+        <Text style={styles2.initialProm}>
+          Envío gratis en millones de productos desde $60.000
+        </Text>
         <InitialCategories />
         <View style={styles2.sectionContainer}>
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
