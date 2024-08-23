@@ -100,6 +100,9 @@ const styles2 = StyleSheet.create({
     gap: 20,
     padding: 20,
   },
+  sliderContainer:{
+    height:250,
+  },
   slider: {
     width: width,
     display: 'flex',
@@ -133,6 +136,17 @@ const styles2 = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     width: 130,
+  },
+  categoryItemPage: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    padding: 10,
+    backgroundColor: '#6A0DAD',
+    borderRadius: 10,
+    margin: 10,
   },
   btnCategoryImg: {
     backgroundColor: 'white',
@@ -408,6 +422,24 @@ const styles2 = StyleSheet.create({
     position: 'absolute',
     bottom: 5,
   },
+  containerCenter:{
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryContainerPage:{
+    backgroundColor: 'black',
+    height:'100%',
+  },
+  containerColumn2:{
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: 20,
+
+
+  },
   textDiscount: {
     color: 'white',
     fontWeight: 'bold',
@@ -490,8 +522,26 @@ const styles2 = StyleSheet.create({
     backgroundColor: '#fff',
     color: 'black',
   },
-  scrollContent: {
-    flexGrow: 1,
+  containerRowStart: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'start',
+    alignItems: 'start',
+    gap: 10,
+  },
+  containerComment: {
+    marginBottom: 10,
+  },
+  containerSectionProduct: {
+    marginBottom: 10,
+  },
+  imgCommentProfile: {
+    width: 30,
+    height: 30,
+    borderRadius: 100,
+  },
+  textSecondary: {
+    color: 'white',
   },
 });
 

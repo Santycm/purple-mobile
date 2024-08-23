@@ -18,7 +18,7 @@ export let products = [
     comments: [
       {
         user: 'Usuario 1',
-        comment: 'Comentario 1',
+        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus',
         score: 5,
       },
       {
@@ -27,7 +27,7 @@ export let products = [
         score: 5,
       },
     ],
-    price: 10000,
+    price: 1000000000000000,
     category: 'Celulares',
     offer: {
       isOffer: true,

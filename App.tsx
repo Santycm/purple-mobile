@@ -13,6 +13,7 @@ import {Arrival} from './src/screens/ArrivalDay.js';
 import {MyPurchases} from './src/screens/MyPurchases.js';
 import {MyFavorites} from './src/screens/MyFavorites.js';
 import {ConfirmPurchase} from './src/screens/ConfirmPurchase.js';
+import {CategoryScreen} from './src/screens/CategoryScreen.js';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -39,14 +40,18 @@ export default function App() {
           name="SearchProduct"
           component={SearchProduct}
           options={{
-            header: ({navigation}) => <Navbar navigation={navigation} />,
+            header: ({navigation}: {navigation: any}) => (
+              <Navbar navigation={navigation} />
+            ),
           }}
         />
         <Stack.Screen
           name="Home"
           component={Home}
           options={{
-            header: ({navigation}) => <Navbar navigation={navigation} />,
+            header: ({navigation}: {navigation: any}) => (
+              <Navbar navigation={navigation} />
+            ),
           }}
         />
 
@@ -95,6 +100,15 @@ export default function App() {
           name="ConfirmPurchase"
           component={ConfirmPurchase}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CategoryScreen"
+          component={CategoryScreen}
+          options={{
+            header: ({navigation}: {navigation: any}) => (
+              <Navbar navigation={navigation} />
+            ),
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

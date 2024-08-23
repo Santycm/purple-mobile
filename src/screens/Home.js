@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, FlatList, ScrollView, Text} from 'react-native';
-import {Navbar} from '../components/Navbar.js';
+import {View, ScrollView, Text, TouchableOpacity} from 'react-native';
 import {Slider} from '../components/Slider.js';
 import {InitialCategories} from '../components/InitialCategories.js';
 import {ProductComponent} from '../components/ProductComponent.js';
@@ -29,7 +28,7 @@ export const Home = () => {
         </View>
         <View style={styles2.sectionContainer}>
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
-            ¡En Oferta HOY!
+            Ultimos Agregados
           </Text>
           <View style={styles2.sectionBg}>
             {products.map((item, index) => (
@@ -43,12 +42,9 @@ export const Home = () => {
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
             ¿Necesitas ayuda?
           </Text>
-          <View style={styles2.sectionBg}>
-            <Text style={styles2.textTitle}>Contactanos</Text>
-            <Text style={styles2.textTitle}>Preguntas frecuentes</Text>
-            <Text style={styles2.textTitle}>Términos y condiciones</Text>
-            <Text style={styles2.textTitle}>Políticas de privacidad</Text>
-          </View>
+          <TouchableOpacity style={styles2.btnPrimary}>
+            <Text style={styles2.textTitle}>Ayuda y soporte PQRD</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

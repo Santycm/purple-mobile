@@ -28,7 +28,12 @@ export const ProductComponent = item => {
         <Text style={styles2.textTitle} numberOfLines={2}>
           {item.description}
         </Text>
-        <Text style={{color: 'white'}}>$ {item.price}</Text>
+        <Text style={{color: 'white'}}>
+          ${' '}
+          {item.price.toString().length > 8
+            ? item.price.toString().substring(0, 8) + '...'
+            : item.price}
+        </Text>
       </View>
       <View style={styles2.containerRow}>
         <TouchableOpacity style={styles2.btnPrimary} onPress={handlePress}>
