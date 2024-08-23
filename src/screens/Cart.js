@@ -56,6 +56,7 @@ export const Cart = ({ navigation }) => {
       <View style={AppStyles.imageContainer}>
         <Image source={{ uri: item.image }} style={AppStyles.cartItemImage} />
       </View>
+      
       <View style={AppStyles.cartItemDetails}>
         <Text style={AppStyles.cartItemName}>{item.name}</Text>
         <Text style={AppStyles.cartItemDescription}>{item.description}</Text>
