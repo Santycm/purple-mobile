@@ -188,7 +188,7 @@ const styles2 = StyleSheet.create({
     padding: 10,
   },
   imgProduct: {
-    width: 150,
+    width: 90,
     height: 150,
     resizeMode: 'contain',
   },
