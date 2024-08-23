@@ -39,7 +39,7 @@ export const ProductInfo = ({route, navigation}) => {
         <View style={styles2.productContainer}>
           <View style={styles2.bgImgProduct}>
             <Image source={product.img} style={styles2.imgProductPage} />
-            {product.offer && (
+            {product.offer.isOffer && (
               <View style={styles2.discountContainer}>
                 <Text style={styles2.textDiscount}>
                   -{product.offer.discount}%
@@ -48,9 +48,7 @@ export const ProductInfo = ({route, navigation}) => {
             )}
           </View>
           <View>
-            <Text style={styles2.titleTextPageProduct}>
-              {product.description}
-            </Text>
+            <Text style={styles2.titleTextPageProduct}>{product.name}</Text>
             <Text style={styles2.textCategory}>{product.category}</Text>
             <View style={styles2.containerRow}>
               <Text style={styles2.textPricePageProduct}>
@@ -63,9 +61,18 @@ export const ProductInfo = ({route, navigation}) => {
                 <Text style={styles2.textBtn}>Agregar al carrito</Text>
               </Pressable>
             </View>
-            <Text style={styles2.textCharacteristics}>
-              {product.characteristics}
+            <Text style={styles2.textDescription}>
+              {product.description}
             </Text>
+
+            <Text style={styles2.textTitle}>Caracteristicas</Text>
+            <View style={styles2.table}>
+              {product.characteristics.map((char, index) => (
+                <View key={index} style={styles2.tableRow}>
+                  <Text style={styles2.tableCellValue}>{char}</Text>
+                </View>
+              ))}
+            </View>
             <Text style={styles2.textTitle}>Medios de pago aceptados</Text>
             <View style={[styles2.containerRow, styles2.containerRowWrap]}>
               {product.paymentAccepted.map((payment, index) => (
@@ -106,9 +113,7 @@ export const ProductInfo = ({route, navigation}) => {
               <View
                 style={[styles2.containerRow, styles2.containerSectionProduct]}>
                 {[...Array(5)].map((_, i) => (
-                  <Pressable
-                    key={i}
-                    onPress={() => handleStarPress(i + 1)}>
+                  <Pressable key={i} onPress={() => handleStarPress(i + 1)}>
                     <Icon
                       name={i < rating ? 'star' : 'star-o'}
                       type="font-awesome"

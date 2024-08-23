@@ -5,8 +5,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import Swiper from 'react-native-swiper';
 
 const images = [
-  require('../assets/Slider/img1.jpg'),
-  require('../assets/Slider/img1.jpg'),
+  require('../assets/Slider/img1.webp'),
+  require('../assets/Slider/img2.webp'),
+  require('../assets/Slider/img3.webp'),
+  require('../assets/Slider/img4.webp'),
+  require('../assets/Slider/img5.webp'),
 ];
 
 export const Slider = () => {

@@ -15,7 +15,7 @@ export const ProductComponent = item => {
     <View style={styles2.cardProduct}>
       <View style={styles2.imgProductContainer}>
         <Image source={item.img} style={styles2.imgProduct} />
-        {item.offer && (
+        {item.offer.isOffer && (
           <View style={styles2.discountContainer}>
             <Text style={styles2.textDiscount}>-{item.offer.discount}%</Text>
           </View>
@@ -26,6 +26,9 @@ export const ProductComponent = item => {
       </View>
       <View style={styles2.textProductContainer}>
         <Text style={styles2.textTitle} numberOfLines={2}>
+          {item.name}
+        </Text>
+        <Text numberOfLines={3}>
           {item.description}
         </Text>
         <Text style={{color: 'white'}}>

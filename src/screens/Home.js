@@ -21,7 +21,7 @@ export const Home = () => {
           </Text>
           <View style={styles2.sectionBg}>
             {products
-              .filter(item => item.offer)
+              .filter(item => item.offer.isOffer)
               .map((item, index) => (
                 <View key={index}>
                   <ProductComponent {...item} />

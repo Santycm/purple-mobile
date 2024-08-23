@@ -101,7 +101,7 @@ const styles2 = StyleSheet.create({
     padding: 20,
   },
   sliderContainer: {
-    height: 250,
+    height: 200,
   },
   slider: {
     width: width,
@@ -114,7 +114,7 @@ const styles2 = StyleSheet.create({
   sliderImg: {
     resizeMode: 'cover',
     width: '100%',
-    height: 200,
+    height: 175,
     overflow: 'hidden',
     borderRadius: 15,
   },
@@ -498,7 +498,7 @@ const styles2 = StyleSheet.create({
     fontWeight: 'bold',
     paddingVertical: 30,
   },
-  textCharacteristics: {
+  textDescription: {
     color: 'white',
     marginBottom: 10,
     textAlign: 'justify',
@@ -546,6 +546,22 @@ const styles2 = StyleSheet.create({
     borderRadius: 100,
   },
   textSecondary: {
+    color: 'white',
+  },
+  table: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    padding: 10,
+  },
+  tableCellValue: {
+    flex: 2,
     color: 'white',
   },
 });
