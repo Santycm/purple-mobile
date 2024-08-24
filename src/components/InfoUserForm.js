@@ -30,7 +30,11 @@ export const InfoUserForm = ({nextStep, userState}) => {
     } else {
       const today = new Date();
       const birthDate = new Date(currentDate);
-      userState.setBirthDate(birthDate);
+      let day = birthDate.getDay();
+      let month = birthDate.getMonth();
+      let year = birthDate.getFullYear();
+      let birthDateFormated = day + "/" + month + "/" + year;
+      userState.setBirthDate(birthDateFormated);
       let age = today.getFullYear() - birthDate.getFullYear();
       setAge(age);
     }

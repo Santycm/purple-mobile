@@ -143,14 +143,6 @@ export const Navbar = ({navigation}) => {
               <Pressable
                 style={styles2.sideBarOption}
                 onPress={() => {
-                  navigation.navigate('MyProfile');
-                }}>
-                <Icon name="person" size={30} color="white"></Icon>
-                <Text style={styles2.textTitle}>Mi cuenta</Text>
-              </Pressable>
-              <Pressable
-                style={styles2.sideBarOption}
-                onPress={() => {
                   navigation.navigate('Categories');
                 }}>
                 <Icon name="list" size={30} color="white"></Icon>

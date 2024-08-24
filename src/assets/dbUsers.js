@@ -2,7 +2,7 @@ export let users = [
     {
         userName: 'admin',
         addres: 'Calle 123',
-        birthDate: '19-08-2000',
+        birthDate: '19/08/2000',
         country: 'Colombia',
         department: 'Antioquia',
         city: 'Medellin',

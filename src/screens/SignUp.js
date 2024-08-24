@@ -12,7 +12,7 @@ export const SignUp = ({navigation}) => {
 
   const [userName, setUsername] = useState('');
   const [addres, setAddress] = useState('');
-  const [birthDate, setBirthDate] = useState(0);
+  const [birthDate, setBirthDate] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
@@ -35,7 +35,7 @@ export const SignUp = ({navigation}) => {
     return true;
   };
 
-  const nameRegex = /^[A-Za-z ]+$/;
+  const nameRegex = /^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$/;
 
   const validateFinalForm = () => {
     if (name === '' || lastName === '' || email === '' || passwordAccount === '') {

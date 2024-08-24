@@ -3,10 +3,17 @@ import {View, Text, Image, TextInput, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 import {users} from '../assets/dbUsers.js';
+import {useNavigation} from '@react-navigation/native';
 
-export const SigIn = ({navigation}) => {
+export const SigIn = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('MyProfile', {user:user});
+  };
 
   return (
     <View style={styles2.bgScreen}>
@@ -53,7 +60,7 @@ export const SigIn = ({navigation}) => {
               );
             });
             if (userFound) {
-              navigation.navigate('MyProfile');
+              handlePress();
             } else {
               alert('Usuario o contraseña incorrectos');
             }
