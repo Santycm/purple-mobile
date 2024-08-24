@@ -6,7 +6,7 @@ import {ProductComponent} from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
 import {products} from '../assets/dbProducts.js';
 
-export const Home = () => {
+export const Home= ({ navigation }) => {
   return (
     <View style={styles2.homeContainer}>
       <ScrollView>
@@ -45,7 +45,10 @@ export const Home = () => {
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
             ¿Necesitas ayuda?
           </Text>
-          <Pressable style={styles2.btnPrimary}>
+          <Pressable style={styles2.btnPrimary}
+          onPress={() => {
+            navigation.navigate('Help');
+          }}>
             <Text style={styles2.textTitle}>Ayuda y soporte PQRD</Text>
           </Pressable>
         </View>

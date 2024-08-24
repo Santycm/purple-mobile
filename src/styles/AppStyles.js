@@ -713,6 +713,91 @@ const AppStyles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+//------------------Estilos HelpSupport---------------------------
+containerHelp: {
+  flex: 1,
+  backgroundColor: '#000000',
+},
+headerHelp: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  padding: 16,
+  backgroundColor: '#6A0DAD',
+},
+titleHelp: {
+  flex: 1,
+  textAlign: 'center',
+  color: '#FFFFFF',
+  fontSize: 18,
+  fontWeight: 'bold',
+},
+contentHelp: {
+  padding: 16,
+},
+labelHelp: {
+  color: '#FFFFFF',
+  fontSize: 16,
+  marginBottom: 8,
+},
+pickerHelp: {
+  backgroundColor: '#B388FF',
+  color: '#FFFFFF',
+  marginBottom: 16,
+},
+textInputHelp: {
+  height: 100,
+  borderColor: '#B0B0B0',
+  borderWidth: 1,
+  padding: 10,
+  backgroundColor: '#FFFFFF',
+  color: '#2B2B2B',
+  marginBottom: 16,
+},
+footerHelp: {
+  padding: 16,
+  borderTopColor: '#B0B0B0',
+  borderTopWidth: 1,
+},
+backButtonHelp: {
+  marginRight: -20,
+},
+checkoutButtonHelp: {
+  color: '#FFFFFF',
+  fontSize: 18,
+},
+successImageHelp: {
+  width: 150,           
+  height: 150,          
+  marginBottom: 20,
+  alignSelf: 'center',  
+},
+imageContainerHelp: {
+  alignItems: 'center',
+  marginVertical: 30, 
+},
+imageHelp: {
+  width: 300, 
+  height: 300, 
+  resizeMode: 'contain', 
+},
+faqTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  marginVertical: 15,
+  paddingHorizontal: 10,
+},
+faqItem: {
+  marginBottom: 15,
+  paddingHorizontal: 10,
+},
+faqQuestion: {
+  fontSize: 16,
+  fontWeight: 'bold',
+},
+faqAnswer: {
+  fontSize: 16,
+  marginTop: 5,
+},
 
 });
   
