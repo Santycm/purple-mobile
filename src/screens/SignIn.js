@@ -1,18 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, Image, TextInput, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
-import {users} from '../assets/dbUsers.js';
+
+import {dbMarket} from '../assets/dbMarket.js';
 import {useNavigation} from '@react-navigation/native';
+
+import {UserContext} from '../context/UserContext.js';
 
 export const SigIn = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [state, dispatch] = useContext(UserContext);
 
   const navigation = useNavigation();
 
-  const handlePress = () => {
-    navigation.navigate('MyProfile', {user:user});
+  const findUser = (user, password) => {
+    let userFound = dbMarket.find(userItem => {
+      return userItem.userName === user && userItem.password === password;
+    });
+    if(userFound){
+      dispatch({type: 'LOGIN', payload: userFound});
+    }
+    return userFound;
   };
 
   return (
@@ -54,13 +64,9 @@ export const SigIn = () => {
         <Pressable
           style={styles2.btnSecondary}
           onPress={() => {
-            let userFound = users.find(userItem => {
-              return (
-                userItem.userName === user && userItem.password === password
-              );
-            });
+            let userFound = findUser(user, password);
             if (userFound) {
-              handlePress();
+              navigation.navigate('MyProfile');
             } else {
               alert('Usuario o contraseña incorrectos');
             }

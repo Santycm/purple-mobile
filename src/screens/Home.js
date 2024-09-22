@@ -4,9 +4,9 @@ import {Slider} from '../components/Slider.js';
 import {InitialCategories} from '../components/InitialCategories.js';
 import ProductComponent from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
-import {products} from '../assets/dbProducts.js';
 import {FlatList} from 'react-native-gesture-handler';
 
+import {dbMarket} from '../assets/dbMarket.js';
 import {CartContext} from '../context/CartContext.js';
 
 export const Home = ({navigation}) => {
@@ -30,7 +30,7 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={products.filter(product => product.offer.isOffer)}
+            data={dbMarket.map((user) => user.products.filter((product) => product.offer.isOffer)).flat()}
             renderItem={renderProductComponent}
           />
         </View>
@@ -42,7 +42,7 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={products}
+            data={dbMarket.map((user) => user.products).flat()}
             renderItem={renderProductComponent}
           />
         </View>

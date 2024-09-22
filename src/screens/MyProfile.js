@@ -1,17 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Text, View, Pressable, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { styles2 } from '../styles/AppStyles2'
-import {users} from '../assets/dbUsers.js'
 
-export const MyProfile = ({route, navigation}) => {
-  const {user} = route.params;
+import {UserContext} from '../context/UserContext.js';
 
-  let userFound = users.find(item => {
-    return (
-      item.userName === user
-    )
-  })
+export const MyProfile = ({navigation}) => {
+  const [state, dispatch] = useContext(UserContext);
+
+  const logOut = () => {
+    dispatch({type: 'LOGOUT'});
+    navigation.navigate('Home');
+  }
 
   return (
     <View style={styles2.userScreen}>
@@ -21,9 +21,9 @@ export const MyProfile = ({route, navigation}) => {
           style={styles2.iconApp}></Image>
         <View>
           <Text style={styles2.textPrincipal}>¡Hola!</Text>
-          <Text style={styles2.nameUser}>{userFound.name}</Text>
-          <Text style={styles2.nameUser}>{userFound.lastName}</Text>
-          <Text style={styles2.birthDate}>{userFound.birthDate}</Text>
+          <Text style={styles2.nameUser}>{state.user.name}</Text>
+          <Text style={styles2.nameUser}>{state.user.lastName}</Text>
+          <Text style={styles2.birthDate}>{state.user.birthDate}</Text>
         </View>
         <View style={styles2.containerRow}>
           <Pressable
@@ -39,9 +39,7 @@ export const MyProfile = ({route, navigation}) => {
 
           <Pressable
             style={styles2.btnFourth}
-            onPress={() => {
-              navigation.navigate('Home');
-            }}>
+            onPress={logOut}>
             <Icon name="log-out" size={30} color="white" />
           </Pressable>
         </View>

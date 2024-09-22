@@ -11,9 +11,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 import {useFocusEffect, useNavigationState} from '@react-navigation/native';
 import {CartContext} from '../context/CartContext.js';
+import {UserContext} from '../context/UserContext.js';
 
 export const Navbar = ({navigation}) => {
   const [state, dispatch] = useContext(CartContext);
+  const [userState, userDispatch] = useContext(UserContext);
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const routeName = useNavigationState(state => state.routes[state.index].name);
@@ -56,7 +58,7 @@ export const Navbar = ({navigation}) => {
           placeholder="Buscar en Purple Store"
           ref={searchInputRef}
           onFocus={() => {
-            if(routeName === 'Home') return;
+            if (routeName === 'Home') return;
             if (routeName !== 'SearchProduct') {
               navigation.navigate('SearchProduct');
             }
@@ -77,9 +79,9 @@ export const Navbar = ({navigation}) => {
         style={styles2.buttonNav}>
         <Icon name="cart" size={25} color="white" />
         <View style={styles2.badge}>
-          <Text style={styles2.badgeText}>{
-            state.cart.reduce((total, product) => total + product.quantity, 0)
-            }</Text>
+          <Text style={styles2.badgeText}>
+            {state.cart.reduce((total, product) => total + product.quantity, 0)}
+          </Text>
         </View>
       </Pressable>
 
@@ -96,20 +98,35 @@ export const Navbar = ({navigation}) => {
                   <Icon name="person" size={40} color="black" />
                 </View>
                 <View style={styles2.sideBarUserText}>
-                  <Text style={styles2.textTitle}>Ingresa a tu cuenta</Text>
+                  <Text style={styles2.textTitle}>
+                    {
+                      userState.user.name ? `${userState.user.name} ${userState.user.lastName}`: '¡Hola! Inicia sesión'
+                    }
+                  </Text>
                   <Text>
                     Podrás ver detalles de envío y personalizar tu experiencia
                   </Text>
                 </View>
               </View>
-              <Pressable
-                style={styles2.btnPrimary}
-                onPress={() => {
-                  toggleMenu();
-                  navigation.navigate('Login');
-                }}>
-                <Text style={styles2.textTitle}>INGRESAR</Text>
-              </Pressable>
+              {userState.user.name ? (
+                <Pressable
+                  style={styles2.btnPrimary}
+                  onPress={() => {
+                    toggleMenu();
+                    navigation.navigate('MyProfile');
+                  }}>
+                  <Text style={styles2.textTitle}>MI PERFIL</Text>
+                </Pressable>
+              ) : (
+                <Pressable
+                  style={styles2.btnPrimary}
+                  onPress={() => {
+                    toggleMenu();
+                    navigation.navigate('Login');
+                  }}>
+                  <Text style={styles2.textTitle}>INICIAR CUENTA</Text>
+                </Pressable>
+              )}
             </View>
             <View style={styles2.sideBarOptions}>
               <Pressable

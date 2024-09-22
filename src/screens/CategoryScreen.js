@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import {View, Text, Image, ScrollView} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
-import {products} from '../assets/dbProducts';
 import ProductComponent from '../components/ProductComponent.js';
+
+import { dbMarket } from '../assets/dbMarket.js';
 import {CartContext} from '../context/CartContext.js';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -31,7 +32,7 @@ const CategoryScreen = ({route, navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={products.filter(item => item.category === category.key)}
+            data={dbMarket.map((user) => user.products.filter((product) => product.category === category.key)).flat()}
             renderItem={renderProductComponent}
           />
         </View>

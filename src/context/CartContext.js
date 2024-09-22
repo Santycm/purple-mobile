@@ -1,5 +1,4 @@
 import React, {createContext, useContext, useReducer} from 'react';
-import {products} from '../assets/dbProducts.js';
 
 const CartContext = createContext();
 

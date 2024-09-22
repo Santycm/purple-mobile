@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
-import {users} from '../assets/dbUsers.js';
+
+import { dbMarket } from '../assets/dbMarket.js';
 
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
@@ -80,7 +81,12 @@ export const SignUp = ({navigation}) => {
       return false;
     }
 
-    users.push({
+    if(dbMarket.find((user) => user.email === email)){
+      alert('El correo ya está registrado');
+      return false;
+    }
+
+    dbMarket.push({
       userName: userName,
       addres: addres,
       birthDate: birthDate,
@@ -91,7 +97,9 @@ export const SignUp = ({navigation}) => {
       password: passwordAccount,
       name: name,
       lastName: lastName,
-    });
+      products: [],
+      purchases: [],
+    })
 
     return true;
   };
