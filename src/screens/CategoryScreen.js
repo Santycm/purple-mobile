@@ -1,11 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, Image, ScrollView} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
-import { products } from '../assets/dbProducts';
-import { ProductComponent } from '../components/ProductComponent.js';
+import {products} from '../assets/dbProducts';
+import ProductComponent from '../components/ProductComponent.js';
+import {CartContext} from '../context/CartContext.js';
+import {FlatList} from 'react-native-gesture-handler';
 
-export const CategoryScreen = ({route, navigation}) => {
+const CategoryScreen = ({route, navigation}) => {
   const {category} = route.params;
+
+  const [state, dispatch] = useContext(CartContext);
+
+  const renderProductComponent = ({item}) => (
+    <ProductComponent item={item} state={state} dispatch={dispatch} />
+  );
+
   return (
     <View style={styles2.categoryContainerPage}>
       <ScrollView>
@@ -18,18 +27,17 @@ export const CategoryScreen = ({route, navigation}) => {
           </Text>
         </View>
         <View style={styles2.containerCenter}>
-          <Text style={styles2.textTitle}>Productos</Text>
-          <View style={styles2.containerColumn2}>
-            {products
-              .filter(item => item.category===category.key)
-              .map((item, index) => (
-                <View key={index}>
-                  <ProductComponent {...item} />
-                </View>
-              ))}
-          </View>
+          <FlatList
+            scrollEnabled={false}
+            numColumns={2}
+            style={styles2.sectionBg}
+            data={products.filter(item => item.category === category.key)}
+            renderItem={renderProductComponent}
+          />
         </View>
       </ScrollView>
     </View>
   );
 };
+
+export default CategoryScreen;

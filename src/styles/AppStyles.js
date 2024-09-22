@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const AppStyles = StyleSheet.create({
-//------------------------- ESTILOS DE EL CARRITO DE COMPRA(CART.JS)-------------------------------------
+  //------------------------- ESTILOS DE EL CARRITO DE COMPRA(CART.JS)-------------------------------------
   container: {
     flex: 1,
     padding: 20,
@@ -42,22 +42,23 @@ const AppStyles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#6A0DAD',
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5,
+    alignItems: 'center',
   },
   imageContainer: {
-    flex: 1,
-    justifyContent: 'flex-end', 
-    alignItems: 'center', 
+    alignItems: 'center',
     marginRight: 10,
-  },
-  cartItemImage: {
+    backgroundColor: '#FFFFFF',
+    overflow: 'hidden',
+    borderRadius: 10,
     width: 100,
     height: 100,
-    resizeMode: 'contain', 
+  },
+  cartItemImage: {
+    padding: 10,
+    width: 70,
+    height: 70,
+    overflow: 'hidden',
+    objectFit: 'scale-down',
   },
   cartItemDetails: {
     flex: 1,
@@ -137,7 +138,7 @@ const AppStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   backButtonModal: {
     position: 'absolute',
@@ -147,8 +148,8 @@ const AppStyles = StyleSheet.create({
   },
   modalContent: {
     width: '80%',
-    height: 100 ,
-    backgroundColor: '#000000', 
+    height: 100,
+    backgroundColor: '#000000',
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
@@ -157,7 +158,7 @@ const AppStyles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#D4A5FF', 
+    color: '#D4A5FF',
     marginBottom: 20,
   },
   selectionContainer: {
@@ -165,7 +166,7 @@ const AppStyles = StyleSheet.create({
   },
   drawer: {
     width: '100%',
-    backgroundColor: '#2B2B2B', 
+    backgroundColor: '#2B2B2B',
     borderRadius: 8,
     padding: 15,
     marginBottom: 20,
@@ -177,20 +178,20 @@ const AppStyles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#B388FF', 
+    color: '#B388FF',
   },
   addressText: {
     fontSize: 16,
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     marginTop: 5,
   },
   pickupDetails: {
     fontSize: 16,
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     marginBottom: 5,
   },
   editButton: {
-    backgroundColor: '#B388FF', 
+    backgroundColor: '#B388FF',
     padding: 10,
     borderRadius: 5,
     marginVertical: 10,
@@ -198,7 +199,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   mapButton: {
-    backgroundColor: '#B388FF', 
+    backgroundColor: '#B388FF',
     padding: 10,
     borderRadius: 5,
     marginVertical: 10,
@@ -206,7 +207,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   closeButton: {
-    backgroundColor: '#6A0DAD', 
+    backgroundColor: '#6A0DAD',
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
@@ -214,7 +215,7 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontWeight: 'bold',
   },
   advanceButton: {
@@ -224,7 +225,7 @@ const AppStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
+
   //-------------------------------------ESTILOS ARRIVALDAY -------------------------------
   container: {
     flex: 1,
@@ -232,7 +233,7 @@ const AppStyles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 20,
-    paddingBottom: 80, 
+    paddingBottom: 80,
   },
   header: {
     flexDirection: 'row',
@@ -266,7 +267,7 @@ const AppStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 15,
-    padding: 15, 
+    padding: 15,
     backgroundColor: '#6A0DAD',
     borderRadius: 10,
   },
@@ -275,7 +276,7 @@ const AppStyles = StyleSheet.create({
     height: 70,
     borderRadius: 35,
     overflow: 'hidden',
-    marginRight: 20, 
+    marginRight: 20,
   },
   productImage: {
     width: '100%',
@@ -284,7 +285,7 @@ const AppStyles = StyleSheet.create({
   },
   productDetails: {
     flex: 1,
-    paddingHorizontal: 10, 
+    paddingHorizontal: 10,
   },
   productTitle: {
     fontSize: 18,
@@ -311,7 +312,7 @@ const AppStyles = StyleSheet.create({
   },
   freeShipping: {
     fontSize: 14,
-    color: '#00FF00', 
+    color: '#00FF00',
     fontWeight: 'bold',
     textAlign: 'right',
   },
@@ -403,7 +404,7 @@ const AppStyles = StyleSheet.create({
   },
 
   //-------------mas de payment ----
-  
+
   scrollViewContainerPaymentScreen: {
     flexGrow: 1,
     alignItems: 'center',
@@ -434,7 +435,7 @@ const AppStyles = StyleSheet.create({
   },
   productItemScreen: {
     flexDirection: 'row',
-    backgroundColor: '#6A0DAD', 
+    backgroundColor: '#6A0DAD',
     borderRadius: 10,
     marginBottom: 20,
     padding: 10,
@@ -444,7 +445,7 @@ const AppStyles = StyleSheet.create({
   productImageScreen: {
     width: 80,
     height: 80,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     borderRadius: 40,
     marginRight: 10,
   },
@@ -484,7 +485,6 @@ const AppStyles = StyleSheet.create({
   },
   paymentOptionsContainerScreen: {
     width: '100%',
-    
   },
   paymentOptionScreen: {
     flexDirection: 'row',
@@ -501,24 +501,24 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#B0B0B0', 
+    backgroundColor: '#B0B0B0',
     marginVertical: 5,
     marginHorizontal: 10,
   },
-  
+
   paymentOptionActiveScreen: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: '#6A0DAD', 
+    backgroundColor: '#6A0DAD',
     marginVertical: 5,
     marginHorizontal: 10,
   },
-  
+
   paymentTextScreen: {
     marginLeft: 10,
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
   },
   captchaContainerScreen: {
     marginVertical: 50,
@@ -552,9 +552,9 @@ const AppStyles = StyleSheet.create({
     fontSize: 18,
   },
 
-    //------------------------------------ESTILOS MyPurchases--------------------------------------
+  //------------------------------------ESTILOS MyPurchases--------------------------------------
 
-    container: {
+  container: {
     flex: 1,
     backgroundColor: '#000000',
     padding: 10,
@@ -605,8 +605,8 @@ const AppStyles = StyleSheet.create({
     fontSize: 16,
   },
   reorderButton: {
-    backgroundColor: '#6A0DAD', 
-    width: 100, 
+    backgroundColor: '#6A0DAD',
+    width: 100,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
@@ -614,7 +614,7 @@ const AppStyles = StyleSheet.create({
     marginTop: 10,
   },
   reorderButtonText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     textAlign: 'center',
     fontWeight: 'bold',
   },
@@ -623,29 +623,28 @@ const AppStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
   statusEntregado: {
-    color: '#B388FF', 
+    color: '#B388FF',
   },
   statusEnTransito: {
-    color: '#B388FF', 
+    color: '#B388FF',
   },
   statusCancelado: {
-    color: 'red', 
+    color: 'red',
   },
   productStatusLabel: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontSize: 14,
   },
   productStatusValue: {
-    color: '#6A0DAD', 
+    color: '#6A0DAD',
     fontSize: 14,
     fontWeight: 'bold',
   },
   dateText: {
-    color: '#B0B0B0', 
+    color: '#B0B0B0',
     fontSize: 12,
     marginBottom: 5,
   },
-
 
   imageSmall: {
     width: 80,
@@ -669,7 +668,7 @@ const AppStyles = StyleSheet.create({
   },
 
   //------------------------------ConfirmPurchase----------------
-  
+
   containerConfirm: {
     flex: 1,
     justifyContent: 'center',
@@ -684,7 +683,7 @@ const AppStyles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
@@ -713,98 +712,91 @@ const AppStyles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-//------------------Estilos HelpSupport---------------------------
-containerHelp: {
-  flex: 1,
-  backgroundColor: '#000000',
-},
-headerHelp: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  padding: 16,
-  backgroundColor: '#6A0DAD',
-},
-titleHelp: {
-  flex: 1,
-  textAlign: 'center',
-  color: '#FFFFFF',
-  fontSize: 18,
-  fontWeight: 'bold',
-},
-contentHelp: {
-  padding: 16,
-},
-labelHelp: {
-  color: '#FFFFFF',
-  fontSize: 16,
-  marginBottom: 8,
-},
-pickerHelp: {
-  backgroundColor: '#B388FF',
-  color: '#FFFFFF',
-  marginBottom: 16,
-},
-textInputHelp: {
-  height: 100,
-  borderColor: '#B0B0B0',
-  borderWidth: 1,
-  padding: 10,
-  backgroundColor: '#FFFFFF',
-  color: '#2B2B2B',
-  marginBottom: 16,
-},
-footerHelp: {
-  padding: 16,
-  borderTopColor: '#B0B0B0',
-  borderTopWidth: 1,
-},
-backButtonHelp: {
-  marginRight: -20,
-},
-checkoutButtonHelp: {
-  color: '#FFFFFF',
-  fontSize: 18,
-},
-successImageHelp: {
-  width: 150,           
-  height: 150,          
-  marginBottom: 20,
-  alignSelf: 'center',  
-},
-imageContainerHelp: {
-  alignItems: 'center',
-  marginVertical: 30, 
-},
-imageHelp: {
-  width: 300, 
-  height: 300, 
-  resizeMode: 'contain', 
-},
-faqTitle: {
-  fontSize: 18,
-  fontWeight: 'bold',
-  marginVertical: 15,
-  paddingHorizontal: 10,
-},
-faqItem: {
-  marginBottom: 15,
-  paddingHorizontal: 10,
-},
-faqQuestion: {
-  fontSize: 16,
-  fontWeight: 'bold',
-},
-faqAnswer: {
-  fontSize: 16,
-  marginTop: 5,
-},
-
+  //------------------Estilos HelpSupport---------------------------
+  containerHelp: {
+    flex: 1,
+    backgroundColor: '#000000',
+  },
+  headerHelp: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#6A0DAD',
+  },
+  titleHelp: {
+    flex: 1,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  contentHelp: {
+    padding: 16,
+  },
+  labelHelp: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  pickerHelp: {
+    backgroundColor: '#B388FF',
+    color: '#FFFFFF',
+    marginBottom: 16,
+  },
+  textInputHelp: {
+    height: 100,
+    borderColor: '#B0B0B0',
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: '#FFFFFF',
+    color: '#2B2B2B',
+    marginBottom: 16,
+  },
+  footerHelp: {
+    padding: 16,
+    borderTopColor: '#B0B0B0',
+    borderTopWidth: 1,
+  },
+  backButtonHelp: {
+    marginRight: -20,
+  },
+  checkoutButtonHelp: {
+    color: '#FFFFFF',
+    fontSize: 18,
+  },
+  successImageHelp: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+  imageContainerHelp: {
+    alignItems: 'center',
+    marginVertical: 30,
+  },
+  imageHelp: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
+  },
+  faqTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginVertical: 15,
+    paddingHorizontal: 10,
+  },
+  faqItem: {
+    marginBottom: 15,
+    paddingHorizontal: 10,
+  },
+  faqQuestion: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  faqAnswer: {
+    fontSize: 16,
+    marginTop: 5,
+  },
 });
-  
-
-
-
-
-
 
 export default AppStyles;

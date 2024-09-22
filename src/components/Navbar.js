@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useRef} from 'react';
+import React, {useState, useCallback, useRef, useContext} from 'react';
 import {
   View,
   TextInput,
@@ -10,8 +10,10 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 import {useFocusEffect, useNavigationState} from '@react-navigation/native';
+import {CartContext} from '../context/CartContext.js';
 
 export const Navbar = ({navigation}) => {
+  const [state, dispatch] = useContext(CartContext);
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const routeName = useNavigationState(state => state.routes[state.index].name);
@@ -44,32 +46,41 @@ export const Navbar = ({navigation}) => {
 
   return (
     <View style={styles2.navbar}>
-      <Pressable onPress={toggleMenu}>
+      <Pressable onPress={toggleMenu} style={styles2.buttonNav}>
         <Icon name="menu" size={25} color="white" />
       </Pressable>
 
-      <TextInput
-        style={styles2.navbarSearch}
-        placeholder="Buscar en Purple Store"
-        ref={searchInputRef}
-        onFocus={() => {
-          if (routeName !== 'SearchProduct') {
+      <View style={styles2.searchContainer}>
+        <TextInput
+          style={styles2.navbarSearch}
+          placeholder="Buscar en Purple Store"
+          ref={searchInputRef}
+          onFocus={() => {
+            if(routeName === 'Home') return;
+            if (routeName !== 'SearchProduct') {
+              navigation.navigate('SearchProduct');
+            }
             navigation.navigate('SearchProduct');
-          }
-          navigation.navigate('SearchProduct');
-        }}
-        value={searchTerm}
-        onChangeText={text => {
-          setSearchTerm(text);
-          navigation.navigate('SearchProduct', {searchTerm: text});
-        }}
-      />
+          }}
+          value={searchTerm}
+          onChangeText={text => {
+            setSearchTerm(text);
+            navigation.navigate('SearchProduct', {searchTerm: text});
+          }}
+        />
+      </View>
 
       <Pressable
         onPress={() => {
           navigation.navigate('Cart');
-        }}>
+        }}
+        style={styles2.buttonNav}>
         <Icon name="cart" size={25} color="white" />
+        <View style={styles2.badge}>
+          <Text style={styles2.badgeText}>{
+            state.cart.reduce((total, product) => total + product.quantity, 0)
+            }</Text>
+        </View>
       </Pressable>
 
       <Modal
@@ -133,12 +144,13 @@ export const Navbar = ({navigation}) => {
                 <Icon name="heart" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Favoritos</Text>
               </Pressable>
-              <Pressable style={styles2.sideBarOption}
-               onPress={() => {
-                navigation.navigate('Offerts');
-              }}>
+              <Pressable
+                style={styles2.sideBarOption}
+                onPress={() => {
+                  navigation.navigate('Offerts');
+                }}>
                 <Icon name="pricetags" size={30} color="white"></Icon>
-                <Text style={styles2.textTitle}>Ofertas</Text> 
+                <Text style={styles2.textTitle}>Ofertas</Text>
               </Pressable>
               <Pressable
                 style={styles2.sideBarOption}

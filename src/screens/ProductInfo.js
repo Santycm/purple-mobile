@@ -108,6 +108,7 @@ export const ProductInfo = ({route, navigation}) => {
                 placeholder="Escribe tu comentario aquí..."
                 multiline={true}
                 numberOfLines={3}
+                maxLength={200}
               />
               <Text>Calificar</Text>
               <View
