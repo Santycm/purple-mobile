@@ -1,7 +1,7 @@
 export let dbMarket = [
   {
     userName: 'admin',
-    addres: 'Calle 123',
+    address: 'Calle 123',
     birthDate: '19/08/2000',
     country: 'Colombia',
     department: 'Antioquia',
@@ -94,18 +94,21 @@ export let dbMarket = [
     ],
     purchases: [
       {
-        id: 1,
         product:
           'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
+        img: require('../assets/provImgProduct/product4.webp'),
         date: '2021-09-01',
         price: 700000,
+        status: 'Entregado',
         paymentMethod: 'Tarjeta',
+        distribuitor: 'Alex Munera',
       },
     ],
+    clientPurchases: [],
   },
   {
     userName: 'admin2',
-    addres: 'Calle 123',
+    address: 'Calle 123',
     birthDate: '19/08/2000',
     country: 'Colombia',
     department: 'Antioquia',
@@ -198,14 +201,14 @@ export let dbMarket = [
     ],
     purchases: [
       {
-        id: 1,
         product:
           'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
+        img: require('../assets/provImgProduct/product4.webp'),
         date: '2021-09-01',
         price: 700000,
         paymentMethod: 'Tarjeta',
       },
     ],
+    clientPurchases: [],
   },
 ];
-

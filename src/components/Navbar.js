@@ -10,11 +10,9 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 import {useFocusEffect, useNavigationState} from '@react-navigation/native';
-import {CartContext} from '../context/CartContext.js';
 import {UserContext} from '../context/UserContext.js';
 
 export const Navbar = ({navigation}) => {
-  const [state, dispatch] = useContext(CartContext);
   const [userState, userDispatch] = useContext(UserContext);
   const [menuVisible, setMenuVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,6 +44,19 @@ export const Navbar = ({navigation}) => {
     }, []),
   );
 
+  const handleCartPress = () => {
+    if (userState.user) {
+      navigation.navigate('Cart');
+    } else {
+      navigation.navigate('Login');
+    }
+  };
+
+  const totalItemsInCart = userState.cart.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   return (
     <View style={styles2.navbar}>
       <Pressable onPress={toggleMenu} style={styles2.buttonNav}>
@@ -72,15 +83,11 @@ export const Navbar = ({navigation}) => {
         />
       </View>
 
-      <Pressable
-        onPress={() => {
-          navigation.navigate('Cart');
-        }}
-        style={styles2.buttonNav}>
+      <Pressable onPress={handleCartPress} style={styles2.buttonNav}>
         <Icon name="cart" size={25} color="white" />
         <View style={styles2.badge}>
           <Text style={styles2.badgeText}>
-            {state.cart.reduce((total, product) => total + product.quantity, 0)}
+            {userState.user ? totalItemsInCart : 0}
           </Text>
         </View>
       </Pressable>
@@ -99,16 +106,16 @@ export const Navbar = ({navigation}) => {
                 </View>
                 <View style={styles2.sideBarUserText}>
                   <Text style={styles2.textTitle}>
-                    {
-                      userState.user.name ? `${userState.user.name} ${userState.user.lastName}`: '¡Hola! Inicia sesión'
-                    }
+                    {userState.user
+                      ? `${userState.user.name} ${userState.user.lastName}`
+                      : '¡Hola! Inicia sesión'}
                   </Text>
                   <Text>
                     Podrás ver detalles de envío y personalizar tu experiencia
                   </Text>
                 </View>
               </View>
-              {userState.user.name ? (
+              {userState.user ? (
                 <Pressable
                   style={styles2.btnPrimary}
                   onPress={() => {

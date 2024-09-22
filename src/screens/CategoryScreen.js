@@ -4,16 +4,16 @@ import {styles2} from '../styles/AppStyles2';
 import ProductComponent from '../components/ProductComponent.js';
 
 import { dbMarket } from '../assets/dbMarket.js';
-import {CartContext} from '../context/CartContext.js';
+import { UserContext } from '../context/UserContext.js';
 import {FlatList} from 'react-native-gesture-handler';
 
 const CategoryScreen = ({route, navigation}) => {
   const {category} = route.params;
 
-  const [state, dispatch] = useContext(CartContext);
+  const [userState, userDispatch] = useContext(UserContext);
 
   const renderProductComponent = ({item}) => (
-    <ProductComponent item={item} state={state} dispatch={dispatch} />
+    <ProductComponent item={item} state={userState} dispatch={userDispatch} />
   );
 
   return (

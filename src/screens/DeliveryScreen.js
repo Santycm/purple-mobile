@@ -1,29 +1,59 @@
-import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import React, {useContext, useState, useRef} from 'react';
+import {View, Text, Pressable, TextInput} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
-export const DeliveryScreen = ({ navigation, route }) => {
-  const { cart } = route.params || {}; 
+import {UserContext} from '../context/UserContext.js';
 
-  const handleNext = () => {
-    if (cart) {
-      navigation.navigate('Arrival', { cart });
-    } else {
-      
-      console.warn("Cart is undefined");
-    }
+export const DeliveryScreen = ({navigation}) => {
+  const [userState, userDispatch] = useContext(UserContext);
+  const [isEditing, setIsEditing] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
+  const [selectedPoint, setSelectedPoint] = useState('');
+  const [address, setAddress] = useState(
+    userState.user ? userState.user.address : '',
+  );
+  const addressInputRef = useRef(null);
+
+  const handleEditAddress = () => {
+    setIsEditing(true);
+    setTimeout(() => {
+      if (addressInputRef.current) {
+        addressInputRef.current.focus();
+      }
+    }, 100); // Pequeño retraso para asegurar que el TextInput esté montado
   };
+
+  const handleSaveAddress = () => {
+    userState.user.pointDelivery = null;
+    userDispatch({type: 'UPDATE_ADDRESS', payload: address});
+    navigation.navigate('Payment');
+  };
+
+  const handleSaveAddressPoint = () => {
+    userState.user.address = null;
+    userDispatch({type: 'SET_POINT_DELIVERY', payload: selectedPoint});
+    navigation.navigate('Payment');
+  };
+
+  const handleShowPicker = () => {
+    setShowPicker(true);
+  };
+
+  const handlePickerChange = itemValue => {
+    setSelectedPoint(itemValue);
+    setShowPicker(false);
+  };
+
+  const pointsDelivery = [
+    "CALLE 12 # 12-12 Medellín",
+    "CALLE 34 # 34-34 Bogotá",
+    "CALLE 56 # 56-56 Cali",
+  ]
 
   return (
     <View style={AppStyles.modalContainerDelivery}>
-      <Pressable style={AppStyles.backButtonModal}
-        onPress={() => {
-          navigation.navigate('Cart');
-        }}>
-        <Icon name="arrow-undo-circle-outline" size={50} color="#6A0DAD" />
-      </Pressable>
-
       <View style={AppStyles.modalContent}>
         <Text style={AppStyles.modalTitle}>Selecciona la forma de entrega</Text>
 
@@ -31,34 +61,64 @@ export const DeliveryScreen = ({ navigation, route }) => {
           <View style={AppStyles.drawer}>
             <View style={AppStyles.drawerContent}>
               <Text style={AppStyles.sectionTitle}>Entrega a domicilio</Text>
-              <Text style={AppStyles.addressText}>Dirección: Calle X #123, Ciudad</Text>
+              {isEditing ? (
+                <TextInput
+                  ref={addressInputRef}
+                  style={AppStyles.textInput}
+                  value={address}
+                  onChangeText={setAddress}
+                  onBlur={handleSaveAddress}
+                />
+              ) : (
+                <Text style={AppStyles.addressText}>{address}</Text>
+              )}
             </View>
-            <Pressable style={AppStyles.advanceButton}
-              onPress={handleNext}>
+            <Pressable
+              style={AppStyles.advanceButton}
+              onPress={handleSaveAddress}>
               <Icon name="arrow-forward-circle" size={30} color="#FFFFFF" />
             </Pressable>
-            <Pressable style={AppStyles.editButton}>
-              <Text style={AppStyles.buttonText}>Editar o elegir otro domicilio</Text>
+            <Pressable style={AppStyles.editButton} onPress={handleEditAddress}>
+              <Text style={AppStyles.buttonText}>Editar domicilio</Text>
             </Pressable>
           </View>
 
           <View style={AppStyles.drawer}>
             <View style={AppStyles.drawerContent}>
-              <Text style={AppStyles.sectionTitle}>Retirar en punto de entrega</Text>
-              <Text style={AppStyles.pickupDetails}>Dirección: Punto de entrega X</Text>
-              <Text style={AppStyles.pickupDetails}>Horario: 9:00 AM - 6:00 PM</Text>
+              <Text style={AppStyles.sectionTitle}>
+                Retirar en punto de entrega
+              </Text>
+              <Text style={AppStyles.pickupDetails}>
+                Dirección: {selectedPoint || 'CALLE 12 # 12-12 Medellín'}
+              </Text>
+              <Text style={AppStyles.pickupDetails}>
+                Horario: 9:00 AM - 6:00 PM
+              </Text>
             </View>
-            <Pressable style={AppStyles.advanceButton}
-            onPress={handleNext}>
+            <Pressable
+              style={AppStyles.advanceButton}
+              onPress={handleSaveAddressPoint}>
               <Icon name="arrow-forward-circle" size={30} color="#FFFFFF" />
             </Pressable>
-            <Pressable style={AppStyles.mapButton}>
-              <Text style={AppStyles.buttonText}>Ver punto en el mapa o elegir otro</Text>
+            <Pressable style={AppStyles.mapButton} onPress={handleShowPicker}>
+              <Text style={AppStyles.buttonText}>
+                Elegir otro punto de entrega
+              </Text>
             </Pressable>
+            {showPicker && (
+              <Picker
+                selectedValue={selectedPoint}
+                onValueChange={handlePickerChange}>
+                {pointsDelivery.map(address => (
+                  <Picker.Item key={address} label={address} value={address} />
+                ))}
+              </Picker>
+            )}
           </View>
         </View>
 
-        <Pressable style={AppStyles.closeButton}
+        <Pressable
+          style={AppStyles.editButton}
           onPress={() => {
             navigation.navigate('Cart');
           }}>

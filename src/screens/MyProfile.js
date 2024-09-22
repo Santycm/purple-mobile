@@ -1,7 +1,7 @@
-import React, {useContext} from 'react'
-import { Text, View, Pressable, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { styles2 } from '../styles/AppStyles2'
+import React, {useContext} from 'react';
+import {Text, View, Pressable, Image} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {styles2} from '../styles/AppStyles2';
 
 import {UserContext} from '../context/UserContext.js';
 
@@ -11,7 +11,7 @@ export const MyProfile = ({navigation}) => {
   const logOut = () => {
     dispatch({type: 'LOGOUT'});
     navigation.navigate('Home');
-  }
+  };
 
   return (
     <View style={styles2.userScreen}>
@@ -21,9 +21,15 @@ export const MyProfile = ({navigation}) => {
           style={styles2.iconApp}></Image>
         <View>
           <Text style={styles2.textPrincipal}>¡Hola!</Text>
-          <Text style={styles2.nameUser}>{state.user.name}</Text>
-          <Text style={styles2.nameUser}>{state.user.lastName}</Text>
-          <Text style={styles2.birthDate}>{state.user.birthDate}</Text>
+          <Text style={styles2.nameUser}>
+            {state.user ? state.user.name : ''}
+          </Text>
+          <Text style={styles2.nameUser}>
+            {state.user ? state.user.lastName : ''}
+          </Text>
+          <Text style={styles2.birthDate}>
+            {state.user ? state.user.birthDate : ''}
+          </Text>
         </View>
         <View style={styles2.containerRow}>
           <Pressable
@@ -37,13 +43,11 @@ export const MyProfile = ({navigation}) => {
             <Icon name="basket" size={30} color="white" />
           </Pressable>
 
-          <Pressable
-            style={styles2.btnFourth}
-            onPress={logOut}>
+          <Pressable style={styles2.btnFourth} onPress={logOut}>
             <Icon name="log-out" size={30} color="white" />
           </Pressable>
         </View>
       </View>
     </View>
   );
-}
+};

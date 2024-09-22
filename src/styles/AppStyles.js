@@ -138,22 +138,14 @@ const AppStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  backButtonModal: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    zIndex: 1,
+    backgroundColor: '#6A0DAD',
   },
   modalContent: {
     width: '80%',
-    height: 100,
     backgroundColor: '#000000',
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
-    position: 'relative',
   },
   modalTitle: {
     fontSize: 20,
@@ -425,9 +417,11 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
   modalTitleScreen: {
+    marginTop: 20,
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#FFFFFF',
   },
   productsContainerScreen: {
     width: '100%',
@@ -474,6 +468,10 @@ const AppStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 20,
+    color: '#FFFFFF',
+    textAlign: 'right',
+    width: '100%',
+    marginRight: 30,
   },
   addressInputScreen: {
     width: '100%',
@@ -622,14 +620,18 @@ const AppStyles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
-  statusEntregado: {
+  statusDelivered: {
     color: '#B388FF',
   },
-  statusEnTransito: {
+  statusInWay: {
     color: '#B388FF',
   },
-  statusCancelado: {
+  statusCanceled: {
     color: 'red',
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    gap: 10,
   },
   productStatusLabel: {
     color: '#FFFFFF',
@@ -797,6 +799,36 @@ const AppStyles = StyleSheet.create({
     fontSize: 16,
     marginTop: 5,
   },
+  //Estilos summary
+  purchaseSummaryItemScreen: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  purchaseSummaryImageScreen: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  purchaseSummaryTextScreen: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  },
+  modalTitleSecond: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginTop: 20,
+    width: '100%',
+    textAlign: 'left',
+    marginLeft: 30,
+  },
+  addressContainer:{
+    width: '100%',
+    alignContent:'start',
+    marginLeft: 30,
+  }
 });
 
 export default AppStyles;

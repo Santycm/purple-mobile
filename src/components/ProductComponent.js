@@ -20,6 +20,7 @@ const ProductComponent = ({item, state, dispatch}) => {
   };
 
    const isInCart = state.cart.find(product => product.id === item.id);
+   const isUserLogged = state.user !== null;
 
   return (
     <View style={styles2.cardProduct}>
@@ -49,11 +50,17 @@ const ProductComponent = ({item, state, dispatch}) => {
         </Pressable>
         <Pressable style={styles2.btnFourth} onPress={
           ()=>{
-            if(isInCart){
-              dispatch({type: 'INCREMENT_ITEM', payload: item.id});
+            if(!isUserLogged){
+              navigation.navigate('Login');
+              return;
             }else{
-              dispatch({type: 'ADD_TO_CART', payload: item});
+              if (isInCart) {
+                dispatch({type: 'INCREMENT_ITEM', payload: item.id});
+              } else {
+                dispatch({type: 'ADD_TO_CART', payload: item});
+              }
             }
+            
           }
         }>
           <Icon name="cart" size={25} color={isInCart ? "black": "white"} />

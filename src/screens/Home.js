@@ -7,12 +7,14 @@ import {styles2} from '../styles/AppStyles2.js';
 import {FlatList} from 'react-native-gesture-handler';
 
 import {dbMarket} from '../assets/dbMarket.js';
-import {CartContext} from '../context/CartContext.js';
+import { UserContext } from '../context/UserContext.js';
 
 export const Home = ({navigation}) => {
-  const [state, dispatch] = useContext(CartContext);
+  const [userState, userDispatch] = useContext(UserContext);
 
-  const renderProductComponent = ({item}) => <ProductComponent item={item} state={state} dispatch={dispatch} />;
+  const renderProductComponent = ({item}) => (
+    <ProductComponent item={item} state={userState} dispatch={userDispatch} />
+  );
 
   return (
     <View style={styles2.homeContainer}>

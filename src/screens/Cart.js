@@ -4,13 +4,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
 import ProductCartComponent from '../components/ProductCartComponent.js';
-import {CartContext} from '../context/CartContext.js';
+import { UserContext } from '../context/UserContext.js';
 
 export const Cart = ({navigation}) => {
-  const [state, dispatch] = useContext(CartContext);
+  const [userState, userDispatch] = useContext(UserContext);
 
   const getTotalItems = cart => {
-    return cart.reduce((total, product) => total + product.quantity, 0);
+    return (
+     cart.reduce((total, product) => total + product.quantity, 0)
+    );
   };
 
   const getTotalPrice = cart => {
@@ -31,7 +33,11 @@ export const Cart = ({navigation}) => {
   };
 
   const renderProductCart = ({item}) => (
-    <ProductCartComponent item={item} state={state} dispatch={dispatch} />
+    <ProductCartComponent
+      item={item}
+      state={userState}
+      dispatch={userDispatch}
+    />
   );
 
   return (
@@ -47,7 +53,7 @@ export const Cart = ({navigation}) => {
         <Text style={AppStyles.headerTitle}>Carrito de compra</Text>
       </View>
       <FlatList
-        data={state.cart}
+        data={userState.cart}
         renderItem={renderProductCart}
         keyExtractor={item => item.id.toString()}
         style={AppStyles.cartList}
@@ -55,16 +61,16 @@ export const Cart = ({navigation}) => {
       <View style={AppStyles.detailsContainer}>
         <Text style={AppStyles.detailsText}>Detalles de compra</Text>
         <Text style={AppStyles.detailsText}>
-          Cantidad de productos: {getTotalItems(state.cart)}
+          Cantidad de productos: {getTotalItems(userState.cart)}
         </Text>
         <Text style={AppStyles.totalText}>
-          Total: {getTotalPrice(state.cart)}
+          Total: {getTotalPrice(userState.cart)}
         </Text>
         <Pressable
           style={AppStyles.checkoutButton}
-          /*onPress={() => {
-            navigation.navigate('Delivery', { cart }); 
-          }}*/
+          onPress={() => {
+            navigation.navigate('Delivery'); 
+          }}
         >
           <Text style={AppStyles.checkoutButtonText}>Continuar compra</Text>
         </Pressable>
