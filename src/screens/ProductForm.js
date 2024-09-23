@@ -7,8 +7,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import AppStyles from '../styles/AppStyles';
 
-export const ProductForm = () => {
-  const [selectedPaymentMethods,setSelectedPaymentMethods] = useState([]);
+
+export const ProductForm = ({navigation}) => {
+  const [selectedPaymentMethods, setSelectedPaymentMethods] = useState([]);
   const [isAvailable, setIsAvailable] = useState(false);
   const [productImage, setProductImage] = useState(null);
   const [product, setProduct] = useState({
@@ -40,29 +41,33 @@ export const ProductForm = () => {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        const source = {uri: response.assets[0].uri};
-        setProductImage(source);
+        const source = response.assets[0].uri;
 
-        // Guardar la imagen en la carpeta assets
-        const fileName = response.assets[0].fileName;
-        const destPath = `./src/assets/${fileName}`;
+        // Subir la imagen a Cloudinary
+        const formData = new FormData();
+        formData.append('file', {
+          uri: source,
+          type: 'image/jpeg',
+          name: 'upload.jpg',
+        });
+        formData.append('upload_preset', 'Purple'); // Reemplaza con tu upload preset
+        formData.append('folder', 'purple'); // Especifica la carpeta en Cloudinary
 
-        RNFS.copyFile(response.assets[0].uri, destPath)
-          .then(() => {
-            console.log('Image saved to assets folder');
-            // Actualizar el objeto product con la dirección de la imagen
-            setProduct(prevProduct => ({
-              ...prevProduct,
-              img: destPath,
-            }));
+        fetch(`https://api.cloudinary.com/v1_1/dctc1rhlx/image/upload`, {
+          method: 'POST',
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Image uploaded successfully:', data);
+            setProductImage(data.secure_url);
           })
           .catch(error => {
-            console.log('Error saving image: ', error);
+            console.log('Error uploading image:', error);
           });
       }
     });
   };
-  
 
   return (
     <View style={styles2.bgScreen2}>
@@ -77,6 +82,20 @@ export const ProductForm = () => {
         <View style={AppStyles.productContainer}>
           <Text style={styles2.titleTextPageProduct}>AGREGAR PRODUCTO</Text>
           <View>
+            <View>
+              <Text>Imagen</Text>
+              <Pressable
+                onPress={handleImagePicker}
+                style={styles2.imagePicker}>
+                <Text>Seleccionar Imagen</Text>
+              </Pressable>
+              {productImage && (
+                <Image
+                  source={{uri: productImage}}
+                  style={{width: 100, height: 100}}
+                />
+              )}
+            </View>
             <TextInput placeholder="Nombre del producto" />
             <TextInput
               multiline={true}
@@ -120,17 +139,6 @@ export const ProductForm = () => {
                 onPress={() => setIsAvailable(!isAvailable)}>
                 <Text>{isAvailable ? 'Disponible' : 'No disponible'}</Text>
               </Pressable>
-            </View>
-            <View>
-              <Text>Imagen</Text>
-              <Pressable
-                onPress={handleImagePicker}
-                style={styles2.imagePicker}>
-                <Text>Seleccionar Imagen</Text>
-              </Pressable>
-              {productImage && (
-                <Image source={productImage} style={styles2.productImage} />
-              )}
             </View>
           </View>
         </View>

@@ -23,7 +23,10 @@ export const MyProductComponent = ({item /*, state, dispatch*/}) => {
   return (
     <View style={AppStyles.MyProductContainer}>
       <View style={AppStyles.MyProductInfo}>
-        <Image source={item.img} style={AppStyles.purchaseSummaryImageScreen} />
+        <Image
+          source={{uri: item.img}}
+          style={AppStyles.purchaseSummaryImageScreen}
+        />
         <View>
           <Text>{truncateText(item.name, 15)}</Text>
           <Text>{formatPrice(item.price)}</Text>

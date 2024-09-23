@@ -25,7 +25,7 @@ const ProductComponent = ({item, state, dispatch}) => {
   return (
     <View style={styles2.cardProduct}>
       <Pressable style={styles2.imgProductContainer} onPress={handlePress}>
-        <Image source={item.img} style={styles2.imgProduct} />
+        <Image source={{uri: item.img}} style={styles2.imgProduct} />
         {item.offer.isOffer && (
           <View style={styles2.discountContainer}>
             <Text style={styles2.textDiscount}>-{item.offer.discount}%</Text>

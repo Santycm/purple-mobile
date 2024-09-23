@@ -135,7 +135,7 @@ export const Payment = ({navigation}) => {
             {userState.cart.map(item => (
               <View style={AppStyles.purchaseSummaryItemScreen} key={item.id}>
                 <Image
-                  source={item.img}
+                  source={{uri: item.img}}
                   style={AppStyles.purchaseSummaryImageScreen}
                 />
                 <View>

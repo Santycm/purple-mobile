@@ -30,7 +30,7 @@ export const ProductFavComponent = ({item, state, dispatch}) => {
   return (
     <View style={AppStyles.purchaseItem}>
       <View style={[AppStyles.imageContainer, {marginLeft: 20}]}>
-        <Image source={item.img} style={AppStyles.imageSmall} />
+        <Image source={{uri: item.img}} style={AppStyles.imageSmall} />
       </View>
       <View style={[AppStyles.purchaseDetails, {marginLeft: 20}]}>
         <Text style={AppStyles.productName}>{item.name}</Text>

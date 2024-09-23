@@ -17,7 +17,7 @@ const ProductCartComponent = ({item, dispatch}) => {
   return (
     <View style={AppStyles.cartItem}>
       <View style={AppStyles.imageContainer}>
-        <Image source={item.img} style={AppStyles.cartItemImage} />
+        <Image source={{uri: item.img}} style={AppStyles.cartItemImage} />
       </View>
       <View style={AppStyles.cartItemDetails}>
         <Text numberOfLines={1} style={AppStyles.cartItemName}>

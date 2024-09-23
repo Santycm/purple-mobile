@@ -105,7 +105,7 @@ export const ProductInfo = ({route, navigation}) => {
       <ScrollView>
         <View style={styles2.productContainer}>
           <View style={styles2.bgImgProduct}>
-            <Image source={product.img} style={styles2.imgProductPage} />
+            <Image source={{uri: product.img}} style={styles2.imgProductPage} />
             {product.offer.isOffer && (
               <View style={styles2.discountContainer}>
                 <Text style={styles2.textDiscount}>

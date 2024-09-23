@@ -37,7 +37,7 @@ export const ProductPurchaseComponent = ({item}) => {
   return (
     <View style={AppStyles.purchaseItem}>
       <View style={AppStyles.imageContainer}>
-        <Image source={item.img} style={AppStyles.image} />
+        <Image source={{uri: item.img}} style={AppStyles.image} />
       </View>
       <View style={AppStyles.purchaseDetails}>
         <Text style={AppStyles.dateText}>
@@ -58,15 +58,11 @@ export const ProductPurchaseComponent = ({item}) => {
           </View>
           <View style={AppStyles.statusContainer}>
             <Text style={AppStyles.productStatusLabel}>Distribuidor:</Text>
-            <Text>
-              {item.distribuitor}
-            </Text>
+            <Text>{item.distribuitor}</Text>
           </View>
           <View style={AppStyles.statusContainer}>
             <Text style={AppStyles.productStatusLabel}>Medio de pago:</Text>
-            <Text>
-              {item.paymentMethod}
-            </Text>
+            <Text>{item.paymentMethod}</Text>
           </View>
         </View>
       </View>

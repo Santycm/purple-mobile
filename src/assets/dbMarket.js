@@ -13,7 +13,7 @@ export let dbMarket = [
     products: [
       {
         id: 1,
-        img: require('../assets/provImgProduct/product4.webp'),
+        img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
         description:
           'Lo que tienes que saber de este productoCantidad de llantas: 1Índice de carga: 54Posición: DelanteraTipo de montaje: Sin cámaraEl ancho de sección es de 110mm.Tiene un diámetro de 17".La relación entre alto y ancho es de 70.Para moto deportiva.Fabricada en Japón.Diseñada para lograr la firmeza que necesitas al conducir.No incluye rin.Apta para motos Sport.',
@@ -56,7 +56,7 @@ export let dbMarket = [
       },
       {
         id: 2,
-        img: require('../assets/provImgProduct/product1.webp'),
+        img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Batería Moto Magna Akt 125 Sl Mf Tt 125 Akt 150 Nkd Yb6.5lb',
         description:
           'Lo que tienes que saber de este productoCantidad de llantas: 1Índice de carga: 54Posición: DelanteraTipo de montaje: Sin cámaraEl ancho de sección es de 110mm.Tiene un diámetro de 17".La relación entre alto y ancho es de 70.Para moto deportiva.Fabricada en Japón.Diseñada para lograr la firmeza que necesitas al conducir.No incluye rin.Apta para motos Sport.',
@@ -94,13 +94,9 @@ export let dbMarket = [
         status: 'Disponible',
       },
     ],
-    purchases: [
-      
-    ],
+    purchases: [],
     clientPurchases: [],
-    favoriteProducts: [
-      
-    ],
+    favoriteProducts: [],
   },
   {
     userName: 'admin2',
@@ -116,7 +112,7 @@ export let dbMarket = [
     products: [
       {
         id: 3,
-        img: require('../assets/provImgProduct/charol.webp'),
+        img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Sartén Farberware Eco Advantage 25cm Antiadherente',
         description:
           'Cocina con amor, cocina con Farberware Y ayuda al planeta, preparando comidas deliciosas y saludables con esta conveniente Sartén Antiadherente Cerámico 25cm Farberware Eco Advantage.',
@@ -158,7 +154,7 @@ export let dbMarket = [
       },
       {
         id: 4,
-        img: require('../assets/provImgProduct/silla.webp'),
+        img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Silla Escritorio Ergonomica Magnux MX2015',
         description:
           'Lo que tienes que saber de este producto Unidades por pack: 1Material del tapizado: MeshConfortable y duradera.Cómodos apoyabrazos.Con ruedas.Giratoria.Material del relleno: espuma.',
@@ -199,7 +195,7 @@ export let dbMarket = [
       {
         product:
           'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
-        img: require('../assets/provImgProduct/product4.webp'),
+        img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         date: '2021-09-01',
         price: 700000,
         paymentMethod: 'Tarjeta',
