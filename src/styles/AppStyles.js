@@ -824,11 +824,49 @@ const AppStyles = StyleSheet.create({
     textAlign: 'left',
     marginLeft: 30,
   },
-  addressContainer:{
+  addressContainer: {
     width: '100%',
-    alignContent:'start',
+    alignContent: 'start',
     marginLeft: 30,
-  }
+  },
+  MyProductContainer: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  MyProductInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  MyProductControls: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  MyProductBtnControl: {
+    backgroundColor: '#6A0DAD',
+    width: 30,
+    height: 30,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  MyProductBtnAdd: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 5,
+    borderColor: 'white',
+    borderWidth: 1,
+    padding: 10,
+  },
+  productContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 30,
+    gap: 20,
+  },
 });
 
 export default AppStyles;

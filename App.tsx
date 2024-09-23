@@ -22,6 +22,9 @@ import {SearchProduct} from './src/screens/SearchProduct.js';
 import {Offers} from './src/screens/Offers.js';
 import {Categories} from './src/screens/Categories.js';
 
+import { MyProducts } from './src/screens/MyProducts.js';
+import { ProductForm } from './src/screens/ProductForm.js';
+
 //Context
 import {UserProvider} from './src/context/UserContext.js';
 
@@ -32,6 +35,16 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="MyProducts"
+            component={MyProducts}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ProductForm"
+            component={ProductForm}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="MyProfile"
             component={MyProfile}

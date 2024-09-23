@@ -162,6 +162,16 @@ export const Navbar = ({navigation}) => {
                   <Text style={styles2.textTitle}>Mis compras</Text>
                 </Pressable>
               )}
+              {!userState.user && (
+                <Pressable
+                  style={styles2.sideBarOption}
+                  onPress={() => {
+                    navigation.navigate('MyProducts');
+                  }}>
+                  <Icon name="server" size={30} color="white"></Icon>
+                  <Text style={styles2.textTitle}>Mis productos</Text>
+                </Pressable>
+              )}
               {userState.user && (
                 <Pressable
                   style={styles2.sideBarOption}
