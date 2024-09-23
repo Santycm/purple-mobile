@@ -55,7 +55,6 @@ export const Cart = ({navigation}) => {
       <FlatList
         data={userState.cart}
         renderItem={renderProductCart}
-        keyExtractor={item => item.id.toString()}
         style={AppStyles.cartList}
       />
       <View style={AppStyles.detailsContainer}>

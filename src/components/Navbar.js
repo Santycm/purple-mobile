@@ -152,26 +152,30 @@ export const Navbar = ({navigation}) => {
                 <Icon name="search" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Buscar</Text>
               </Pressable>
+              {userState.user && (
+                <Pressable
+                  style={styles2.sideBarOption}
+                  onPress={() => {
+                    navigation.navigate('MyPurchases');
+                  }}>
+                  <Icon name="basket" size={30} color="white"></Icon>
+                  <Text style={styles2.textTitle}>Mis compras</Text>
+                </Pressable>
+              )}
+              {userState.user && (
+                <Pressable
+                  style={styles2.sideBarOption}
+                  onPress={() => {
+                    navigation.navigate('MyFavorites');
+                  }}>
+                  <Icon name="heart" size={30} color="white"></Icon>
+                  <Text style={styles2.textTitle}>Mis Favoritos</Text>
+                </Pressable>
+              )}
               <Pressable
                 style={styles2.sideBarOption}
                 onPress={() => {
-                  navigation.navigate('MyPurchases');
-                }}>
-                <Icon name="basket" size={30} color="white"></Icon>
-                <Text style={styles2.textTitle}>Mis compras</Text>
-              </Pressable>
-              <Pressable
-                style={styles2.sideBarOption}
-                onPress={() => {
-                  navigation.navigate('MyFavorites');
-                }}>
-                <Icon name="heart" size={30} color="white"></Icon>
-                <Text style={styles2.textTitle}>Favoritos</Text>
-              </Pressable>
-              <Pressable
-                style={styles2.sideBarOption}
-                onPress={() => {
-                  navigation.navigate('Offerts');
+                  navigation.navigate('Offers');
                 }}>
                 <Icon name="pricetags" size={30} color="white"></Icon>
                 <Text style={styles2.textTitle}>Ofertas</Text>

@@ -22,21 +22,20 @@ const styles2 = StyleSheet.create({
   navbarSearchContainer: {
     width: '90%',
   },
-  buttonNav:{
-    height:70,
-    alignItems:'center',
-    justifyContent:'center',
-    flexDirection:'row',
-    gap:2,
+  buttonNav: {
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 2,
   },
-  badge:{
-    backgroundColor:'red',
-    borderRadius:100,
-    alignItems:'center',
-    justifyContent:'center',
-    width:20,
-    height:20,
-
+  badge: {
+    backgroundColor: 'red',
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 20,
+    height: 20,
   },
   navbarSearch: {
     width: '100%',
@@ -84,6 +83,24 @@ const styles2 = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  btnLove: {
+    backgroundColor: '#6A0DAD',
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+  },
+  btnLoveAdded: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
   },
   iconProfile: {
     backgroundColor: 'white',

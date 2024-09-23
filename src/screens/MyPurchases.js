@@ -19,11 +19,16 @@ export const MyPurchases = ({navigation}) => {
         </Pressable>
         <Text style={AppStyles.headerTitle}>Mis Compras</Text>
       </View>
-      <FlatList
-        data={userState.user.purchases}
-        renderItem={ProductPurchaseComponent}
-        contentContainerStyle={AppStyles.listContainer}
-      />
+      {userState.user.purchases.length === 0 && (
+        <Text style={AppStyles.noData}>No hay compras realizadas</Text>
+      )}
+      {userState.user.purchases.length > 0 && (
+        <FlatList
+          data={userState.user.purchases}
+          renderItem={ProductPurchaseComponent}
+          contentContainerStyle={AppStyles.listContainer}
+        />
+      )}
     </View>
   );
 };

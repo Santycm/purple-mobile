@@ -1,30 +1,97 @@
-import React, {useState} from 'react';
-import {View, Text, Pressable, Image, TextInput, ScrollViewBase} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  TextInput,
+  ScrollViewBase,
+} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ScrollView} from 'react-native-gesture-handler';
-
-
-const getPaymentIcon = payment => {
-  switch (payment.toLowerCase()) {
-    case 'tarjeta':
-      return 'credit-card';
-    case 'efectivo':
-      return 'money';
-    default:
-      return 'money';
-  }
-};
+import {dbMarket} from '../assets/dbMarket';
 
 export const ProductInfo = ({route, navigation}) => {
-  const {product} = route.params;
-
   const [rating, setRating] = useState(0);
+
+  const {product} = route.params;
+  const {state} = route.params;
 
   const handleStarPress = newRating => {
     setRating(newRating);
   };
+
+  const getPaymentIcon = payment => {
+    switch (payment.toLowerCase()) {
+      case 'tarjeta':
+        return 'credit-card';
+      case 'efectivo':
+        return 'money';
+      default:
+        return 'money';
+    }
+  };
+
+  const formatPrice = price => {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
+
+  const handleAddFavorite = () => {
+    if(state.user === null) {
+      return;
+    }
+    const user = dbMarket.find(user => user.userName === state.user.userName);
+
+    if (user) {
+      if (!isFavorite) {
+        user.favoriteProducts.push({
+          id:product.id,
+          name: product.name,
+          img: product.img,
+          description: product.description,
+          status: product.status,
+          price: product.price,
+        });
+        setIsFavorite(true);
+      }
+    }
+  };
+
+  let isFav = false;
+
+  if (state.user) {
+   isFav = state.user.favoriteProducts.some(
+      favorite => favorite.id === product.id,
+    )
+  }
+
+  const [isFavorite, setIsFavorite] = useState(isFav ? true : false);
+
+  const loadFavoriteComponent = () => {
+    if (isFavorite) {
+      return (
+        <Pressable style={styles2.btnLoveAdded}>
+          <Icon name="heart" size={20} color="white" />
+        </Pressable>
+      );
+    } else {
+      return (
+        <Pressable style={styles2.btnLove} onPress={handleAddFavorite}>
+          <Icon name="heart" size={20} color="white" />
+        </Pressable>
+      );
+    }
+  };
+
+  useEffect(() => {
+    loadFavoriteComponent();
+  }, [isFavorite]);
 
   return (
     <View style={styles2.bgScreen2}>
@@ -52,18 +119,14 @@ export const ProductInfo = ({route, navigation}) => {
             <Text style={styles2.textCategory}>{product.category}</Text>
             <View style={styles2.containerRow}>
               <Text style={styles2.textPricePageProduct}>
-                ${' '}
-                {product.price.toString().length > 8
-                  ? product.price.toString().substring(0, 8) + '...'
-                  : product.price}
+                {formatPrice(product.price)}
               </Text>
               <Pressable style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Agregar al carrito</Text>
               </Pressable>
+              {loadFavoriteComponent()}
             </View>
-            <Text style={styles2.textDescription}>
-              {product.description}
-            </Text>
+            <Text style={styles2.textDescription}>{product.description}</Text>
 
             <Text style={styles2.textTitle}>Caracteristicas</Text>
             <View style={styles2.table}>

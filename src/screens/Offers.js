@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, ScrollView, Text, Pressable} from 'react-native';
 import {Slider} from '../components/Slider.js';
 import {InitialCategories} from '../components/InitialCategories.js';
-import {ProductComponent} from '../components/ProductComponent.js';
+import ProductComponent from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
-import {products} from '../assets/dbProducts.js';
+import {UserContext} from '../context/UserContext.js';
+import {FlatList} from 'react-native-gesture-handler';
+import {dbMarket} from '../assets/dbMarket.js';
 
-export const Offerts = ({navigation}) => {
+export const Offers = ({navigation}) => {
+  const [userState, userDispatch] = useContext(UserContext);
+
+  const renderProductComponent = ({item}) => (
+    <ProductComponent item={item} state={userState} dispatch={userDispatch} />
+  );
   return (
     <View style={styles2.homeContainer}>
       <ScrollView>
@@ -16,15 +23,13 @@ export const Offerts = ({navigation}) => {
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>
             ¡En Oferta HOY!
           </Text>
-          <View style={styles2.sectionBg}>
-            {products
-              .filter(item => item.offer.isOffer)
-              .map((item, index) => (
-                <View key={index}>
-                  <ProductComponent {...item} />
-                </View>
-              ))}
-          </View>
+          <FlatList
+            scrollEnabled={false}
+            numColumns={2}
+            style={styles2.sectionBg}
+            data={dbMarket.map(user => user.products.filter(product => product.offer.isOffer),).flat()}
+            renderItem={renderProductComponent}
+          />
         </View>
         <View style={styles2.sectionContainer}>
           <Text style={[styles2.textTitle, styles2.textTitleCenter]}>

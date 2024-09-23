@@ -8,7 +8,7 @@ const ProductComponent = ({item, state, dispatch}) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('ProductInfo', {product: item});
+    navigation.navigate('ProductInfo', {product: item, state:state});
   };
 
   const formatPrice = price => {
@@ -19,7 +19,7 @@ const ProductComponent = ({item, state, dispatch}) => {
     }).format(price);
   };
 
-   const isInCart = state.cart.find(product => product.id === item.id);
+   const isInCart = state.cart.find(product => product.id === item.id || product.product === item.name);
    const isUserLogged = state.user !== null;
 
   return (
@@ -55,7 +55,7 @@ const ProductComponent = ({item, state, dispatch}) => {
               return;
             }else{
               if (isInCart) {
-                dispatch({type: 'INCREMENT_ITEM', payload: item.id});
+                dispatch({type: 'INCREMENT_ITEM', payload: item.id });
               } else {
                 dispatch({type: 'ADD_TO_CART', payload: item});
               }

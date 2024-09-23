@@ -52,6 +52,7 @@ export let dbMarket = [
           isOffer: true,
           discount: 20,
         },
+        status: 'Disponible',
       },
       {
         id: 2,
@@ -90,21 +91,16 @@ export let dbMarket = [
           isOffer: false,
           discount: 0,
         },
+        status: 'Disponible',
       },
     ],
     purchases: [
-      {
-        product:
-          'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
-        img: require('../assets/provImgProduct/product4.webp'),
-        date: '2021-09-01',
-        price: 700000,
-        status: 'Entregado',
-        paymentMethod: 'Tarjeta',
-        distribuitor: 'Alex Munera',
-      },
+      
     ],
     clientPurchases: [],
+    favoriteProducts: [
+      
+    ],
   },
   {
     userName: 'admin2',
