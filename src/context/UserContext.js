@@ -20,6 +20,14 @@ const userReducer = (state, action) => {
         user: null,
         cart: [], // Limpiar el carrito al cerrar sesión
       };
+    case 'ADD_PRODUCT':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          products: [...state.user.products, action.payload],
+        },
+      };
     case 'UPDATE_ADDRESS':
       return {
         ...state,

@@ -17,12 +17,8 @@ export let dbMarket = [
         name: 'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
         description:
           'Lo que tienes que saber de este productoCantidad de llantas: 1Índice de carga: 54Posición: DelanteraTipo de montaje: Sin cámaraEl ancho de sección es de 110mm.Tiene un diámetro de 17".La relación entre alto y ancho es de 70.Para moto deportiva.Fabricada en Japón.Diseñada para lograr la firmeza que necesitas al conducir.No incluye rin.Apta para motos Sport.',
-        characteristics: [
-          'Marca: Dunlop',
-          'Línea: Arrowmax',
-          'Tamaño: 110/70-17',
-        ],
-        paymentAccepted: ['Tarjeta', 'Efectivo'],
+        features: ['Marca: Dunlop', 'Línea: Arrowmax', 'Tamaño: 110/70-17'],
+        paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
         questions: [
           {
             question: 'Pregunta 1',
@@ -60,8 +56,8 @@ export let dbMarket = [
         name: 'Batería Moto Magna Akt 125 Sl Mf Tt 125 Akt 150 Nkd Yb6.5lb',
         description:
           'Lo que tienes que saber de este productoCantidad de llantas: 1Índice de carga: 54Posición: DelanteraTipo de montaje: Sin cámaraEl ancho de sección es de 110mm.Tiene un diámetro de 17".La relación entre alto y ancho es de 70.Para moto deportiva.Fabricada en Japón.Diseñada para lograr la firmeza que necesitas al conducir.No incluye rin.Apta para motos Sport.',
-        characteristics: ['Marca: Magna'],
-        paymentAccepted: ['Tarjeta', 'Efectivo'],
+        features: ['Marca: Magna'],
+        paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
         questions: [
           {
             question: 'Pregunta 1',
@@ -116,7 +112,7 @@ export let dbMarket = [
         name: 'Sartén Farberware Eco Advantage 25cm Antiadherente',
         description:
           'Cocina con amor, cocina con Farberware Y ayuda al planeta, preparando comidas deliciosas y saludables con esta conveniente Sartén Antiadherente Cerámico 25cm Farberware Eco Advantage.',
-        characteristics: [
+        features: [
           'Marca: Farberware',
           'Línea: EcoAdvantage',
           'Tamaño: 29 cm x 45.72 cm',
@@ -158,7 +154,7 @@ export let dbMarket = [
         name: 'Silla Escritorio Ergonomica Magnux MX2015',
         description:
           'Lo que tienes que saber de este producto Unidades por pack: 1Material del tapizado: MeshConfortable y duradera.Cómodos apoyabrazos.Con ruedas.Giratoria.Material del relleno: espuma.',
-        characteristics: ['Marca: Magnux', 'Línea: Secretarial'],
+        features: ['Marca: Magnux', 'Línea: Secretarial'],
         paymentAccepted: ['Tarjeta', 'Efectivo'],
         questions: [
           {

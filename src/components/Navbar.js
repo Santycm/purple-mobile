@@ -162,7 +162,7 @@ export const Navbar = ({navigation}) => {
                   <Text style={styles2.textTitle}>Mis compras</Text>
                 </Pressable>
               )}
-              {!userState.user && (
+              {userState.user && (
                 <Pressable
                   style={styles2.sideBarOption}
                   onPress={() => {

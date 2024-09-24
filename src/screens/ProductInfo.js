@@ -24,11 +24,15 @@ export const ProductInfo = ({route, navigation}) => {
   };
 
   const getPaymentIcon = payment => {
-    switch (payment.toLowerCase()) {
-      case 'tarjeta':
+    switch (payment) {
+      case 'Débito':
         return 'credit-card';
-      case 'efectivo':
+      case 'Crédito':
+        return 'credit-card';
+      case 'Efecty':
         return 'money';
+      case 'PSE':
+        return 'arrows-alt';
       default:
         return 'money';
     }
@@ -43,7 +47,7 @@ export const ProductInfo = ({route, navigation}) => {
   };
 
   const handleAddFavorite = () => {
-    if(state.user === null) {
+    if (state.user === null) {
       return;
     }
     const user = dbMarket.find(user => user.userName === state.user.userName);
@@ -51,7 +55,7 @@ export const ProductInfo = ({route, navigation}) => {
     if (user) {
       if (!isFavorite) {
         user.favoriteProducts.push({
-          id:product.id,
+          id: product.id,
           name: product.name,
           img: product.img,
           description: product.description,
@@ -66,9 +70,9 @@ export const ProductInfo = ({route, navigation}) => {
   let isFav = false;
 
   if (state.user) {
-   isFav = state.user.favoriteProducts.some(
+    isFav = state.user.favoriteProducts.some(
       favorite => favorite.id === product.id,
-    )
+    );
   }
 
   const [isFavorite, setIsFavorite] = useState(isFav ? true : false);
@@ -118,9 +122,17 @@ export const ProductInfo = ({route, navigation}) => {
             <Text style={styles2.titleTextPageProduct}>{product.name}</Text>
             <Text style={styles2.textCategory}>{product.category}</Text>
             <View style={styles2.containerRow}>
-              <Text style={styles2.textPricePageProduct}>
-                {formatPrice(product.price)}
-              </Text>
+              <View>
+                <Text style={styles2.textPricePageProduct}>
+                  {formatPrice(product.price)}
+                </Text>
+                {product.offer.isOffer && (
+                  <Text style={styles2.txtOffer}>
+                    {formatPrice(product.price - (product.offer.discount / 100) * product.price)}
+                  </Text>
+                )}
+              </View>
+
               <Pressable style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Agregar al carrito</Text>
               </Pressable>
@@ -130,7 +142,7 @@ export const ProductInfo = ({route, navigation}) => {
 
             <Text style={styles2.textTitle}>Caracteristicas</Text>
             <View style={styles2.table}>
-              {product.characteristics.map((char, index) => (
+              {product.features.map((char, index) => (
                 <View key={index} style={styles2.tableRow}>
                   <Text style={styles2.tableCellValue}>{char}</Text>
                 </View>

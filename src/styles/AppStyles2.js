@@ -381,6 +381,10 @@ const styles2 = StyleSheet.create({
   containerRowWrap: {
     flexWrap: 'wrap',
   },
+  txtOffer: {
+    color: 'yellow',
+  },
+  txtPriceInOffer: {textDecorationLine: 'line-through', color: 'white'},
   nameUser: {
     color: 'white',
     fontSize: 25,
@@ -531,7 +535,6 @@ const styles2 = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingVertical: 30,
   },
   textDescription: {
     color: 'white',
@@ -598,6 +601,91 @@ const styles2 = StyleSheet.create({
   tableCellValue: {
     flex: 2,
     color: 'white',
+  },
+  imagePicker: {
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 200,
+    borderColor: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  changeImageBtn: {
+    marginTop: 10,
+    backgroundColor: '#B388FF',
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: 'flex-start',
+  },
+  changeImageTxt: {
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  inputProductTxt: {
+    backgroundColor: '#333333',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    color: 'white',
+  },
+  inputProductTxtArea: {
+    textAlignVertical: 'top',
+  },
+  pickerCategory: {
+    backgroundColor: '#B388FF',
+    borderColor: 'white',
+    borderRadius: 10,
+    color: 'white',
+  },
+  labelInputPr: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  labelInputPr2: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  paymentContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 10,
+  },
+  paymentMethod: {
+    backgroundColor: '#B388FF',
+    borderRadius: 10,
+    padding: 10,
+    display: 'flex',
+    alignSelf: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  offerButton: {
+    backgroundColor: '#B388FF',
+    padding: 10,
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  btnProduct: {
+    marginTop: 10,
+    backgroundColor: '#6A0DAD',
+    padding: 15,
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  btnProductTxt: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

@@ -3,6 +3,7 @@ import {View, Image, Text, Pressable} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import { dbMarket } from '../assets/dbMarket';
 
 const ProductComponent = ({item, state, dispatch}) => {
   const navigation = useNavigation();
@@ -12,12 +13,17 @@ const ProductComponent = ({item, state, dispatch}) => {
   };
 
   const formatPrice = price => {
+    dbMarket.map((item)=>{
+      console.log(item);
+    })
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
       currency: 'COP',
       minimumFractionDigits: 0,
     }).format(price);
   };
+
+  const priceInOffer =  item.price - (item.price * item.offer.discount) / 100;
 
    const isInCart = state.cart.find(product => product.id === item.id || product.product === item.name);
    const isUserLogged = state.user !== null;
@@ -40,30 +46,43 @@ const ProductComponent = ({item, state, dispatch}) => {
           {item.name}
         </Text>
         <Text numberOfLines={3}>{item.description}</Text>
-        <Text style={{color: 'white'}}>
-          {formatPrice(item.price)}
-        </Text>
+        {item.offer.isOffer && (
+          <Text style={styles2.txtOffer}>
+            {formatPrice(priceInOffer)}{' '}
+            <Text style={styles2.txtPriceInOffer}>
+              {formatPrice(item.price)}
+            </Text>
+          </Text>
+        )}
+        {!item.offer.isOffer && (
+          <Text style={styles2.txtOffer}>
+            {formatPrice(item.price)}
+            <Text>{'\n '} </Text>
+          </Text>
+        )}
       </View>
       <View style={styles2.containerRow}>
         <Pressable style={styles2.btnPrimary} onPress={handlePress}>
           <Text style={styles2.textBtn}>Ver más</Text>
         </Pressable>
-        <Pressable style={styles2.btnFourth} onPress={
-          ()=>{
-            if(!isUserLogged){
+        <Pressable
+          style={styles2.btnFourth}
+          onPress={() => {
+            if(item.offer.isOffer){
+              item.price = priceInOffer;
+            }
+            if (!isUserLogged) {
               navigation.navigate('Login');
               return;
-            }else{
+            } else {
               if (isInCart) {
-                dispatch({type: 'INCREMENT_ITEM', payload: item.id });
+                dispatch({type: 'INCREMENT_ITEM', payload: item.id});
               } else {
                 dispatch({type: 'ADD_TO_CART', payload: item});
               }
             }
-            
-          }
-        }>
-          <Icon name="cart" size={25} color={isInCart ? "black": "white"} />
+          }}>
+          <Icon name="cart" size={25} color={isInCart ? 'black' : 'white'} />
         </Pressable>
       </View>
     </View>
