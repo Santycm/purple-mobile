@@ -25,28 +25,42 @@ const userReducer = (state, action) => {
     case 'ADD_PURCHASE':
       return {
         ...state,
-        user: {
-          ...state.user,
-          purchases: [...state.user.purchases, action.payload],
-        },
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === state.user.userName
+            ? {
+                ...user,
+                purchases: [...user.purchases, action.payload],
+              }
+            : user,
+        ),
       };
     case 'ADD_PRODUCT':
+      const {userName, product} = action.payload;
       return {
         ...state,
-        user: {
-          ...state.user,
-          products: [...state.user.products, action.payload],
-        },
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === userName
+            ? {...user, products: [...user.products, product]}
+            : user,
+        ),
       };
     case 'UPDATE_ADDRESS':
       return {
         ...state,
-        user: {...state.user, address: action.payload},
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === state.user.userName
+            ? {...user, address: action.payload}
+            : user,
+        ),
       };
     case 'SET_POINT_DELIVERY':
       return {
         ...state,
-        user: {...state.user, pointDelivery: action.payload},
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === state.user.userName
+            ? {...user, pointDelivery: action.payload}
+            : user,
+        ),
       };
     case 'ADD_TO_CART':
       return {

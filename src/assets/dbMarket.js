@@ -47,6 +47,7 @@ export let dbMarket = [
         offer: {
           isOffer: true,
           discount: 20,
+          priceInOffer: 560000,
         },
         status: 'Disponible',
       },
@@ -86,6 +87,7 @@ export let dbMarket = [
         offer: {
           isOffer: false,
           discount: 0,
+          priceInOffer: 60000,
         },
         status: 'Disponible',
       },
@@ -146,6 +148,7 @@ export let dbMarket = [
         offer: {
           isOffer: true,
           discount: 20,
+          priceInOffer: 53920,
         },
       },
       {
@@ -184,6 +187,7 @@ export let dbMarket = [
         offer: {
           isOffer: false,
           discount: 0,
+          priceInOffer: 67400,
         },
       },
     ],

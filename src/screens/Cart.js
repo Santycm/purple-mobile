@@ -17,10 +17,11 @@ export const Cart = ({navigation}) => {
 
   const getTotalPrice = cart => {
     return formatPrice(
-      cart.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0,
-      ),
+      cart.reduce((total, product) => {
+        const price =
+          product.offer ? product.offer.priceInOffer : product.price;
+        return total + price * product.quantity;
+      }, 0),
     );
   };
 

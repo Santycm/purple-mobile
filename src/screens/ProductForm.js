@@ -17,8 +17,11 @@ export const ProductForm = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
 
+  const [infoFetched, setInfoFetched] = useState(false);
+
   const [isAvailable, setIsAvailable] = useState(null);
   const [productImage, setProductImage] = useState(null);
+  const [urlImage, setUrlImage] = useState(null);
   const [product, setProduct] = useState({
     id: dbMarket.map(item => item.products.length).reduce((a, b) => a + b, 0),
     img: '',
@@ -31,6 +34,7 @@ export const ProductForm = ({navigation}) => {
     offer: {
       isOffer: false,
       discount: 0,
+      priceInOffer: 0,
     },
     status: '',
   });
@@ -131,7 +135,8 @@ export const ProductForm = ({navigation}) => {
       .then(response => response.json())
       .then(data => {
         console.log('Image uploaded successfully:', data);
-       setProductImage(data.secure_url);
+        setInfoFetched(true);
+        setUrlImage(data.secure_url);
       })
       .catch(error => {
         console.log('Error uploading image:', error);
@@ -140,29 +145,29 @@ export const ProductForm = ({navigation}) => {
 
   const handleSaveProduct = async() => {
     await getUploadImage();
+    setProduct({
+      ...product,
+      category: selectedCategory,
+      paymentAccepted: selectedPaymentMethods,
+    });
+  }
+
+  const handleUploadProduct= async() => {
+    userDispatch({
+      type: 'ADD_PRODUCT',
+      payload: {userName: userState.user.userName, product},
+    });
   };
 
   useEffect(() => {
-    if (productImage) {
-      console.log(productImage);
-      setTimeout(() => {
-        console.log(productImage);
-        setProduct({
-          ...product,
-          img: productImage,
-          category: selectedCategory,
-          paymentAccepted: selectedPaymentMethods,
-        });
-
-        console.log(product);
-        dbMarket.map(item => {
-          if (item.userName === userState.user.userName) {
-            item.products.push(product);
-          }
-        });
-      }, 10000);
+    if (urlImage) {
+      console.log(urlImage);
+      setProduct({
+        ...product,
+        img: urlImage,
+      });
     }
-  }, [getUploadImage()]);
+  }, [urlImage]);
 
   return (
     <View style={styles2.bgScreen2}>
@@ -323,15 +328,24 @@ export const ProductForm = ({navigation}) => {
                     offer: {
                       isOffer: true,
                       discount: isNaN(discount) ? 0 : discount,
+                      priceInOffer: product.price - (product.price * discount) / 100,
                     },
                   });
                 }}
                 style={styles2.inputProductTxt}
               />
             )}
-            <Pressable style={styles2.btnProduct} onPress={handleSaveProduct}>
-              <Text style={styles2.btnProductTxt}>Agregar producto</Text>
-            </Pressable>
+            <View>
+              <Pressable style={styles2.btnProduct} onPress={handleSaveProduct}>
+                <Text style={styles2.btnProductTxt}>Confirmar cambios</Text>
+              </Pressable>
+              {infoFetched && (<Pressable
+                style={styles2.btnProduct2}
+                onPress={handleUploadProduct}>
+                <Text style={styles2.btnProductTxt}>Subir Producto</Text>
+              </Pressable>)}
+              
+            </View>
           </View>
         </View>
       </ScrollView>

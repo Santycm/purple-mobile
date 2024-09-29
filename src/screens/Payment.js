@@ -25,6 +25,17 @@ export const Payment = ({navigation}) => {
     return text;
   };
 
+  const getTotalPrice = cart => {
+    return formatPrice(
+      cart.reduce((total, product) => {
+        const price = product.offer
+          ? product.offer.priceInOffer
+          : product.price;
+        return total + price * product.quantity;
+      }, 0),
+    );
+  };
+
   const handleAddressView = () => {
     if (userState.user.address) {
       return (
@@ -65,7 +76,7 @@ export const Payment = ({navigation}) => {
       return;
     }
 
-    userDispatch({type: 'CLEAR_CART'});
+    
 
     //ADD TO MYPURCHASES
     userState.cart.forEach(cartItem => {
@@ -84,7 +95,10 @@ export const Payment = ({navigation}) => {
             product: cartItem.name,
             img: cartItem.img,
             date: new Date().toISOString(),
-            price: cartItem.price * cartItem.quantity,
+            price:
+              (cartItem.offer.isOffer
+                ? cartItem.offer.priceInOffer
+                : cartItem.price) * cartItem.quantity,
             status: 'En tránsito',
             paymentMethod: selectedPayment,
             distribuitor: distribuitorUser ? distribuitorUser.name : 'Tienda',
@@ -93,6 +107,7 @@ export const Payment = ({navigation}) => {
       }
     });
 
+    
     //ADD TO CLIENTPURCHASES
     userState.cart.forEach(cartItem => {
       const user = userState.dbMarket.find(user =>
@@ -107,13 +122,17 @@ export const Payment = ({navigation}) => {
           img: cartItem.img,
           quantity: cartItem.quantity,
           date: new Date().toISOString(),
-          price: cartItem.price * cartItem.quantity,
+          price:
+            (cartItem.offer.isOffer
+              ? cartItem.offer.priceInOffer
+              : cartItem.price) * cartItem.quantity,
           state: 'En tránsito',
           paymentMethod: selectedPayment,
         });
       }
     });
     navigation.navigate('ConfirmPurchase');
+    userDispatch({type: 'CLEAR_CART'});
   };
 
   const formatPrice = price => {
@@ -148,7 +167,10 @@ export const Payment = ({navigation}) => {
                     {truncateText(item.name, 30)}
                   </Text>
                   <Text>
-                    {item.quantity} x {formatPrice(item.price)}
+                    {item.offer.isOffer
+                      ? formatPrice(item.offer.priceInOffer)
+                      : formatPrice(item.price)}{' '}
+                    x {item.quantity}
                   </Text>
                 </View>
               </View>
@@ -156,13 +178,7 @@ export const Payment = ({navigation}) => {
           </View>
 
           <Text style={AppStyles.totalAmountScreen}>
-            Total:{' '}
-            {formatPrice(
-              userState.cart.reduce(
-                (acc, item) => acc + item.price * item.quantity,
-                0,
-              ),
-            )}
+            Total: {getTotalPrice(userState.cart)}
           </Text>
 
           <Text style={AppStyles.modalTitleSecond}>Información de envío</Text>

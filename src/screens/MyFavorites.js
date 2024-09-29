@@ -7,6 +7,10 @@ import { ProductFavComponent } from '../components/ProductFavComponent.js';
 export const MyFavorites = () => {
   const [userState, userDispatch] = useContext(UserContext);
 
+  const myFavorites = userState.dbMarket.find(
+    (user) => user.userName === userState.user.userName,
+  ).favoriteProducts;
+
   const renderProductComponent = ({item}) => (
     <ProductFavComponent
       item={item}
@@ -29,7 +33,7 @@ export const MyFavorites = () => {
         <Text style={AppStyles.headerTitle}>Mis Favoritos</Text>
       </View>
       <FlatList
-        data={userState.user.favoriteProducts}
+        data={myFavorites}
         renderItem={renderProductComponent}
         contentContainerStyle={AppStyles.listContainer}
       />

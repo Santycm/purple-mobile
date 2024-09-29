@@ -683,10 +683,27 @@ const styles2 = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
+  btnProduct2: {
+    marginTop: 10,
+    backgroundColor: '#B388FF',
+    padding: 15,
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
   btnProductTxt: {
     color: 'white',
     fontWeight: 'bold',
   },
+  containerRow2:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  
 });
 
 export {styles2};

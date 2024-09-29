@@ -27,7 +27,7 @@ const ProductCartComponent = ({item, dispatch}) => {
           {item.description}
         </Text>
         <Text style={AppStyles.cartItemPrice}>
-          {formatPrice(item.price)} x {item.quantity}
+          {item.offer.isOffer ? formatPrice(item.offer.priceInOffer) : formatPrice(item.price)} x {item.quantity}
         </Text>
         <View style={AppStyles.quantityControls}>
           <Pressable

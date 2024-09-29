@@ -33,7 +33,7 @@ export const ProductPurchaseComponent = ({item}) => {
       dateObject.getMonth() + 1
     }/${dateObject.getFullYear()} ${dateObject.getHours()}:${dateObject.getMinutes()}`;
   };
-
+console.log(item);
   return (
     <View style={AppStyles.purchaseItem}>
       <View style={AppStyles.imageContainer}>
@@ -47,7 +47,7 @@ export const ProductPurchaseComponent = ({item}) => {
           {item.product}
         </Text>
         <Text style={AppStyles.productPrice}>
-          Precio: {formatPrice(item.price)}
+          Precio:{formatPrice(item.price)}
         </Text>
         <View>
           <View style={AppStyles.statusContainer}>

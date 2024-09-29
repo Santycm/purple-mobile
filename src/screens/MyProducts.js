@@ -1,19 +1,31 @@
-import { View, Text, Pressable } from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import React, {useContext} from 'react';
-import { styles2 } from '../styles/AppStyles2';
+import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
-import { MyProductComponent } from '../components/MyProductComponent';
-import { UserContext } from '../context/UserContext';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {MyProductComponent} from '../components/MyProductComponent';
+import {UserContext} from '../context/UserContext';
 
 import AppStyles from '../styles/AppStyles';
 
 export const MyProducts = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
 
+  const myProducts = userState.dbMarket.find(
+    user => user.userName === userState.user.userName,
+  ).products;
+  
+  console.log(myProducts);
+
   const renderProductComponent = ({item}) => {
-    return <MyProductComponent item={item} state={userState} dispatch={userDispatch} />;
-  }
+    return (
+      <MyProductComponent
+        item={item}
+        /*state={userState}
+        dispatch={userDispatch}*/
+      />
+    );
+  };
 
   return (
     <View style={styles2.bgScreen2}>
@@ -27,19 +39,22 @@ export const MyProducts = ({navigation}) => {
       <ScrollView>
         <View style={AppStyles.productContainer}>
           <Text style={styles2.titleTextPageProduct}>Mis productos</Text>
-          <Pressable style={AppStyles.MyProductBtnAdd} onPress={()=>{
-            navigation.navigate('ProductForm');
-          }}>
+          <Pressable
+            style={AppStyles.MyProductBtnAdd}
+            onPress={() => {
+              navigation.navigate('ProductForm');
+            }}>
             <Text>Agregar producto</Text>
             <Icon name="arrow-right" size={15} color="white" />
           </Pressable>
           <FlatList
             scrollEnabled={false}
-            data={userState.user.products}
-            renderItem={renderProductComponent}
+            data={myProducts}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => <MyProductComponent item={item} />}
           />
         </View>
       </ScrollView>
     </View>
   );
-}
+};

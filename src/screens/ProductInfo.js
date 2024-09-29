@@ -5,7 +5,6 @@ import {
   Pressable,
   Image,
   TextInput,
-  ScrollViewBase,
 } from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -14,15 +13,21 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {UserContext} from '../context/UserContext';
 
 export const ProductInfo = ({route, navigation}) => {
-  const [userState, userDispatch] = useContext(UserContext);
+  const [userState, dispatch] = useContext(UserContext);
   const [rating, setRating] = useState(0);
 
   const {product} = route.params;
   const {state} = route.params;
+ 
 
   const handleStarPress = newRating => {
     setRating(newRating);
   };
+
+  const isInCart = state.cart.find(
+    product => product.id === product.id || product.product === product.name,
+  );
+  const isUserLogged = state.user !== null;
 
   const getPaymentIcon = payment => {
     switch (payment) {
@@ -39,6 +44,8 @@ export const ProductInfo = ({route, navigation}) => {
     }
   };
 
+  console.log(product);
+
   const formatPrice = price => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -51,7 +58,11 @@ export const ProductInfo = ({route, navigation}) => {
     if (state.user === null) {
       return;
     }
-    const user = userState.user;
+
+    const user = state.dbMarket.find(
+      user => user.userName === state.user.userName
+    );
+
     if (user) {
       if (!isFavorite) {
         user.favoriteProducts.push({
@@ -97,15 +108,38 @@ export const ProductInfo = ({route, navigation}) => {
     loadFavoriteComponent();
   }, [isFavorite]);
 
+  const handleCartPress = () => {
+    if (userState.user) {
+      navigation.navigate('Cart');
+    } else {
+      navigation.navigate('Login');
+    }
+  };
+
+  const totalItemsInCart = userState.cart.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   return (
     <View style={styles2.bgScreen2}>
-      <Pressable
-        style={styles2.btnBack}
-        onPress={() => {
-          navigation.navigate('Home');
-        }}>
-        <Icon name="arrow-left" size={30} color="white" />
-      </Pressable>
+      <View style={styles2.containerRow2}>
+        <Pressable
+          style={styles2.btnBack}
+          onPress={() => {
+            navigation.navigate('Home');
+          }}>
+          <Icon name="arrow-left" size={30} color="white" />
+        </Pressable>
+        <Pressable onPress={handleCartPress} style={styles2.buttonNav}>
+          <Icon name="shopping-cart" size={25} color="white" />
+          <View style={styles2.badge}>
+            <Text style={styles2.badgeText}>
+              {userState.user ? totalItemsInCart : 0}
+            </Text>
+          </View>
+        </Pressable>
+      </View>
       <ScrollView>
         <View style={styles2.productContainer}>
           <View style={styles2.bgImgProduct}>
@@ -128,12 +162,25 @@ export const ProductInfo = ({route, navigation}) => {
                 </Text>
                 {product.offer.isOffer && (
                   <Text style={styles2.txtOffer}>
-                    {formatPrice(product.price - (product.offer.discount / 100) * product.price)}
+                    {formatPrice(product.offer.priceInOffer)}
                   </Text>
                 )}
               </View>
 
-              <Pressable style={styles2.btnAddCart}>
+              <Pressable
+                style={styles2.btnAddCart}
+                onPress={() => {
+                  if (!isUserLogged) {
+                    navigation.navigate('Login');
+                    return;
+                  } else {
+                    if (isInCart) {
+                      dispatch({type: 'INCREMENT_ITEM', payload: product.id});
+                    } else {
+                      dispatch({type: 'ADD_TO_CART', payload: product});
+                    }
+                  }
+                }}>
                 <Text style={styles2.textBtn}>Agregar al carrito</Text>
               </Pressable>
               {loadFavoriteComponent()}
@@ -205,38 +252,42 @@ export const ProductInfo = ({route, navigation}) => {
                 <Text style={styles2.textBtn}>Enviar</Text>
               </Pressable>
 
-              <View>
-                <Text>Ultimos comentarios</Text>
-                {product.comments.map((comment, index) => (
-                  <View
-                    key={index}
-                    style={[
-                      styles2.containerRowStart,
-                      styles2.containerComment,
-                    ]}>
-                    <Image
-                      source={require('../assets/userProfile.webp')}
-                      style={styles2.imgCommentProfile}
-                    />
-                    <View>
-                      <Text style={styles2.textTitle}>{comment.user}</Text>
-                      <Text>{comment.comment}</Text>
-                      <View style={styles2.containerRow}>
-                        <Text style={styles2.textSecondary}>Calificación:</Text>
+              {product.comments && (
+                <View>
+                  <Text>Ultimos comentarios</Text>
+                  {product.comments.map((comment, index) => (
+                    <View
+                      key={index}
+                      style={[
+                        styles2.containerRowStart,
+                        styles2.containerComment,
+                      ]}>
+                      <Image
+                        source={require('../assets/userProfile.webp')}
+                        style={styles2.imgCommentProfile}
+                      />
+                      <View>
+                        <Text style={styles2.textTitle}>{comment.user}</Text>
+                        <Text>{comment.comment}</Text>
+                        <View style={styles2.containerRow}>
+                          <Text style={styles2.textSecondary}>
+                            Calificación:
+                          </Text>
 
-                        {[...Array(5)].map((_, i) => (
-                          <Icon
-                            key={i}
-                            name={i < comment.score ? 'star' : 'star-o'}
-                            type="font-awesome"
-                            color="gold"
-                          />
-                        ))}
+                          {[...Array(5)].map((_, i) => (
+                            <Icon
+                              key={i}
+                              name={i < comment.score ? 'star' : 'star-o'}
+                              type="font-awesome"
+                              color="gold"
+                            />
+                          ))}
+                        </View>
                       </View>
                     </View>
-                  </View>
-                ))}
-              </View>
+                  ))}
+                </View>
+              )}
             </View>
           </View>
         </View>

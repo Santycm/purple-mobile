@@ -19,8 +19,6 @@ const ProductComponent = ({item, state, dispatch}) => {
     }).format(price);
   };
 
-  const priceInOffer =  item.price - (item.price * item.offer.discount) / 100;
-
    const isInCart = state.cart.find(product => product.id === item.id || product.product === item.name);
    const isUserLogged = state.user !== null;
 
@@ -44,7 +42,7 @@ const ProductComponent = ({item, state, dispatch}) => {
         <Text numberOfLines={3}>{item.description}</Text>
         {item.offer.isOffer && (
           <Text style={styles2.txtOffer}>
-            {formatPrice(priceInOffer)}{' '}
+            {formatPrice(item.offer.priceInOffer)}{' '}
             <Text style={styles2.txtPriceInOffer}>
               {formatPrice(item.price)}
             </Text>
@@ -64,9 +62,6 @@ const ProductComponent = ({item, state, dispatch}) => {
         <Pressable
           style={styles2.btnFourth}
           onPress={() => {
-            if(item.offer.isOffer){
-              item.price = priceInOffer;
-            }
             if (!isUserLogged) {
               navigation.navigate('Login');
               return;
