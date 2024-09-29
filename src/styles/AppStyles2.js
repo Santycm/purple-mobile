@@ -34,8 +34,8 @@ const styles2 = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 20,
-    height: 20,
+    height: 30,
+    padding: 5,
   },
   navbarSearch: {
     width: '100%',
@@ -697,13 +697,12 @@ const styles2 = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  containerRow2:{
+  containerRow2: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  
 });
 
 export {styles2};

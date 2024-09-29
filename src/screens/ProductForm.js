@@ -48,6 +48,8 @@ export const ProductForm = ({navigation, route}) => {
       priceInOffer: 0,
     },
     status: 'No Disponible',
+    coments: [],
+    questions: [],
   });
 
   useEffect(() => {

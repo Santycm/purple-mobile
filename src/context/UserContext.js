@@ -71,9 +71,6 @@ const userReducer = (state, action) => {
       const updateProduct = action.payload.updateProduct;
       const updateUserName = action.payload.updateUserName;
 
-      console.log(updateProduct);
-      console.log(updateUserName);
-
       return {
         ...state,
         dbMarket: state.dbMarket.map(user =>

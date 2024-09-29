@@ -36,7 +36,6 @@ export const ProductPurchaseComponent = ({item}) => {
       .toString()
       .padStart(2, '0')}`;
   };
-console.log(item);
   return (
     <View style={AppStyles.purchaseItem}>
       <View style={AppStyles.imageContainer}>

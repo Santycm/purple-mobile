@@ -21,10 +21,12 @@ export let dbMarket = [
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
         questions: [
           {
+            user:'Usuario 1',
             question: 'Pregunta 1',
             answer: 'Respuesta 1',
           },
           {
+            user:'Usuario 2',
             question: 'Pregunta 2',
             answer: 'Respuesta 2',
           },
@@ -87,7 +89,7 @@ export let dbMarket = [
         offer: {
           isOffer: false,
           discount: 0,
-          priceInOffer: 60000,
+          priceInOffer: 0,
         },
         status: 'Disponible',
       },
@@ -187,7 +189,7 @@ export let dbMarket = [
         offer: {
           isOffer: false,
           discount: 0,
-          priceInOffer: 67400,
+          priceInOffer: 0,
         },
       },
     ],
@@ -202,5 +204,6 @@ export let dbMarket = [
       },
     ],
     clientPurchases: [],
+    favoriteProducts: [],
   },
 ];

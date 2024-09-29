@@ -1,11 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  TextInput,
-} from 'react-native';
+import {View, Text, Pressable, Image, TextInput} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -18,14 +12,13 @@ export const ProductInfo = ({route, navigation}) => {
 
   const {product} = route.params;
   const {state} = route.params;
- 
 
   const handleStarPress = newRating => {
     setRating(newRating);
   };
 
-  const isInCart = state.cart.find(
-    product => product.id === product.id || product.product === product.name,
+  const isInCart = userState.cart.find(
+    item => item.id === product.id || item.product === product.name,
   );
   const isUserLogged = state.user !== null;
 
@@ -58,7 +51,7 @@ export const ProductInfo = ({route, navigation}) => {
     }
 
     const user = state.dbMarket.find(
-      user => user.userName === state.user.userName
+      user => user.userName === state.user.userName,
     );
 
     if (user) {
@@ -79,9 +72,11 @@ export const ProductInfo = ({route, navigation}) => {
   let isFav = false;
 
   if (state.user) {
-    isFav = state.user.favoriteProducts.some(
-      favorite => favorite.id === product.id,
-    );
+    if (state.user.favoriteProducts) {
+      isFav = state.user.favoriteProducts.some(
+        favorite => favorite.id === product.id,
+      );
+    }
   }
 
   const [isFavorite, setIsFavorite] = useState(isFav ? true : false);
@@ -166,7 +161,7 @@ export const ProductInfo = ({route, navigation}) => {
               </View>
 
               <Pressable
-                style={styles2.btnAddCart}
+                style={styles2.btnFourth}
                 onPress={() => {
                   if (!isUserLogged) {
                     navigation.navigate('Login');
@@ -179,7 +174,11 @@ export const ProductInfo = ({route, navigation}) => {
                     }
                   }
                 }}>
-                <Text style={styles2.textBtn}>Agregar al carrito</Text>
+                <Icon
+                  name="shopping-cart"
+                  size={25}
+                  color={isInCart ? 'black' : 'white'}
+                />
               </Pressable>
               {loadFavoriteComponent()}
             </View>
@@ -220,6 +219,35 @@ export const ProductInfo = ({route, navigation}) => {
               <Pressable style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Enviar</Text>
               </Pressable>
+              {product.questions.length > 0 && (
+                <View>
+                  <Text>Ultimas preguntas</Text>
+                  {product.questions.map((question, index) => (
+                    <View
+                      key={index}
+                      style={[
+                        styles2.containerRowStart,
+                        styles2.containerComment,
+                      ]}>
+                      <Image
+                        source={require('../assets/userProfile.webp')}
+                        style={styles2.imgCommentProfile}
+                      />
+                      <View>
+                        <Text style={styles2.textTitle}>{question.user}</Text>
+                        <Text>{question.question}</Text>
+                        <View style={styles2.containerRow}>
+                          {question.answer && (
+                            <Text style={styles2.textSecondary}>
+                              {question.answer}
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
             <View>
               <Text style={styles2.textTitle}>Comentarios</Text>
