@@ -20,8 +20,8 @@ export const MyProducts = ({navigation}) => {
     return (
       <MyProductComponent
         item={item}
-        /*state={userState}
-        dispatch={userDispatch}*/
+        state={userState}
+        dispatch={userDispatch}
       />
     );
   };
@@ -41,7 +41,7 @@ export const MyProducts = ({navigation}) => {
           <Pressable
             style={AppStyles.MyProductBtnAdd}
             onPress={() => {
-              navigation.navigate('ProductForm');
+              navigation.navigate('ProductForm', {isEdit: false});
             }}>
             <Text>Agregar producto</Text>
             <Icon name="arrow-right" size={15} color="white" />
@@ -49,7 +49,7 @@ export const MyProducts = ({navigation}) => {
           <FlatList
             scrollEnabled={false}
             data={myProducts}
-            renderItem={({item}) => <MyProductComponent item={item} />}
+            renderItem={renderProductComponent}
           />
         </View>
       </ScrollView>

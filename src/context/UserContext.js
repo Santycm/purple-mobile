@@ -50,6 +50,45 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
+    case 'DELETE_PRODUCT':
+      const deleteProduct = action.payload.deleteProduct;
+      const deleteUserName = action.payload.deleteUserName;
+
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === deleteUserName
+            ? {
+                ...user,
+                products: user.products.filter(
+                  product => product.name !== deleteProduct.name,
+                ),
+              }
+            : user,
+        ),
+      };
+      case 'UPDATE_PRODUCT':
+      const updateProduct = action.payload.updateProduct;
+      const updateUserName = action.payload.updateUserName;
+
+      console.log(updateProduct);
+      console.log(updateUserName);
+
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === updateUserName
+            ? {
+                ...user,
+                products: user.products.map(product =>
+                  product.id === updateProduct.id
+                    ? {...product, ...updateProduct}
+                    : product,
+                ),
+              }
+            : user,
+        ),
+      };
     case 'UPDATE_ADDRESS':
       return {
         ...state,

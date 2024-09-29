@@ -19,7 +19,7 @@ export const Cart = ({navigation}) => {
     return formatPrice(
       cart.reduce((total, product) => {
         const price =
-          product.offer ? product.offer.priceInOffer : product.price;
+          product.offer.isOffer ? product.offer.priceInOffer : product.price;
         return total + price * product.quantity;
       }, 0),
     );

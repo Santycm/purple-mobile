@@ -1,5 +1,12 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {View, Text, Pressable, Image, Alert, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,9 +14,13 @@ import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import AppStyles from '../styles/AppStyles';
 import {categories} from '../assets/dbCategories';
 import {Picker} from '@react-native-picker/picker';
-import { UserContext } from '../context/UserContext';
+import {UserContext} from '../context/UserContext';
 
-export const ProductForm = ({navigation}) => {
+export const ProductForm = ({navigation, route}) => {
+  const [formData, setFormData] = useState(new FormData());
+  const {isEdit} = route.params;
+  const productId = route.params?.productId || null;
+
   const [userState, userDispatch] = useContext(UserContext);
   const [isOffer, setIsOffer] = useState(false);
   const [selectedPaymentMethods, setSelectedPaymentMethods] = useState([]);
@@ -23,36 +34,74 @@ export const ProductForm = ({navigation}) => {
   const [productImage, setProductImage] = useState(null);
   const [urlImage, setUrlImage] = useState(null);
   const [product, setProduct] = useState({
+    id:null,
     img: '',
     name: '',
     description: '',
     features: [],
     paymentAccepted: [],
-    price: '',
+    price: 0,
     category: '',
     offer: {
       isOffer: false,
       discount: 0,
       priceInOffer: 0,
     },
-    status: '',
+    status: 'No Disponible',
   });
+
+  useEffect(() => {
+    if (isEdit) {
+      const {
+        name,
+        description,
+        features,
+        price,
+        category,
+        paymentAccepted,
+        offer,
+        status,
+        img,
+      } = productId;
+      setProduct({
+        ...product,
+        name: name,
+        description,
+        features,
+        price,
+        offer: offer.isOffer
+          ? {
+              isOffer: true,
+              discount: offer.discount,
+              priceInOffer: offer.priceInOffer,
+            }
+          : {discount: 0},
+      });
+      setSelectedCategory(category);
+      setSelectedPaymentMethods(paymentAccepted);
+      setIsOffer(offer.isOffer);
+
+      setIsAvailable(status === 'Disponible');
+      setProductImage(img);
+    }
+  }, []);
+
   const paymentMethods = [
     {
       name: 'Débito',
-      icon: 'credit-card', 
+      icon: 'credit-card',
     },
     {
       name: 'Crédito',
-      icon: 'credit-card', 
+      icon: 'credit-card',
     },
     {
       name: 'Efecty',
-      icon: 'money', 
+      icon: 'money',
     },
     {
       name: 'PSE',
-      icon: 'arrows-alt', 
+      icon: 'arrows-alt',
     },
   ];
 
@@ -113,7 +162,6 @@ export const ProductForm = ({navigation}) => {
       ],
       {cancelable: true},
     );
-
   };
 
   const getUploadImage = async () => {
@@ -125,7 +173,7 @@ export const ProductForm = ({navigation}) => {
       name: 'upload.jpg',
     });
     formData.append('upload_preset', 'Purple');
-    formData.append('folder', 'purple'); 
+    formData.append('folder', 'purple');
 
     fetch(`https://api.cloudinary.com/v1_1/dctc1rhlx/image/upload`, {
       method: 'POST',
@@ -140,41 +188,73 @@ export const ProductForm = ({navigation}) => {
       .catch(error => {
         console.log('Error uploading image:', error);
       });
-  }
+  };
 
-  const handleSaveProduct = async() => {
+  const handleSaveProduct = async () => {
     setLoading(true);
-    const acceptedDiscounts = [5, 20, 30, 35, 60];
 
-    if(!acceptedDiscounts.includes(product.offer.discount)){
-      Alert.alert('Error', 'El descuento debe ser 5, 20, 30, 35 o 60');
+    if (
+      !productImage ||
+      !product.name ||
+      !product.description ||
+      !product.features ||
+      !product.price ||
+      !selectedCategory ||
+      !selectedPaymentMethods
+    ) {
+      Alert.alert('Error', 'Todos los campos son obligatorios');
       setLoading(false);
       return;
     }
-    
-    try{
+
+    const acceptedDiscounts = [5, 20, 30, 35, 60];
+
+    if (product.offer.isOffer) {
+      if (!acceptedDiscounts.includes(product.offer.discount)) {
+        Alert.alert('Error', 'El descuento debe ser 5, 20, 30, 35 o 60');
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
       await getUploadImage();
       setProduct({
         ...product,
+        id: isEdit
+          ? productId.id
+          : userState.dbMarket
+              .map(user => user.products.length)
+              .reduce((a, b) => a + b, 0) + 1,
         category: selectedCategory,
         paymentAccepted: selectedPaymentMethods,
       });
-    }catch(error){
+    } catch (error) {
       Alert.alert('Error', 'Error al subir la imagen');
     }
-  }
+  };
 
-  const handleUploadProduct= async() => {
-    userDispatch({
-      type: 'ADD_PRODUCT',
-      payload: {userName: userState.user.userName, product},
-    });
-    navigation.navigate('MessageAddProduct');
+  const handleUploadProduct = async () => {
+    if (isEdit) {
+      userDispatch({
+        type: 'UPDATE_PRODUCT',
+        payload: {
+          updateProduct: product,
+          updateUserName: userState.user.userName,
+        },
+      });
+      navigation.navigate('MyProducts');
+    } else {
+      userDispatch({
+        type: 'ADD_PRODUCT',
+        payload: {userName: userState.user.userName, product},
+      });
+      navigation.navigate('MessageAddProduct');
+    }
   };
 
   useEffect(() => {
     if (urlImage) {
-      console.log(urlImage);
       setProduct({
         ...product,
         img: urlImage,
@@ -221,9 +301,12 @@ export const ProductForm = ({navigation}) => {
               style={styles2.inputProductTxt}
               placeholder="Nombre del producto"
               placeholderTextColor="white"
+              numberOfLines={3}
+              multiline={true}
               onChangeText={text => {
                 setProduct({...product, name: text});
               }}
+              value={product.name}
             />
             <TextInput
               style={[styles2.inputProductTxt, styles2.inputProductTxtArea]}
@@ -232,6 +315,7 @@ export const ProductForm = ({navigation}) => {
               numberOfLines={4}
               placeholder="Descripción"
               onChangeText={text => setProduct({...product, description: text})}
+              value={product.description}
             />
             <Picker
               style={styles2.pickerCategory}
@@ -256,6 +340,9 @@ export const ProductForm = ({navigation}) => {
                 const features = text.split(';');
                 setProduct({...product, features});
               }}
+              value={
+                product.features.length > 0 ? product.features.join(';') : ''
+              }
             />
             <Text style={styles2.labelInputPr}>Métodos de pago aceptados</Text>
             <Text>Selecciona uno o varios métodos</Text>
@@ -298,6 +385,7 @@ export const ProductForm = ({navigation}) => {
                 setProduct({...product, price: isNaN(price) ? 0 : price});
               }}
               maxLength={8}
+              value={product.price.toString()}
             />
             <View style={styles2.paymentContainer}>
               <View>
@@ -346,6 +434,7 @@ export const ProductForm = ({navigation}) => {
                     },
                   });
                 }}
+                value={product.offer.discount.toString()}
                 style={styles2.inputProductTxt}
               />
             )}
@@ -355,13 +444,11 @@ export const ProductForm = ({navigation}) => {
                   style={styles2.btnProduct}
                   onPress={handleSaveProduct}>
                   <Text style={styles2.btnProductTxt}>
-                    {
-                      loading ? (
-                        <ActivityIndicator size="small" color="white" />
-                      ) : (
-                        'Confirmar cambios'
-                      )
-                    }
+                    {loading ? (
+                      <ActivityIndicator size="small" color="white" />
+                    ) : (
+                      'Confirmar cambios'
+                    )}
                   </Text>
                 </Pressable>
               )}
