@@ -15,7 +15,6 @@ export const MyProducts = ({navigation}) => {
     user => user.userName === userState.user.userName,
   ).products;
   
-  console.log(myProducts);
 
   const renderProductComponent = ({item}) => {
     return (
@@ -50,7 +49,6 @@ export const MyProducts = ({navigation}) => {
           <FlatList
             scrollEnabled={false}
             data={myProducts}
-            keyExtractor={item => item.id}
             renderItem={({item}) => <MyProductComponent item={item} />}
           />
         </View>

@@ -7,6 +7,7 @@ const initialState = {
   dbMarket: dbMarket,
   user: null,
   cart: [],
+  search: '',
 };
 
 const userReducer = (state, action) => {
@@ -20,7 +21,12 @@ const userReducer = (state, action) => {
       return {
         ...state,
         user: null,
-        cart: [], // Limpiar el carrito al cerrar sesión
+        cart: [], // Clear cart when user logs out
+      };
+    case 'SET_SEARCH_TERM':
+      return {
+        ...state,
+        search: action.payload,
       };
     case 'ADD_PURCHASE':
       return {
@@ -82,7 +88,11 @@ const userReducer = (state, action) => {
         ...state,
         cart: state.cart.map(item =>
           item.id === action.payload
-            ? {...item, quantity: item.quantity + 1}
+            ? {
+                ...item,
+                quantity:
+                  item.quantity > 98 ? item.quantity : item.quantity + 1,
+              }
             : item,
         ),
       };

@@ -1,11 +1,10 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {View, Text, Pressable, Image, Alert} from 'react-native';
+import {View, Text, Pressable, Image, Alert, ActivityIndicator} from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import AppStyles from '../styles/AppStyles';
-import {dbMarket} from '../assets/dbMarket';
 import {categories} from '../assets/dbCategories';
 import {Picker} from '@react-native-picker/picker';
 import { UserContext } from '../context/UserContext';
@@ -16,6 +15,7 @@ export const ProductForm = ({navigation}) => {
   const [selectedPaymentMethods, setSelectedPaymentMethods] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [infoFetched, setInfoFetched] = useState(false);
 
@@ -23,7 +23,6 @@ export const ProductForm = ({navigation}) => {
   const [productImage, setProductImage] = useState(null);
   const [urlImage, setUrlImage] = useState(null);
   const [product, setProduct] = useState({
-    id: dbMarket.map(item => item.products.length).reduce((a, b) => a + b, 0),
     img: '',
     name: '',
     description: '',
@@ -144,12 +143,25 @@ export const ProductForm = ({navigation}) => {
   }
 
   const handleSaveProduct = async() => {
-    await getUploadImage();
-    setProduct({
-      ...product,
-      category: selectedCategory,
-      paymentAccepted: selectedPaymentMethods,
-    });
+    setLoading(true);
+    const acceptedDiscounts = [5, 20, 30, 35, 60];
+
+    if(!acceptedDiscounts.includes(product.offer.discount)){
+      Alert.alert('Error', 'El descuento debe ser 5, 20, 30, 35 o 60');
+      setLoading(false);
+      return;
+    }
+    
+    try{
+      await getUploadImage();
+      setProduct({
+        ...product,
+        category: selectedCategory,
+        paymentAccepted: selectedPaymentMethods,
+      });
+    }catch(error){
+      Alert.alert('Error', 'Error al subir la imagen');
+    }
   }
 
   const handleUploadProduct= async() => {
@@ -157,6 +169,7 @@ export const ProductForm = ({navigation}) => {
       type: 'ADD_PRODUCT',
       payload: {userName: userState.user.userName, product},
     });
+    navigation.navigate('MessageAddProduct');
   };
 
   useEffect(() => {
@@ -328,7 +341,8 @@ export const ProductForm = ({navigation}) => {
                     offer: {
                       isOffer: true,
                       discount: isNaN(discount) ? 0 : discount,
-                      priceInOffer: product.price - (product.price * discount) / 100,
+                      priceInOffer:
+                        product.price - (product.price * discount) / 100,
                     },
                   });
                 }}
@@ -336,15 +350,28 @@ export const ProductForm = ({navigation}) => {
               />
             )}
             <View>
-              <Pressable style={styles2.btnProduct} onPress={handleSaveProduct}>
-                <Text style={styles2.btnProductTxt}>Confirmar cambios</Text>
-              </Pressable>
-              {infoFetched && (<Pressable
-                style={styles2.btnProduct2}
-                onPress={handleUploadProduct}>
-                <Text style={styles2.btnProductTxt}>Subir Producto</Text>
-              </Pressable>)}
-              
+              {!infoFetched && (
+                <Pressable
+                  style={styles2.btnProduct}
+                  onPress={handleSaveProduct}>
+                  <Text style={styles2.btnProductTxt}>
+                    {
+                      loading ? (
+                        <ActivityIndicator size="small" color="white" />
+                      ) : (
+                        'Confirmar cambios'
+                      )
+                    }
+                  </Text>
+                </Pressable>
+              )}
+              {infoFetched && (
+                <Pressable
+                  style={styles2.btnProduct2}
+                  onPress={handleUploadProduct}>
+                  <Text style={styles2.btnProductTxt}>Subir Producto</Text>
+                </Pressable>
+              )}
             </View>
           </View>
         </View>

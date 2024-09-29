@@ -69,7 +69,6 @@ export const Navbar = ({navigation}) => {
           placeholder="Buscar en Purple Store"
           ref={searchInputRef}
           onFocus={() => {
-            if (routeName === 'Home') return;
             if (routeName !== 'SearchProduct') {
               navigation.navigate('SearchProduct');
             }
@@ -78,7 +77,8 @@ export const Navbar = ({navigation}) => {
           value={searchTerm}
           onChangeText={text => {
             setSearchTerm(text);
-            navigation.navigate('SearchProduct', {searchTerm: text});
+            userDispatch({type: 'SET_SEARCH_TERM', payload: text || ''});
+            navigation.navigate('SearchProduct');
           }}
         />
       </View>

@@ -10,8 +10,10 @@ import {DeliveryScreen} from './src/screens/DeliveryScreen.js';
 import {Payment} from './src/screens/Payment.js';
 import {MyPurchases} from './src/screens/MyPurchases.js';
 import {MyFavorites} from './src/screens/MyFavorites.js';
-import {ConfirmPurchase} from './src/screens/ConfirmPurchase.js';
 import CategoryScreen from './src/screens/CategoryScreen.js';
+
+import {ConfirmPurchase} from './src/screens/ConfirmPurchase.js';
+import {MessageAddProduct} from './src/screens/MessageAddProduct.js';
 import {ConfirmHelp} from './src/screens/ConfirmHelp.js';
 
 import {Help} from './src/screens/HelpSupport.js';
@@ -35,6 +37,11 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="MessageAddProduct"
+            component={MessageAddProduct}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="MyProducts"
             component={MyProducts}

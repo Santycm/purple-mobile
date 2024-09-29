@@ -68,6 +68,7 @@ export const DeliveryScreen = ({navigation}) => {
                   value={address}
                   onChangeText={setAddress}
                   onBlur={handleSaveAddress}
+                  maxLength={30}
                 />
               ) : (
                 <Text style={AppStyles.addressText}>{address}</Text>

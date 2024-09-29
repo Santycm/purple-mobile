@@ -31,7 +31,10 @@ export const ProductPurchaseComponent = ({item}) => {
     const dateObject = new Date(date);
     return `${dateObject.getDate()}/${
       dateObject.getMonth() + 1
-    }/${dateObject.getFullYear()} ${dateObject.getHours()}:${dateObject.getMinutes()}`;
+    }/${dateObject.getFullYear()} ${dateObject.getHours()}:${dateObject
+      .getMinutes()
+      .toString()
+      .padStart(2, '0')}`;
   };
 console.log(item);
   return (

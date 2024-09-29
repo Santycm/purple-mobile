@@ -44,8 +44,6 @@ export const ProductInfo = ({route, navigation}) => {
     }
   };
 
-  console.log(product);
-
   const formatPrice = price => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -217,6 +215,7 @@ export const ProductInfo = ({route, navigation}) => {
                 placeholder="Escribe tu pregunta aquí..."
                 multiline={true}
                 numberOfLines={3}
+                maxLength={100}
               />
               <Pressable style={styles2.btnAddCart}>
                 <Text style={styles2.textBtn}>Enviar</Text>

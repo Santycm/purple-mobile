@@ -12,7 +12,6 @@ export let dbMarket = [
     lastName: 'Castaño Moreno',
     products: [
       {
-        id: 1,
         img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Dunlop Arrowmax Cubierta 110/70-17 Gt 601 Fz Ns 200 New Twister Gaona',
         description:
@@ -52,7 +51,6 @@ export let dbMarket = [
         status: 'Disponible',
       },
       {
-        id: 2,
         img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Batería Moto Magna Akt 125 Sl Mf Tt 125 Akt 150 Nkd Yb6.5lb',
         description:
@@ -109,7 +107,6 @@ export let dbMarket = [
     lastName: 'Munera',
     products: [
       {
-        id: 3,
         img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Sartén Farberware Eco Advantage 25cm Antiadherente',
         description:
@@ -152,7 +149,6 @@ export let dbMarket = [
         },
       },
       {
-        id: 4,
         img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',
         name: 'Silla Escritorio Ergonomica Magnux MX2015',
         description:
