@@ -1,8 +1,10 @@
 import React, {createContext, useReducer} from 'react';
+import {dbMarket} from '../assets/dbMarket';
 
 const UserContext = createContext();
 
 const initialState = {
+  dbMarket: dbMarket,
   user: null,
   cart: [],
 };
@@ -19,6 +21,14 @@ const userReducer = (state, action) => {
         ...state,
         user: null,
         cart: [], // Limpiar el carrito al cerrar sesión
+      };
+    case 'ADD_PURCHASE':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          purchases: [...state.user.purchases, action.payload],
+        },
       };
     case 'ADD_PRODUCT':
       return {

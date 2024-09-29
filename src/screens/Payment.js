@@ -4,7 +4,6 @@ import CheckBox from '@react-native-community/checkbox';
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UserContext} from '../context/UserContext.js';
-import {dbMarket} from '../assets/dbMarket.js';
 
 export const Payment = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
@@ -42,7 +41,13 @@ export const Payment = ({navigation}) => {
     }
   };
 
-  const distribuitorsList = dbMarket.filter(user => user.products.some(product => userState.cart.some(cartItem => cartItem.id === product.id),),).map(user => user.name);
+  const distribuitorsList = userState.dbMarket
+    .filter(user =>
+      user.products.some(product =>
+        userState.cart.some(cartItem => cartItem.id === product.id),
+      ),
+    )
+    .map(user => user.name);
 
   const handleFinishPurchase = () => {
     if (!captchaChecked) {
@@ -64,50 +69,50 @@ export const Payment = ({navigation}) => {
 
     //ADD TO MYPURCHASES
     userState.cart.forEach(cartItem => {
-      const user = dbMarket.find(
-        user => user.userName === userState.user.userName,
+      const user = userState.user;
+
+      const distribuitorUser = userState.dbMarket.find(user =>
+        distribuitorsList.some(
+          distributor => distributor.userName === user.userName,
+        ),
       );
 
-      const distribuitorUser = dbMarket.find(user =>
-          distribuitorsList.some(
-            distributor => distributor.userName === user.userName,
-          ),
-        );
+      if (user) {
+        userDispatch({
+          type: 'ADD_PURCHASE',
+          payload: {
+            product: cartItem.name,
+            img: cartItem.img,
+            date: new Date().toISOString(),
+            price: cartItem.price * cartItem.quantity,
+            status: 'En tránsito',
+            paymentMethod: selectedPayment,
+            distribuitor: distribuitorUser ? distribuitorUser.name : 'Tienda',
+          },
+        });
+      }
+    });
+
+    //ADD TO CLIENTPURCHASES
+    userState.cart.forEach(cartItem => {
+      const user = userState.dbMarket.find(user =>
+        distribuitorsList.some(
+          distributor => distributor.userName === user.userName,
+        ),
+      );
 
       if (user) {
-        user.purchases.push({
-          id: user.purchases.length + 1,
+        user.clientPurchases.push({
           product: cartItem.name,
           img: cartItem.img,
+          quantity: cartItem.quantity,
           date: new Date().toISOString(),
           price: cartItem.price * cartItem.quantity,
-          status: 'En tránsito',
-          distribuitor: distribuitorUser,
+          state: 'En tránsito',
           paymentMethod: selectedPayment,
         });
       }
     });
-    
-    //ADD TO CLIENTPURCHASES
-      userState.cart.forEach(cartItem => {
-        const user = dbMarket.find(user =>
-          distribuitorsList.some(
-            distributor => distributor.userName === user.userName,
-          ),
-        );
-
-        if (user) {
-          user.clientPurchases.push({
-            product: cartItem.name,
-            img: cartItem.img,
-            quantity: cartItem.quantity,
-            date: new Date().toISOString(),
-            price: cartItem.price * cartItem.quantity,
-            state: 'En tránsito',
-            paymentMethod: selectedPayment,
-          });
-        }
-      });
     navigation.navigate('ConfirmPurchase');
   };
 
@@ -165,7 +170,7 @@ export const Payment = ({navigation}) => {
             {handleAddressView()}
             <Text style={AppStyles.addressText}>
               Distribuidores:{' '}
-              {dbMarket
+              {userState.dbMarket
                 .filter(user =>
                   user.products.some(product =>
                     userState.cart.some(cartItem => cartItem.id === product.id),

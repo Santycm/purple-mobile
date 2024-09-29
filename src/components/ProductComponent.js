@@ -3,7 +3,6 @@ import {View, Image, Text, Pressable} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import { dbMarket } from '../assets/dbMarket';
 
 const ProductComponent = ({item, state, dispatch}) => {
   const navigation = useNavigation();
@@ -13,9 +12,6 @@ const ProductComponent = ({item, state, dispatch}) => {
   };
 
   const formatPrice = price => {
-    dbMarket.map((item)=>{
-      console.log(item);
-    })
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
       currency: 'COP',

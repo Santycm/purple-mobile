@@ -3,7 +3,6 @@ import {View, Text, Image, TextInput, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles2} from '../styles/AppStyles2.js';
 
-import {dbMarket} from '../assets/dbMarket.js';
 import {useNavigation} from '@react-navigation/native';
 
 import {UserContext} from '../context/UserContext.js';
@@ -11,16 +10,16 @@ import {UserContext} from '../context/UserContext.js';
 export const SigIn = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [state, dispatch] = useContext(UserContext);
+  const [userState, userDispatch] = useContext(UserContext);
 
   const navigation = useNavigation();
 
   const findUser = (user, password) => {
-    let userFound = dbMarket.find(userItem => {
+    let userFound = userState.dbMarket.find(userItem => {
       return userItem.userName === user && userItem.password === password;
     });
     if(userFound){
-      dispatch({type: 'LOGIN', payload: userFound});
+      userDispatch({type: 'LOGIN', payload: userFound});
     }
     return userFound;
   };

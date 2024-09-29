@@ -11,9 +11,10 @@ import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {ScrollView} from 'react-native-gesture-handler';
-import {dbMarket} from '../assets/dbMarket';
+import {UserContext} from '../context/UserContext';
 
 export const ProductInfo = ({route, navigation}) => {
+  const [userState, userDispatch] = useContext(UserContext);
   const [rating, setRating] = useState(0);
 
   const {product} = route.params;
@@ -50,8 +51,7 @@ export const ProductInfo = ({route, navigation}) => {
     if (state.user === null) {
       return;
     }
-    const user = dbMarket.find(user => user.userName === state.user.userName);
-
+    const user = userState.user;
     if (user) {
       if (!isFavorite) {
         user.favoriteProducts.push({

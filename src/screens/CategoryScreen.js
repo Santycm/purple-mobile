@@ -3,7 +3,6 @@ import {View, Text, Image, ScrollView} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import ProductComponent from '../components/ProductComponent.js';
 
-import { dbMarket } from '../assets/dbMarket.js';
 import { UserContext } from '../context/UserContext.js';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -32,7 +31,7 @@ const CategoryScreen = ({route, navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={dbMarket.map((user) => user.products.filter((product) => product.category === category.key)).flat()}
+            data={userState.dbMarket.map((user) => user.products.filter((product) => product.category === category.key)).flat()}
             renderItem={renderProductComponent}
           />
         </View>

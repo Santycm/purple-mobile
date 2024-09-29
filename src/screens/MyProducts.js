@@ -6,17 +6,14 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { MyProductComponent } from '../components/MyProductComponent';
 import { UserContext } from '../context/UserContext';
 
-import { dbMarket } from '../assets/dbMarket';
 import AppStyles from '../styles/AppStyles';
 
 export const MyProducts = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
 
   const renderProductComponent = ({item}) => {
-    return <MyProductComponent item={item} /*state={userState} dispatch={userDispatch} *//>;
+    return <MyProductComponent item={item} state={userState} dispatch={userDispatch} />;
   }
-
-  
 
   return (
     <View style={styles2.bgScreen2}>
@@ -38,7 +35,7 @@ export const MyProducts = ({navigation}) => {
           </Pressable>
           <FlatList
             scrollEnabled={false}
-            data={dbMarket.map(user => user.products).flat()}
+            data={userState.user.products}
             renderItem={renderProductComponent}
           />
         </View>

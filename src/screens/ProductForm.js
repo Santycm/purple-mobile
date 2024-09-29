@@ -121,8 +121,8 @@ export const ProductForm = ({navigation}) => {
       type: 'image/jpeg',
       name: 'upload.jpg',
     });
-    formData.append('upload_preset', 'Purple'); // Reemplaza con tu upload preset
-    formData.append('folder', 'purple'); // Especifica la carpeta en Cloudinary
+    formData.append('upload_preset', 'Purple');
+    formData.append('folder', 'purple'); 
 
     fetch(`https://api.cloudinary.com/v1_1/dctc1rhlx/image/upload`, {
       method: 'POST',
@@ -140,30 +140,29 @@ export const ProductForm = ({navigation}) => {
 
   const handleSaveProduct = async() => {
     await getUploadImage();
-    if(productImage){
-      console.log(productImage);
-      setTimeout(() => {
-        console.log(productImage);
-         setProduct({
-           ...product,
-           img: productImage,
-           category: selectedCategory,
-           paymentAccepted: selectedPaymentMethods,
-         });
-
-         console.log(product); 
-          dbMarket.map(item => {
-            if (item.userName === userState.user.userName) {
-              item.products.push(product);
-            }
-          });
-      }, 10000);
-    }
   };
 
   useEffect(() => {
-    
-  }, [productImage]);
+    if (productImage) {
+      console.log(productImage);
+      setTimeout(() => {
+        console.log(productImage);
+        setProduct({
+          ...product,
+          img: productImage,
+          category: selectedCategory,
+          paymentAccepted: selectedPaymentMethods,
+        });
+
+        console.log(product);
+        dbMarket.map(item => {
+          if (item.userName === userState.user.userName) {
+            item.products.push(product);
+          }
+        });
+      }, 10000);
+    }
+  }, [getUploadImage()]);
 
   return (
     <View style={styles2.bgScreen2}>

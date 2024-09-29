@@ -6,7 +6,6 @@ import ProductComponent from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
 import {FlatList} from 'react-native-gesture-handler';
 
-import {dbMarket} from '../assets/dbMarket.js';
 import { UserContext } from '../context/UserContext.js';
 
 export const Home = ({navigation}) => {
@@ -32,7 +31,7 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={dbMarket.map((user) => user.products.filter((product) => product.offer.isOffer)).flat()}
+            data={userState.dbMarket.map((user) => user.products.filter((product) => product.offer.isOffer)).flat()}
             renderItem={renderProductComponent}
           />
         </View>
@@ -44,7 +43,7 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={dbMarket.map((user) => user.products).flat()}
+            data={userState.dbMarket.map((user) => user.products).flat()}
             renderItem={renderProductComponent}
           />
         </View>

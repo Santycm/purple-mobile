@@ -6,8 +6,6 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
 
-import { dbMarket } from '../assets/dbMarket.js';
-
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
 
@@ -81,12 +79,12 @@ export const SignUp = ({navigation}) => {
       return false;
     }
 
-    if(dbMarket.find((user) => user.email === email)){
+    if(userState.dbMarket.find((user) => user.email === email)){
       alert('El correo ya está registrado');
       return false;
     }
 
-    dbMarket.push({
+    userState.dbMarket.push({
       userName: userName,
       addres: addres,
       birthDate: birthDate,
