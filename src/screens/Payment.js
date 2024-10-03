@@ -118,6 +118,7 @@ export const Payment = ({navigation}) => {
 
       if (user) {
         user.clientPurchases.push({
+          user: userState.user.userName,
           product: cartItem.name,
           img: cartItem.img,
           quantity: cartItem.quantity,

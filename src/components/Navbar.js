@@ -176,6 +176,16 @@ export const Navbar = ({navigation}) => {
                 <Pressable
                   style={styles2.sideBarOption}
                   onPress={() => {
+                    navigation.navigate('ClientPurchases');
+                  }}>
+                  <Icon name="people" size={30} color="white"></Icon>
+                  <Text style={styles2.textTitle}>Compras de clientes</Text>
+                </Pressable>
+              )}
+              {userState.user && (
+                <Pressable
+                  style={styles2.sideBarOption}
+                  onPress={() => {
                     navigation.navigate('MyFavorites');
                   }}>
                   <Icon name="heart" size={30} color="white"></Icon>

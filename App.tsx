@@ -8,8 +8,11 @@ import {MyProfile} from './src/screens/MyProfile.js';
 import {ProductInfo} from './src/screens/ProductInfo.js';
 import {DeliveryScreen} from './src/screens/DeliveryScreen.js';
 import {Payment} from './src/screens/Payment.js';
+
 import {MyPurchases} from './src/screens/MyPurchases.js';
 import {MyFavorites} from './src/screens/MyFavorites.js';
+import { ClientPurchases } from './src/screens/ClientPurchases.js';
+
 import CategoryScreen from './src/screens/CategoryScreen.js';
 
 import {ConfirmPurchase} from './src/screens/ConfirmPurchase.js';
@@ -37,6 +40,11 @@ export default function App() {
     <UserProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="ClientPurchases"
+            component={ClientPurchases}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="MessageAddProduct"
             component={MessageAddProduct}
