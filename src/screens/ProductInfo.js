@@ -60,6 +60,7 @@ export const ProductInfo = ({route, navigation}) => {
           id: product.id,
           name: product.name,
           img: product.img,
+          offer: product.offer,
           description: product.description,
           status: product.status,
           price: product.price,

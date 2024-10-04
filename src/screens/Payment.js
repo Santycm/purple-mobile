@@ -4,6 +4,7 @@ import CheckBox from '@react-native-community/checkbox';
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UserContext} from '../context/UserContext.js';
+import { dbMarket } from '../assets/dbMarket.js';
 
 export const Payment = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
@@ -37,28 +38,45 @@ export const Payment = ({navigation}) => {
   };
 
   const handleAddressView = () => {
-    if (userState.user.address) {
+    const isAddress = userState.dbMarket.find(user => user.userName === userState.user.userName).address
+
+    const isPointDelivery = userState.dbMarket.find(user => user.userName === userState.user.userName).pointDelivery
+
+    if (isAddress) {
       return (
         <Text style={AppStyles.addressText}>
-          Envío a domicilio: {userState.user.address}
+          Envío a domicilio:{' '}
+          {
+            userState.dbMarket.find(
+              user => user.userName === userState.user.userName,
+            ).address
+          }
         </Text>
       );
-    } else {
+      
+    } else if (isPointDelivery) {
       return (
         <Text style={AppStyles.addressText}>
-          Retiro en punto de entrega: {userState.user.pointDelivery}
+          Retiro en punto de entrega:{' '}
+          {
+            userState.dbMarket.find(
+              user => user.userName === userState.user.userName,
+            ).pointDelivery
+          }
         </Text>
       );
     }
   };
 
-  const distribuitorsList = userState.dbMarket
+  let distribuitorsList = userState.dbMarket
     .filter(user =>
       user.products.some(product =>
         userState.cart.some(cartItem => cartItem.id === product.id),
       ),
     )
     .map(user => user.name);
+
+    distribuitorsList = new Set(distribuitorsList);
 
   const handleFinishPurchase = () => {
     if (!captchaChecked) {
@@ -71,23 +89,23 @@ export const Payment = ({navigation}) => {
       return;
     }
 
-    if (!userState.user.address && !userState.user.pointDelivery) {
-      alert('Debes seleccionar un método de entrega');
+    const isPointDelivery = userState.dbMarket.find(
+      user => user.userName === userState.user.userName,
+    ).pointDelivery;
+
+    const isAddress = userState.dbMarket.find(
+      user => user.userName === userState.user.userName,
+    ).address;
+
+    if(!isPointDelivery && !isAddress){
+      alert('Debes seleccionar un punto de entrega');
       return;
     }
 
-    
-
-    //ADD TO MYPURCHASES
     userState.cart.forEach(cartItem => {
       const user = userState.user;
 
-      const distribuitorUser = userState.dbMarket.find(user =>
-        distribuitorsList.some(
-          distributor => distributor.userName === user.userName,
-        ),
-      );
-
+      //ADD TO MYPURCHASES
       if (user) {
         userDispatch({
           type: 'ADD_PURCHASE',
@@ -100,38 +118,35 @@ export const Payment = ({navigation}) => {
                 ? cartItem.offer.priceInOffer
                 : cartItem.price) * cartItem.quantity,
             status: 'En tránsito',
+            count: cartItem.quantity,
             paymentMethod: selectedPayment,
-            distribuitor: distribuitorUser ? distribuitorUser.name : 'Tienda',
+            distribuitor: userState.dbMarket.find(user =>
+              user.products.some(product => product.id === cartItem.id),
+            ).name,
           },
         });
       }
+
+      //ADD TO CLIENTPURCHASES
+      userDispatch({type:'ADD_CLIENT_PURCHASE', payload: {
+        productP: cartItem.name,
+        img: cartItem.img,
+        date: new Date().toISOString(),
+        price:
+          (cartItem.offer.isOffer
+            ? cartItem.offer.priceInOffer
+            : cartItem.price) * cartItem.quantity,
+        status: 'En tránsito',
+        count: cartItem.quantity,
+        paymentMethod: selectedPayment,
+        distribuitor: userState.dbMarket.find(user =>
+          user.products.some(product => product.id === cartItem.id),
+        ).userName,
+        client: userState.user.name + ' ' + userState.user.lastName
+      }});
     });
 
-    
-    //ADD TO CLIENTPURCHASES
-    userState.cart.forEach(cartItem => {
-      const user = userState.dbMarket.find(user =>
-        distribuitorsList.some(
-          distributor => distributor.userName === user.userName,
-        ),
-      );
-
-      if (user) {
-        user.clientPurchases.push({
-          user: userState.user.userName,
-          product: cartItem.name,
-          img: cartItem.img,
-          quantity: cartItem.quantity,
-          date: new Date().toISOString(),
-          price:
-            (cartItem.offer.isOffer
-              ? cartItem.offer.priceInOffer
-              : cartItem.price) * cartItem.quantity,
-          state: 'En tránsito',
-          paymentMethod: selectedPayment,
-        });
-      }
-    });
+  
     navigation.navigate('ConfirmPurchase');
     userDispatch({type: 'CLEAR_CART'});
   };

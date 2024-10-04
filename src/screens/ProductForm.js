@@ -40,12 +40,12 @@ export const ProductForm = ({navigation, route}) => {
     description: '',
     features: [],
     paymentAccepted: [],
-    price: 0,
+    price: '',
     category: '',
     offer: {
       isOffer: false,
-      discount: 0,
-      priceInOffer: 0,
+      discount: '',
+      priceInOffer: '',
     },
     status: 'No Disponible',
     coments: [],
@@ -245,6 +245,12 @@ export const ProductForm = ({navigation, route}) => {
           updateUserName: userState.user.userName,
         },
       });
+      userDispatch({
+        type: 'UPDATE_PRODUCT_ON_FAVORITE_LIST',
+        payload: {
+          updateProduct: product,
+        },
+      });
       navigation.navigate('MyProducts');
     } else {
       userDispatch({
@@ -398,7 +404,7 @@ export const ProductForm = ({navigation, route}) => {
                     setIsOffer(!isOffer);
                     setProduct({
                       ...product,
-                      offer: {isOffer: !isOffer, discount: 0},
+                      offer: {isOffer: !isOffer},
                     });
                   }}>
                   <Text>{isOffer ? 'Sí' : 'No'}</Text>
@@ -436,7 +442,7 @@ export const ProductForm = ({navigation, route}) => {
                     },
                   });
                 }}
-                value={product.offer.discount.toString()}
+                value={product.offer.discount}
                 style={styles2.inputProductTxt}
               />
             )}

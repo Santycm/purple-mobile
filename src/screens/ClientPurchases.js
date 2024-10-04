@@ -9,12 +9,20 @@ import AppStyles from '../styles/AppStyles';
 import {UserContext} from '../context/UserContext';
 import {ProductClientComponent} from '../components/ProductClientComponent';
 
-const renderProductComponent = ({item}) => {
-  return <ProductClientComponent item={item} />;
-};
-
-export const ClientPurchases = () => {
+export const ClientPurchases = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
+
+  const renderProductComponent = ({item}) => {
+    return <ProductClientComponent item={item} dispatch={userDispatch} state={userState} />;
+  };
+
+
+  const clientPurchases = userState.dbMarket.find(
+    user => user.userName === userState.user.userName,
+  ).clientPurchases;
+
+  console.log(clientPurchases);
+
   return (
     <View style={styles2.bgScreen2}>
       <Pressable
@@ -27,21 +35,20 @@ export const ClientPurchases = () => {
       <ScrollView>
         <View style={AppStyles.productContainer}>
           <Text style={styles2.titleTextPageProduct}>Compras de clientes</Text>
-          {userState.user.clientPurchases.length === 0 && (
+          {clientPurchases.length ===0 && (
             <Text style={styles2.titleTextPageProduct}>
               No se han realizado compras
             </Text>
           )}
-          {userState.user.clientPurchases.length > 0 && (
+          {clientPurchases && (
             <View>
-              <Text style={styles2.titleTextPageProduct}>
-                Compras realizadas
-              </Text>
-              <FlatList
-                scrollEnabled={false}
-                data={userState.user.clientPurchases}
-                renderItem={renderProductComponent}
-              />
+              {
+                <FlatList
+                  scrollEnabled={false}
+                  data={clientPurchases}
+                  renderItem={renderProductComponent}
+                />
+              }
             </View>
           )}
         </View>

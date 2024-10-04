@@ -630,8 +630,7 @@ const AppStyles = StyleSheet.create({
     color: 'red',
   },
   statusContainer: {
-    flexDirection: 'row',
-    gap: 10,
+    flexDirection: 'column',
   },
   productStatusLabel: {
     color: '#FFFFFF',

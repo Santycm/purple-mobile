@@ -1,5 +1,6 @@
 import React, {createContext, useReducer} from 'react';
 import {dbMarket} from '../assets/dbMarket';
+import {ClientPurchases} from '../screens/ClientPurchases';
 
 const UserContext = createContext();
 
@@ -40,6 +41,70 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
+    case 'UPDATE_PURCHASE_STATUS_ONLIST':
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user => {
+          if (user.clientPurchases) {
+            user.clientPurchases.map(purchase => {
+              if (purchase.productP === action.payload.product) {
+                purchase.status = action.payload.status;
+              }
+            });
+          }
+          return user;
+        }),
+      };
+
+    case 'UPDATE_PURCHASE_STATUS':
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user => {
+          user.purchases.map(purchase => {
+            if (purchase.product === action.payload.product) {
+              purchase.status = action.payload.status;
+            }
+          });
+          return user;
+        }),
+      };
+
+    case 'ADD_CLIENT_PURCHASE':
+      const {
+        distribuitor,
+        productP,
+        img,
+        date,
+        price,
+        status,
+        paymentMethod,
+        count,
+        client,
+      } = action.payload;
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === distribuitor
+            ? {
+                ...user,
+                clientPurchases: [
+                  ...user.clientPurchases,
+                  {
+                    productP,
+                    img,
+                    date,
+                    price,
+                    status,
+                    paymentMethod,
+                    count,
+                    client,
+                  },
+                ],
+              }
+            : user,
+        ),
+      };
+
     case 'ADD_PRODUCT':
       const {userName, product} = action.payload;
       return {
@@ -67,7 +132,7 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
-      case 'UPDATE_PRODUCT':
+    case 'UPDATE_PRODUCT':
       const updateProduct = action.payload.updateProduct;
       const updateUserName = action.payload.updateUserName;
 
@@ -85,6 +150,20 @@ const userReducer = (state, action) => {
               }
             : user,
         ),
+      };
+    case 'UPDATE_PRODUCT_ON_FAVORITE_LIST':
+      const updateProductFavorite = action.payload.updateProduct;
+
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user => ({
+          ...user,
+          favoriteProducts: user.favoriteProducts.map(product =>
+            product.id === updateProductFavorite.id
+              ? {...product, ...updateProductFavorite}
+              : product,
+          ),
+        })),
       };
     case 'UPDATE_ADDRESS':
       return {

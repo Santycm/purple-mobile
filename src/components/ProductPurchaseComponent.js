@@ -59,6 +59,10 @@ export const ProductPurchaseComponent = ({item}) => {
             </Text>
           </View>
           <View style={AppStyles.statusContainer}>
+            <Text style={AppStyles.productStatusLabel}>Cantidad:</Text>
+            <Text>{item.count}</Text>
+          </View>
+          <View style={AppStyles.statusContainer}>
             <Text style={AppStyles.productStatusLabel}>Distribuidor:</Text>
             <Text>{item.distribuitor}</Text>
           </View>

@@ -22,17 +22,29 @@ export const DeliveryScreen = ({navigation}) => {
       if (addressInputRef.current) {
         addressInputRef.current.focus();
       }
-    }, 100); // Pequeño retraso para asegurar que el TextInput esté montado
+    }, 100);
   };
 
   const handleSaveAddress = () => {
-    userState.user.pointDelivery = null;
+    userState.dbMarket.map(user => {
+      if (user.userName === userState.user.userName) {
+        if(user.pointDelivery){
+          user.pointDelivery = null;
+        }
+      }
+    });
     userDispatch({type: 'UPDATE_ADDRESS', payload: address});
     navigation.navigate('Payment');
   };
 
   const handleSaveAddressPoint = () => {
-    userState.user.address = null;
+    userState.dbMarket.map(user => {
+      if (user.userName === userState.user.userName) {
+        if (user.address) {
+          user.address = null;
+        }
+      }
+    });
     userDispatch({type: 'SET_POINT_DELIVERY', payload: selectedPoint});
     navigation.navigate('Payment');
   };
