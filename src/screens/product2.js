@@ -140,14 +140,6 @@ export const ProductInfo = ({route, navigation}) => {
       alert("Por favor, inicia sesión para hacer preguntas.");
       return;
     }
-    
-    const updatedQuestions = [
-      ...productQuestions,
-      {
-        user: state.user ? state.user.userName : 'Usuario Anónimo',
-        question: newQuestion,
-      },
-    ];
   
     setProductQuestions(updatedQuestions);
     setNewQuestion('');
@@ -171,15 +163,6 @@ export const ProductInfo = ({route, navigation}) => {
       alert("Por favor, inicia sesión para hacer preguntas.");
       return;
     }
-
-    const updatedComments = [
-      ...productComments,
-      {
-        user: state.user ? state.user.userName : 'Usuario Anónimo',
-        comment: newComment,
-        score: rating,
-      },
-    ];
 
     setProductComments(updatedComments);
     setNewComment('');
@@ -341,21 +324,7 @@ export const ProductInfo = ({route, navigation}) => {
                 </View>
               ))}
             </View>
-            <Text style={styles2.textTitle}>Medios de pago aceptados</Text>
-            <View style={[styles2.containerRow, styles2.containerRowWrap]}>
-              {product.paymentAccepted.map((payment, index) => (
-                <View
-                  key={index}
-                  style={[styles2.containerRow, styles2.containerPayment]}>
-                  <Icon
-                    name={getPaymentIcon(payment)}
-                    size={20}
-                    color="white"
-                  />
-                  <Text style={styles2.textPayment}>{payment}</Text>
-                </View>
-              ))}
-            </View>
+
             <View style={styles2.containerSectionProduct}>
               <Text style={styles2.textTitle}>Haz una pregunta</Text>
               <TextInput

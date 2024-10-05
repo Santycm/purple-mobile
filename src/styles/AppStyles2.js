@@ -703,6 +703,13 @@ const styles2 = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  btnresponse: {
+    backgroundColor: '#B388FF',
+  
+  },
+  
+  
+
 });
 
 export {styles2};

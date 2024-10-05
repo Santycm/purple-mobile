@@ -4,12 +4,14 @@ import {View, Text, Pressable, TextInput, Alert} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {styles2} from '../styles/AppStyles2';
 import colombiaData from '../assets/colombia.min.json';
+import {UserContext} from '../context/UserContext.js';
 
 export const InfoUserForm = ({nextStep, userState}) => {
   
   const [dateTime, setDateTime] = useState(new Date());
   const [show, setShow] = useState(false);
   const [age, setAge] = useState(0);
+  
 
   const countries = ['Colombia'];
 
