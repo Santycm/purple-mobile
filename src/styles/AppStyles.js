@@ -866,6 +866,17 @@ const AppStyles = StyleSheet.create({
     padding: 30,
     gap: 20,
   },
+  smallInput: {
+    height: 40,
+    borderColor: '#B0B0B0',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    backgroundColor: '#FFFFFF',
+    fontSize: 14,
+    color: '#2B2B2B',
+  }
 });
 
 export default AppStyles;
