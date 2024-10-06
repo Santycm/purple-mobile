@@ -4,7 +4,6 @@ import {
   Text,
   Pressable,
   TextInput,
-  StyleSheet,
   ScrollView,
   Linking,
 } from 'react-native';
@@ -13,13 +12,13 @@ import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export const Help = ({navigation}) => {
-  const [selectedSolicitud, setSelectedSolicitud] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [cedula, setCedula] = useState('');
-  const [direccion, setDireccion] = useState('');
-  const [pedido, setPedido] = useState('');
-  const [celular, setCelular] = useState('');
-  const [descripcion, setDescripcion] = useState('');
+  const [selectedRequest, setSelectedRequest] = useState('');
+  const [name, setName] = useState('');
+  const [identification, setIdentification] = useState('');
+  const [address, setAddress] = useState('');
+  const [delivery, setDelivery] = useState('');
+  const [phone, setPhone] = useState('');
+  const [description, setDescription] = useState('');
   const [email, setEmail] = useState('');
 
   const faqs = [
@@ -40,22 +39,22 @@ export const Help = ({navigation}) => {
     },
   ];
 
-  const enviarCorreo = () => {
-    const destinatario = 'alexmunerap@gmail.com';
-    const asunto = `Solicitud de Ayuda: ${selectedSolicitud}`;
-    const cuerpo =
-      `Tipo de Solicitud: ${selectedSolicitud}\n` +
-      `Nombre Completo: ${nombre}\n` +
-      `Cédula: ${cedula}\n` +
+  const sendEmail = () => {
+    const admin = 'alexmunerap@gmail.com';
+    const title = `Solicitud de Ayuda: ${selectedRequest}`;
+    const msg =
+      `Tipo de Solicitud: ${selectedRequest}\n` +
+      `Nombre Completo: ${name}\n` +
+      `Cédula: ${identification}\n` +
       `Correo Electrónico: ${email}\n` +
-      `Dirección: ${direccion}\n` +
-      `Número de Celular: ${celular}\n` +
-      `Pedido: ${pedido}\n\n` +
-      `Descripción:\n${descripcion}`;
+      `Dirección: ${address}\n` +
+      `Número de Celular: ${phone}\n` +
+      `Pedido: ${delivery}\n\n` +
+      `Descripción:\n${description}`;
 
-    const url = `mailto:${destinatario}?subject=${encodeURIComponent(
-      asunto,
-    )}&body=${encodeURIComponent(cuerpo)}`;
+    const url = `mailto:${admin}?subject=${encodeURIComponent(
+      title,
+    )}&body=${encodeURIComponent(msg)}`;
 
     Linking.openURL(url).catch(err => {
       console.error('Error al abrir el correo: ', err);
@@ -81,8 +80,8 @@ export const Help = ({navigation}) => {
             Seleccionar el tipo de solicitud:
           </Text>
           <Picker
-            selectedValue={selectedSolicitud}
-            onValueChange={itemValue => setSelectedSolicitud(itemValue)}
+            selectedValue={selectedRequest}
+            onValueChange={itemValue => setSelectedRequest(itemValue)}
             style={AppStyles.pickerHelp}>
             <Picker.Item label="Queja" value="queja" />
             <Picker.Item label="Petición" value="peticion" />
@@ -92,17 +91,17 @@ export const Help = ({navigation}) => {
           <Text style={AppStyles.labelHelp}>Nombre Completo:</Text>
           <TextInput
             style={AppStyles.smallInput}
-            placeholder="Ingresa tu nombre completo"
-            value={nombre}
-            onChangeText={setNombre}
+            placeholder="Ingresa tu name completo"
+            value={name}
+            onChangeText={setName}
           />
 
           <Text style={AppStyles.labelHelp}>Cédula:</Text>
           <TextInput
             style={AppStyles.smallInput}
             placeholder="Ingresa tu cédula"
-            value={cedula}
-            onChangeText={setCedula}
+            value={identification}
+            onChangeText={setIdentification}
             keyboardType="numeric"
           />
 
@@ -119,25 +118,27 @@ export const Help = ({navigation}) => {
           <TextInput
             style={AppStyles.smallInput}
             placeholder="Ingresa tu dirección"
-            value={direccion}
-            onChangeText={setDireccion}
+            value={address}
+            onChangeText={setAddress}
+            maxLength={30}
           />
 
           <Text style={AppStyles.labelHelp}>Número de Celular:</Text>
           <TextInput
             style={AppStyles.smallInput}
             placeholder="Ingresa tu número de celular"
-            value={celular}
-            onChangeText={setCelular}
+            value={phone}
+            onChangeText={setPhone}
             keyboardType="phone-pad"
+            maxLength={10}
           />
 
           <Text style={AppStyles.labelHelp}>Pedido:</Text>
           <TextInput
             style={AppStyles.smallInput}
             placeholder="Ingresa el número de pedido"
-            value={pedido}
-            onChangeText={setPedido}
+            value={delivery}
+            onChangeText={setDelivery}
           />
 
           <Text style={AppStyles.labelHelp}>Descripción de la solicitud:</Text>
@@ -146,8 +147,8 @@ export const Help = ({navigation}) => {
             multiline
             maxLength={300}
             placeholder="Escribe aquí la descripción"
-            value={descripcion}
-            onChangeText={setDescripcion}
+            value={description}
+            onChangeText={setDescription}
           />
 
           <Text style={AppStyles.faqTitle}>Preguntas Frecuentes (FAQ)</Text>
@@ -158,7 +159,7 @@ export const Help = ({navigation}) => {
             </View>
           ))}
 
-          <Pressable style={AppStyles.checkoutButton} onPress={enviarCorreo}>
+          <Pressable style={AppStyles.checkoutButton} onPress={sendEmail}>
             <Text style={AppStyles.checkoutButtonText}>Continuar</Text>
           </Pressable>
         </View>
