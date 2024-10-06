@@ -49,12 +49,12 @@ export let dbMarket = [
             score: 5,
           },
         ],
-        price: 700000,
+        price: 250000, // Precio actualizado
         category: 'Vehiculos',
         offer: {
           isOffer: true,
           discount: 20,
-          priceInOffer: 560000,
+          priceInOffer: 200000, // Precio en oferta actualizado
         },
         status: 'No disponible',
       },
@@ -94,7 +94,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 120000, // Precio actualizado
         category: 'Vehiculos',
         offer: {
           isOffer: false,
@@ -138,7 +138,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 180000, // Precio actualizado
         category: 'Vehiculos',
         offer: {
           isOffer: false,
@@ -182,7 +182,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 220000, // Precio actualizado
         category: 'Vehiculos',
         offer: {
           isOffer: false,
@@ -226,7 +226,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 150000, // Precio actualizado
         category: 'Vehiculos',
         offer: {
           isOffer: false,
@@ -271,12 +271,12 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 150000, // Precio actualizado
         category: 'Hogar',
         offer: {
           isOffer: true,
           discount: 20,
-          priceInOffer: 48000,
+          priceInOffer: 120000, // Precio en oferta actualizado
         },
         status: 'Disponible',
       },
@@ -315,7 +315,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 250000, // Precio actualizado
         category: 'Hogar',
         offer: {
           isOffer: false,
@@ -359,7 +359,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 1200000, // Precio actualizado
         category: 'Hogar',
         offer: {
           isOffer: false,
@@ -403,12 +403,12 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 800000, // Precio actualizado
         category: 'Hogar',
         offer: {
           isOffer: true,
           discount: 20,
-          priceInOffer: 48000,
+          priceInOffer: 640000, // Precio en oferta actualizado
         },
         status: 'Disponible',
       },
@@ -447,12 +447,12 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 300000, // Precio actualizado
         category: 'Hogar',
         offer: {
           isOffer: true,
           discount: 20,
-          priceInOffer: 48000,
+          priceInOffer: 240000, // Precio en oferta actualizado
         },
         status: 'Disponible',
       },
@@ -502,7 +502,7 @@ export let dbMarket = [
         status: 'Disponible',
       },
       {
-        id: 11,
+        id: 12,
         img: 'https://http2.mlstatic.com/D_NQ_NP_790306-MCO72903944557_112023-O.webp',
         name: 'Mini Brands Paquete De 2 De Zuru Mini Coleccionables',
         description: 'Lo que tienes que saber de este producto',
@@ -546,7 +546,7 @@ export let dbMarket = [
         status: 'Disponible',
       },
       {
-        id: 12,
+        id: 13,
         img: 'https://http2.mlstatic.com/D_NQ_NP_692700-MLA75289105449_032024-O.webp',
         name: 'Juego De Mesa Monopoly Knockout Hasbro F8995',
         description: 'Lo que tienes que saber de este producto',
@@ -590,53 +590,9 @@ export let dbMarket = [
         status: 'Disponible',
       },
       {
-        id: 13,
-        img: 'https://http2.mlstatic.com/D_NQ_NP_767785-MCO72808206833_112023-O.webp',
-        name: 'JCamioneta Todoterreno Électrica Montable Niños Niñas Campero',
-        description: 'Lo que tienes que saber de este producto',
-        features: ['Marca: Magna'],
-        paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
-        questions: [
-          {
-            id: 1,
-            user: 'Usuario 1',
-            question: 'Pregunta 1',
-          },
-          {
-            id: 2,
-            user: 'Usuario 1',
-            question: 'Pregunta 1',
-            answer: 'Respuesta 1',
-          },
-        ],
-        comments: [
-          {
-            id: 1,
-            user: 'Usuario 1',
-            comment:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus',
-            rating: 5,
-          },
-          {
-            id: 2,
-            user: 'Usuario 2',
-            comment: 'Comentario 1',
-            rating: 5,
-          },
-        ],
-        price: 60000,
-        category: 'Juegos',
-        offer: {
-          isOffer: true,
-          discount: 20,
-          priceInOffer: 48000,
-        },
-        status: 'Disponible',
-      },
-      {
         id: 14,
-        img: 'https://http2.mlstatic.com/D_NQ_NP_800021-MCO72368297969_102023-O.webp',
-        name: 'Carro Control Remoto Convierte En Robot Transformers Recarga',
+        img: 'https://http2.mlstatic.com/D_NQ_NP_767785-MCO72808206833_112023-O.webp',
+        name: 'Camioneta Todoterreno Électrica Montable Niños Niñas Campero',
         description: 'Lo que tienes que saber de este producto',
         features: ['Marca: Magna'],
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
@@ -679,8 +635,8 @@ export let dbMarket = [
       },
       {
         id: 15,
-        img: 'https://http2.mlstatic.com/D_NQ_NP_631507-MCO52750758162_122022-O.webp',
-        name: 'Guitarra Eléctrica De Juguete Microfono Parlante Niños Rock',
+        img: 'https://http2.mlstatic.com/D_NQ_NP_800021-MCO72368297969_102023-O.webp',
+        name: 'Carro Control Remoto Convierte En Robot Transformers Recarga',
         description: 'Lo que tienes que saber de este producto',
         features: ['Marca: Magna'],
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
@@ -757,12 +713,12 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 120000,
         category: 'Electrodomesticos',
         offer: {
           isOffer: true,
           discount: 20,
-          priceInOffer: 48000,
+          priceInOffer: 96000,
         },
         status: 'Disponible',
       },
@@ -801,12 +757,12 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 150000,
         category: 'Electrodomesticos',
         offer: {
           isOffer: true,
           discount: 20,
-          priceInOffer: 48000,
+          priceInOffer: 120000,
         },
         status: 'Disponible',
       },
@@ -845,7 +801,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 30000,
         category: 'Electrodomesticos',
         offer: {
           isOffer: false,
@@ -889,7 +845,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 25000,
         category: 'Electrodomesticos',
         offer: {
           isOffer: false,
@@ -901,7 +857,7 @@ export let dbMarket = [
       {
         id: 20,
         img: 'https://http2.mlstatic.com/D_NQ_NP_673020-MCO71609922999_092023-O.webp',
-        name: 'Interruptor 5 Botones, 3vel Para Campana Extractora Mabe ',
+        name: 'Interruptor 5 Botones, 3vel Para Campana Extractora Mabe',
         description: 'Lo que tienes que saber de este producto',
         features: ['Marca: Magna'],
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
@@ -933,7 +889,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 40000,
         category: 'Electrodomesticos',
         offer: {
           isOffer: false,
@@ -978,7 +934,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 1200000,
         category: 'Celulares',
         offer: {
           isOffer: false,
@@ -1022,7 +978,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 800000,
         category: 'Celulares',
         offer: {
           isOffer: false,
@@ -1066,7 +1022,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 900000,
         category: 'Celulares',
         offer: {
           isOffer: false,
@@ -1110,7 +1066,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 200000,
         category: 'Celulares',
         offer: {
           isOffer: false,
@@ -1154,7 +1110,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 150000,
         category: 'Celulares',
         offer: {
           isOffer: false,
@@ -1199,7 +1155,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 2500000,
         category: 'Computacion',
         offer: {
           isOffer: false,
@@ -1211,7 +1167,7 @@ export let dbMarket = [
       {
         id: 27,
         img: 'https://http2.mlstatic.com/D_NQ_NP_715593-MCO45728605208_042021-O.webp',
-        name: 'Pc Torre Gamer Ryzen 3 3200g A320m Ssd 240gb Ram 8gb Mon 22 ',
+        name: 'Pc Torre Gamer Ryzen 3 3200g A320m Ssd 240gb Ram 8gb Mon 22',
         description: 'Lo que tienes que saber de este producto',
         features: ['Marca: Magna'],
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
@@ -1243,7 +1199,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 1500000,
         category: 'Computacion',
         offer: {
           isOffer: false,
@@ -1255,7 +1211,7 @@ export let dbMarket = [
       {
         id: 28,
         img: 'https://http2.mlstatic.com/D_NQ_NP_795169-MCO72740689094_112023-O.webp',
-        name: 'Computador Gamer Lenovo Ryzen 16g 240g Monitor 19 Video 2gb (Reacondicionado) ',
+        name: 'Computador Gamer Lenovo Ryzen 16g 240g Monitor 19 Video 2gb (Reacondicionado)',
         description: 'Lo que tienes que saber de este producto',
         features: ['Marca: Magna'],
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
@@ -1287,7 +1243,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 1200000,
         category: 'Computacion',
         offer: {
           isOffer: false,
@@ -1331,7 +1287,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 900000,
         category: 'Computacion',
         offer: {
           isOffer: false,
@@ -1375,7 +1331,7 @@ export let dbMarket = [
             rating: 5,
           },
         ],
-        price: 60000,
+        price: 500000,
         category: 'Computacion',
         offer: {
           isOffer: false,
