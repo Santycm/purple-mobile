@@ -39,10 +39,13 @@ export const MyProfile = ({navigation}) => {
             }}>
             <Icon name="home" size={30} color="white" />
           </Pressable>
-          <Pressable style={styles2.btnFourth}>
+          <Pressable
+            style={styles2.btnFourth}
+            onPress={() => {
+              navigation.navigate('MyPurchases');
+            }}>
             <Icon name="basket" size={30} color="white" />
           </Pressable>
-
           <Pressable style={styles2.btnFourth} onPress={logOut}>
             <Icon name="log-out" size={30} color="white" />
           </Pressable>
