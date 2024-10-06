@@ -1341,7 +1341,7 @@ export let dbMarket = [
         status: 'Disponible',
       },
       {
-        id: 29,
+        id: 30,
         img: 'https://http2.mlstatic.com/D_NQ_NP_967540-MCO70486713639_072023-O.webp',
         name: 'Computador Hp Amd A6 4gb Ssd 180gb + Monitor Usado 19 (Reacondicionado)',
         description: 'Lo que tienes que saber de este producto',

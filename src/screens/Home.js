@@ -31,6 +31,7 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
+            inverted={true}
             data={userState.dbMarket
               .map(user =>
                 user.products.filter(
@@ -49,6 +50,7 @@ export const Home = ({navigation}) => {
           <FlatList
             scrollEnabled={false}
             numColumns={2}
+            inverted={true}
             style={styles2.sectionBg}
             data={userState.dbMarket
               .map(user =>
