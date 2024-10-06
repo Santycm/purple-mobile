@@ -3,15 +3,36 @@ import {View, Text, Pressable, Image, TextInput} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {ScrollView} from 'react-native-gesture-handler';
+import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {UserContext} from '../context/UserContext';
 
+import { QuestionComponent } from '../components/QuestionComponent';
+import { CommentComponent } from '../components/CommentComponent';
+
 export const ProductInfo = ({route, navigation}) => {
+  const {product} = route.params;
+  const {state} = route.params;
+
   const [userState, dispatch] = useContext(UserContext);
   const [rating, setRating] = useState(0);
 
-  const {product} = route.params;
-  const {state} = route.params;
+  const [question, setQuestion] = useState('');
+  const [questionList, setQuestionList] = useState(product.questions || []);
+
+  const [comment, setComment] = useState('');
+  const [commentList, setCommentList] = useState(product.comments || []);
+
+  let isFav = false;
+
+  if (state.user) {
+    if (state.user.favoriteProducts) {
+      isFav = state.user.favoriteProducts.some(
+        favorite => favorite.id === product.id,
+      );
+    }
+  }
+
+  const [isFavorite, setIsFavorite] = useState(isFav ? true : false);
 
   const handleStarPress = newRating => {
     setRating(newRating);
@@ -21,6 +42,31 @@ export const ProductInfo = ({route, navigation}) => {
     item => item.id === product.id || item.product === product.name,
   );
   const isUserLogged = state.user !== null;
+
+  const renderQuestionComponent = ({item}) => {
+    return <QuestionComponent question={item} product={product} state={userState} dispatch={dispatch} />;
+  };
+
+  const renderCommentComponent = ({item}) => {
+    return <CommentComponent comment={item} />;
+  };
+
+  const handleSubmitQuestion = () => {
+    if(question === '') return;
+    dispatch({type: 'ADD_QUESTION', payload: {productInfo: product, question, productDistribuitor: state.dbMarket.find(user => user.products.some(prod => prod.id === product.id)).userName}});
+    setQuestion('');
+    setQuestionList([...questionList, {id:questionList.length+1, user: `${state.user.name} ${state.user.lastName}`, question}]);
+  }
+
+  const handleSubmitComment = () => {
+    if(comment === '') return;
+    dispatch({type: 'ADD_COMMENT', payload: {productInf: product, comment, rating, productDistrib: state.dbMarket.find(user => user.products.some(prod => prod.id === product.id)).userName}});
+    setComment('');
+    setRating(0);
+    setCommentList([...commentList, {id:commentList.length+1, user: `${state.user.name} ${state.user.lastName}`, comment, rating}]);
+  }
+
+
 
   const getPaymentIcon = payment => {
     switch (payment) {
@@ -75,17 +121,7 @@ export const ProductInfo = ({route, navigation}) => {
     }
   };
 
-  let isFav = false;
-
-  if (state.user) {
-    if (state.user.favoriteProducts) {
-      isFav = state.user.favoriteProducts.some(
-        favorite => favorite.id === product.id,
-      );
-    }
-  }
-
-  const [isFavorite, setIsFavorite] = useState(isFav ? true : false);
+  
 
   const loadFavoriteComponent = () => {
     if (isFavorite) {
@@ -130,7 +166,7 @@ export const ProductInfo = ({route, navigation}) => {
           }}>
           <Icon name="arrow-left" size={30} color="white" />
         </Pressable>
-        <Pressable onPress={handleCartPress} style={styles2.buttonNav}>
+        <Pressable onPress={handleCartPress} style={styles2.buttonNav2}>
           <Icon name="shopping-cart" size={25} color="white" />
           <View style={styles2.badge}>
             <Text style={styles2.badgeText}>
@@ -215,110 +251,108 @@ export const ProductInfo = ({route, navigation}) => {
             </View>
             <View style={styles2.containerSectionProduct}>
               <Text style={styles2.textTitle}>Haz una pregunta</Text>
-              <TextInput
-                style={styles2.textArea}
-                placeholder="Escribe tu pregunta aquí..."
-                multiline={true}
-                numberOfLines={3}
-                maxLength={100}
-              />
-              <Pressable style={styles2.btnAddCart}>
-                <Text style={styles2.textBtn}>Enviar</Text>
-              </Pressable>
-              {product.questions.length > 0 && (
+              {userState.user ? (
                 <View>
+                  <TextInput
+                    style={styles2.textArea}
+                    placeholder="Escribe tu pregunta aquí..."
+                    multiline={true}
+                    numberOfLines={3}
+                    maxLength={100}
+                    value={question}
+                    onChangeText={setQuestion}
+                  />
+                  <Pressable
+                    style={styles2.btnAddCart}
+                    onPress={handleSubmitQuestion}>
+                    <Text style={styles2.textBtn}>Enviar</Text>
+                  </Pressable>
+                </View>
+              ) : (
+                <View>
+                  <Text>Debes iniciar sesión para hacer una pregunta</Text>
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate('Login');
+                    }}>
+                    <Text style={styles2.txtInternalLogin}>Iniciar Sesión</Text>
+                  </Pressable>
+                </View>
+              )}
+              {product.questions && (
+                <View style={styles2.questionsContainer}>
                   <Text>Ultimas preguntas</Text>
-                  {product.questions.map((question, index) => (
-                    <View
-                      key={index}
-                      style={[
-                        styles2.containerRowStart,
-                        styles2.containerComment,
-                      ]}>
-                      <Image
-                        source={require('../assets/userProfile.webp')}
-                        style={styles2.imgCommentProfile}
-                      />
-                      <View>
-                        <Text style={styles2.textTitle}>{question.user}</Text>
-                        <Text>{question.question}</Text>
-                        <View style={styles2.containerRow}>
-                          {question.answer && (
-                            <Text style={styles2.textSecondary}>
-                              {question.answer}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                    </View>
-                  ))}
+                  <FlatList
+                    data={questionList}
+                    renderItem={renderQuestionComponent}
+                    scrollEnabled={false}
+                    inverted={true}
+                  />
                 </View>
               )}
             </View>
             <View>
               <Text style={styles2.textTitle}>Comentarios</Text>
               <Text>Dejar un comentario</Text>
-              <TextInput
-                style={styles2.textArea}
-                placeholder="Escribe tu comentario aquí..."
-                multiline={true}
-                numberOfLines={3}
-                maxLength={200}
-              />
-              <Text>Calificar</Text>
-              <View
-                style={[styles2.containerRow, styles2.containerSectionProduct]}>
-                {[...Array(5)].map((_, i) => (
-                  <Pressable key={i} onPress={() => handleStarPress(i + 1)}>
-                    <Icon
-                      name={i < rating ? 'star' : 'star-o'}
-                      type="font-awesome"
-                      color="gold"
-                      size={30}
-                    />
-                  </Pressable>
-                ))}
-              </View>
+              {userState.user ? (
+                <View>
+                  <TextInput
+                    style={styles2.textArea}
+                    placeholder="Escribe tu comentario aquí..."
+                    multiline={true}
+                    numberOfLines={3}
+                    maxLength={200}
+                    value={comment}
+                    onChangeText={setComment}
+                  />
+                  <Text>Calificar</Text>
+                  <View
+                    style={[
+                      styles2.containerRow,
+                      styles2.containerSectionProduct,
+                    ]}>
+                    {[...Array(5)].map((_, i) => (
+                      <Pressable key={i} onPress={() => handleStarPress(i + 1)}>
+                        <Icon
+                          name={i < rating ? 'star' : 'star-o'}
+                          type="font-awesome"
+                          color="gold"
+                          size={30}
+                        />
+                      </Pressable>
+                    ))}
+                  </View>
 
-              <Pressable
-                style={[styles2.btnAddCart, styles2.containerSectionProduct]}>
-                <Text style={styles2.textBtn}>Enviar</Text>
-              </Pressable>
+                  <Pressable
+                    style={[
+                      styles2.btnAddCart,
+                      styles2.containerSectionProduct,
+                    ]}
+                    onPress={handleSubmitComment}>
+                    <Text style={styles2.textBtn}>Enviar</Text>
+                  </Pressable>
+                </View>
+              ) : (
+                <View>
+                  <Text>Debes iniciar sesión para hacer una pregunta</Text>
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate('Login');
+                    }}>
+                    <Text style={styles2.txtInternalLogin}>Iniciar Sesión</Text>
+                  </Pressable>
+                </View>
+              )}
 
               {product.comments && (
-                <View>
+                <View style={styles2.questionsContainer}>
                   <Text>Ultimos comentarios</Text>
-                  {product.comments.map((comment, index) => (
-                    <View
-                      key={index}
-                      style={[
-                        styles2.containerRowStart,
-                        styles2.containerComment,
-                      ]}>
-                      <Image
-                        source={require('../assets/userProfile.webp')}
-                        style={styles2.imgCommentProfile}
-                      />
-                      <View>
-                        <Text style={styles2.textTitle}>{comment.user}</Text>
-                        <Text>{comment.comment}</Text>
-                        <View style={styles2.containerRow}>
-                          <Text style={styles2.textSecondary}>
-                            Calificación:
-                          </Text>
-
-                          {[...Array(5)].map((_, i) => (
-                            <Icon
-                              key={i}
-                              name={i < comment.score ? 'star' : 'star-o'}
-                              type="font-awesome"
-                              color="gold"
-                            />
-                          ))}
-                        </View>
-                      </View>
-                    </View>
-                  ))}
+                  <FlatList
+                    data={commentList}
+                    renderItem={renderCommentComponent}
+                    scrollEnabled={false}
+                    inverted={true}
+                  />
                 </View>
               )}
             </View>

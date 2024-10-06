@@ -11,6 +11,29 @@ export const Payment = ({navigation}) => {
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [captchaChecked, setCaptchaChecked] = useState(false);
 
+  const getTotalItems = cart => {
+    return cart.reduce((total, product) => total + product.quantity, 0);
+  };
+
+  const getTotalPrice = cart => {
+    return formatPrice(
+      cart.reduce((total, product) => {
+        const price = product.offer.isOffer
+          ? product.offer.priceInOffer
+          : product.price;
+        return total + price * product.quantity;
+      }, 0),
+    );
+  };
+
+  const formatPrice = price => {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
+
   const handlePress = paymentMethod => {
     setSelectedPayment(paymentMethod);
   };
@@ -26,16 +49,6 @@ export const Payment = ({navigation}) => {
     return text;
   };
 
-  const getTotalPrice = cart => {
-    return formatPrice(
-      cart.reduce((total, product) => {
-        const price = product.offer
-          ? product.offer.priceInOffer
-          : product.price;
-        return total + price * product.quantity;
-      }, 0),
-    );
-  };
 
   const handleAddressView = () => {
     const isAddress = userState.dbMarket.find(user => user.userName === userState.user.userName).address
@@ -151,13 +164,7 @@ export const Payment = ({navigation}) => {
     userDispatch({type: 'CLEAR_CART'});
   };
 
-  const formatPrice = price => {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
+  
 
   return (
     <ScrollView

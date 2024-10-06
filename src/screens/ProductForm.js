@@ -48,7 +48,7 @@ export const ProductForm = ({navigation, route}) => {
       priceInOffer: '',
     },
     status: 'No Disponible',
-    coments: [],
+    comments: [],
     questions: [],
   });
 
@@ -78,6 +78,8 @@ export const ProductForm = ({navigation, route}) => {
               priceInOffer: offer.priceInOffer,
             }
           : {discount: 0},
+          comments: productId.comments,
+          questions: productId.questions,
       });
       setSelectedCategory(category);
       setSelectedPaymentMethods(paymentAccepted);

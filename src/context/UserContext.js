@@ -223,6 +223,88 @@ const userReducer = (state, action) => {
           )
           .filter(item => item.quantity > 0),
       };
+      case 'ADD_QUESTION':
+      const {productInfo, question, productDistribuitor} = action.payload;
+
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === productDistribuitor
+            ? {
+                ...user,
+                products: user.products.map(product =>
+                  product.id === productInfo.id
+                    ? {
+                        ...product,
+                        questions: [
+                          ...product.questions,
+                          {
+                            id: product.questions.length + 1,
+                            user: `${state.user.name} ${state.user.lastName}`,
+                            question,
+                          },
+                        ],
+                      }
+                    : product,
+                ),
+              }
+            : user,
+        ),
+      };
+      case 'ADD_ANSWER':
+      const {questionInfo, answer, productQInfo, productDistri} = action.payload;
+
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === productDistri
+            ? {
+                ...user,
+                products: user.products.map(product =>
+                  product.id === productQInfo.id
+                    ? {
+                        ...product,
+                        questions: product.questions.map(question =>
+                          question.id === questionInfo.id
+                            ? {...question, answer}
+                            : question,
+                        ),
+                      }
+                    : product,
+                ),
+              }
+            : user,
+        ),
+      };
+      case 'ADD_COMMENT':
+      const {productInf, comment, rating, productDistrib} = action.payload;
+
+      return {
+        ...state,
+        dbMarket: state.dbMarket.map(user =>
+          user.userName === productDistrib
+            ? {
+                ...user,
+                products: user.products.map(product =>
+                  product.id === productInf.id
+                    ? {
+                        ...product,
+                        comments: [
+                          ...product.comments,
+                          {
+                            id: product.comments.length + 1,
+                            user: `${state.user.name} ${state.user.lastName}`,
+                            comment,
+                            rating,
+                          },
+                        ],
+                      }
+                    : product,
+                ),
+              }
+            : user,
+        ),
+      };
     default:
       return state;
   }

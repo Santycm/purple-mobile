@@ -8,6 +8,9 @@ const styles2 = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'black',
   },
+  questionsContainer: {
+    marginTop: 20,
+  },
   navbar: {
     width: '100%',
     diplay: 'flex',
@@ -24,6 +27,12 @@ const styles2 = StyleSheet.create({
   },
   buttonNav: {
     height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 2,
+  },
+  buttonNav2: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -83,6 +92,28 @@ const styles2 = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  containerAnswer:{
+    flexDirection: 'col',
+    gap: 10,
+  },
+  textInputAnswer:{
+    backgroundColor: 'white',
+    borderRadius: 10,
+    color: 'black',
+    width:200
+
+  },
+  btnResponse:{
+    borderRadius: 10,
+    borderColor: 'white',
+    borderWidth: 1,
+    padding: 5,
+    alignSelf: 'flex-start',
+  },
+  txtInternalLogin: {
+    textDecorationLine: 'underline',
+    color: 'white',
   },
   btnLove: {
     backgroundColor: '#6A0DAD',
@@ -700,8 +731,10 @@ const styles2 = StyleSheet.create({
   containerRow2: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'start',
     justifyContent: 'space-between',
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
   },
 });
 

@@ -89,7 +89,7 @@ export const SignUp = ({navigation}) => {
 
     userState.dbMarket.push({
       userName: userName,
-      addres: addres,
+      address: addres,
       birthDate: birthDate,
       country: selectedCountry,
       department: selectedDepartment,

@@ -63,25 +63,30 @@ export let dbMarket = [
         paymentAccepted: ['Débito', 'Crédito', 'Efecty', 'PSE'],
         questions: [
           {
+            id: 1,
+            user: 'Usuario 1',
             question: 'Pregunta 1',
-            answer: 'Respuesta 1',
           },
           {
-            question: 'Pregunta 2',
-            answer: 'Respuesta 2',
+            id: 2,
+            user: 'Usuario 1',
+            question: 'Pregunta 1',
+            answer: 'Respuesta 1',
           },
         ],
         comments: [
           {
+            id: 1,
             user: 'Usuario 1',
             comment:
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus',
-            score: 5,
+            rating: 5,
           },
           {
+            id: 2,
             user: 'Usuario 2',
             comment: 'Comentario 1',
-            score: 5,
+            rating: 5,
           },
         ],
         price: 60000,
@@ -124,10 +129,12 @@ export let dbMarket = [
         paymentAccepted: ['Tarjeta', 'Efectivo'],
         questions: [
           {
+            user: 'Usuario 1',
             question: 'Pregunta 1',
             answer: 'Respuesta 1',
           },
           {
+            user: 'Usuario 1',
             question: 'Pregunta 2',
             answer: 'Respuesta 2',
           },
@@ -164,10 +171,12 @@ export let dbMarket = [
         paymentAccepted: ['Tarjeta', 'Efectivo'],
         questions: [
           {
+            user: 'Usuario 1',
             question: 'Pregunta 1',
             answer: 'Respuesta 1',
           },
           {
+            user: 'Usuario 1',
             question: 'Pregunta 2',
             answer: 'Respuesta 2',
           },
