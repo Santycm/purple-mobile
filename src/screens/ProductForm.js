@@ -28,6 +28,8 @@ export const ProductForm = ({navigation, route}) => {
   const [showPicker, setShowPicker] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [isSaved, setIsSaved] = useState(false);
+
   const [infoFetched, setInfoFetched] = useState(false);
 
   const [isAvailable, setIsAvailable] = useState(null);
@@ -233,6 +235,7 @@ export const ProductForm = ({navigation, route}) => {
         category: selectedCategory,
         paymentAccepted: selectedPaymentMethods,
       });
+      setIsSaved(true);
     } catch (error) {
       Alert.alert('Error', 'Error al subir la imagen');
     }
@@ -284,192 +287,197 @@ export const ProductForm = ({navigation, route}) => {
       <ScrollView>
         <View style={AppStyles.productContainer}>
           <Text style={styles2.titleTextPageProduct}>AGREGAR PRODUCTO</Text>
-          <View>
+          {!isSaved && (
             <View>
-              {!productImage && (
-                <Pressable
-                  style={styles2.imagePicker}
-                  onPress={handleImagePicker}>
-                  <Text>Seleccionar Imagen</Text>
-                </Pressable>
-              )}
-              {productImage && (
-                <View>
-                  <Image
-                    style={styles2.imagePicker}
-                    source={{uri: productImage}}
-                  />
+              <View>
+                {!productImage && (
                   <Pressable
-                    style={styles2.changeImageBtn}
+                    style={styles2.imagePicker}
                     onPress={handleImagePicker}>
-                    <Text style={styles2.changeImageTxt}>Cambiar imagen</Text>
+                    <Text>Seleccionar Imagen</Text>
+                  </Pressable>
+                )}
+                {productImage && (
+                  <View>
+                    <Image
+                      style={styles2.imagePicker}
+                      source={{uri: productImage}}
+                    />
+                    <Pressable
+                      style={styles2.changeImageBtn}
+                      onPress={handleImagePicker}>
+                      <Text style={styles2.changeImageTxt}>Cambiar imagen</Text>
+                    </Pressable>
+                  </View>
+                )}
+              </View>
+              <TextInput
+                style={styles2.inputProductTxt}
+                placeholder="Nombre del producto"
+                placeholderTextColor="white"
+                numberOfLines={3}
+                multiline={true}
+                onChangeText={text => {
+                  setProduct({...product, name: text});
+                }}
+                value={product.name}
+              />
+              <TextInput
+                style={[styles2.inputProductTxt, styles2.inputProductTxtArea]}
+                placeholderTextColor="white"
+                multiline={true}
+                numberOfLines={4}
+                placeholder="Descripción"
+                onChangeText={text =>
+                  setProduct({...product, description: text})
+                }
+                value={product.description}
+              />
+              <Picker
+                style={styles2.pickerCategory}
+                selectedValue={selectedCategory}
+                onValueChange={handlePickerChange}>
+                <Picker.Item label="Categoría" value="" />
+                {categories.map(category => (
+                  <Picker.Item
+                    key={category.key}
+                    label={category.key}
+                    value={category.key}
+                  />
+                ))}
+              </Picker>
+              <TextInput
+                placeholderTextColor="white"
+                style={[styles2.inputProductTxt, styles2.inputProductTxtArea]}
+                multiline={true}
+                numberOfLines={8}
+                placeholder="Caracteristicas (Separadas por un punto y coma)"
+                onChangeText={text => {
+                  const features = text.split(';');
+                  setProduct({...product, features});
+                }}
+                value={
+                  product.features.length > 0 ? product.features.join(';') : ''
+                }
+              />
+              <Text style={styles2.labelInputPr}>
+                Métodos de pago aceptados
+              </Text>
+              <Text>Selecciona uno o varios métodos</Text>
+              <View style={styles2.paymentContainer}>
+                {paymentMethods.map((item, index) => (
+                  <Pressable
+                    key={index}
+                    style={[
+                      styles2.paymentMethod,
+                      selectedPaymentMethods.includes(item.name) &&
+                        styles2.paymentMethodSelected,
+                    ]}
+                    onPress={() => handlePaymentMethodChange(item.name)}>
+                    <View style={styles2.paymentMethodContent}>
+                      <Icon
+                        name={item.icon}
+                        size={30}
+                        color="white"
+                        style={styles2.paymentIcon}
+                      />
+                      <Text style={styles2.paymentText}>{item.name}</Text>
+                      {selectedPaymentMethods.includes(item.name) && (
+                        <Icon
+                          name="check"
+                          size={15}
+                          color="white"
+                          style={styles2.checkIcon}
+                        />
+                      )}
+                    </View>
+                  </Pressable>
+                ))}
+              </View>
+              <TextInput
+                keyboardType="numeric"
+                placeholder="Precio"
+                style={styles2.inputProductTxt}
+                onChangeText={text => {
+                  const price = parseInt(text, 10);
+                  setProduct({...product, price: isNaN(price) ? 0 : price});
+                }}
+                maxLength={8}
+                value={product.price.toString()}
+              />
+              <View style={styles2.paymentContainer}>
+                <View>
+                  <Text style={styles2.labelInputPr2}>¿Está en oferta?</Text>
+                  <Pressable
+                    style={styles2.offerButton}
+                    onPress={() => {
+                      setIsOffer(!isOffer);
+                      setProduct({
+                        ...product,
+                        offer: {isOffer: !isOffer},
+                      });
+                    }}>
+                    <Text>{isOffer ? 'Sí' : 'No'}</Text>
                   </Pressable>
                 </View>
-              )}
-            </View>
-            <TextInput
-              style={styles2.inputProductTxt}
-              placeholder="Nombre del producto"
-              placeholderTextColor="white"
-              numberOfLines={3}
-              multiline={true}
-              onChangeText={text => {
-                setProduct({...product, name: text});
-              }}
-              value={product.name}
-            />
-            <TextInput
-              style={[styles2.inputProductTxt, styles2.inputProductTxtArea]}
-              placeholderTextColor="white"
-              multiline={true}
-              numberOfLines={4}
-              placeholder="Descripción"
-              onChangeText={text => setProduct({...product, description: text})}
-              value={product.description}
-            />
-            <Picker
-              style={styles2.pickerCategory}
-              selectedValue={selectedCategory}
-              onValueChange={handlePickerChange}>
-              <Picker.Item label="Categoría" value="" />
-              {categories.map(category => (
-                <Picker.Item
-                  key={category.key}
-                  label={category.key}
-                  value={category.key}
+                <View>
+                  <Text style={styles2.labelInputPr2}>Estado</Text>
+                  <Pressable
+                    style={styles2.offerButton}
+                    onPress={() => {
+                      setIsAvailable(!isAvailable);
+                      setProduct({
+                        ...product,
+                        status: isAvailable ? 'No disponible' : 'Disponible',
+                      });
+                    }}>
+                    <Text>{isAvailable ? 'Disponible' : 'No disponible'}</Text>
+                  </Pressable>
+                </View>
+              </View>
+              {isOffer && (
+                <TextInput
+                  placeholder="Descuento"
+                  keyboardType="numeric"
+                  maxLength={2}
+                  onChangeText={text => {
+                    const discount = parseInt(text, 10);
+                    setProduct({
+                      ...product,
+                      offer: {
+                        isOffer: true,
+                        discount: isNaN(discount) ? 0 : discount,
+                        priceInOffer:
+                          product.price - (product.price * discount) / 100,
+                      },
+                    });
+                  }}
+                  value={product.offer.discount}
+                  style={styles2.inputProductTxt}
                 />
-              ))}
-            </Picker>
-            <TextInput
-              placeholderTextColor="white"
-              style={[styles2.inputProductTxt, styles2.inputProductTxtArea]}
-              multiline={true}
-              numberOfLines={8}
-              placeholder="Caracteristicas (Separadas por un punto y coma)"
-              onChangeText={text => {
-                const features = text.split(';');
-                setProduct({...product, features});
-              }}
-              value={
-                product.features.length > 0 ? product.features.join(';') : ''
-              }
-            />
-            <Text style={styles2.labelInputPr}>Métodos de pago aceptados</Text>
-            <Text>Selecciona uno o varios métodos</Text>
-            <View style={styles2.paymentContainer}>
-              {paymentMethods.map((item, index) => (
-                <Pressable
-                  key={index}
-                  style={[
-                    styles2.paymentMethod,
-                    selectedPaymentMethods.includes(item.name) &&
-                      styles2.paymentMethodSelected,
-                  ]}
-                  onPress={() => handlePaymentMethodChange(item.name)}>
-                  <View style={styles2.paymentMethodContent}>
-                    <Icon
-                      name={item.icon}
-                      size={30}
-                      color="white"
-                      style={styles2.paymentIcon}
-                    />
-                    <Text style={styles2.paymentText}>{item.name}</Text>
-                    {selectedPaymentMethods.includes(item.name) && (
-                      <Icon
-                        name="check"
-                        size={15}
-                        color="white"
-                        style={styles2.checkIcon}
-                      />
-                    )}
-                  </View>
-                </Pressable>
-              ))}
+              )}
             </View>
-            <TextInput
-              keyboardType="numeric"
-              placeholder="Precio"
-              style={styles2.inputProductTxt}
-              onChangeText={text => {
-                const price = parseInt(text, 10);
-                setProduct({...product, price: isNaN(price) ? 0 : price});
-              }}
-              maxLength={8}
-              value={product.price.toString()}
-            />
-            <View style={styles2.paymentContainer}>
-              <View>
-                <Text style={styles2.labelInputPr2}>¿Está en oferta?</Text>
-                <Pressable
-                  style={styles2.offerButton}
-                  onPress={() => {
-                    setIsOffer(!isOffer);
-                    setProduct({
-                      ...product,
-                      offer: {isOffer: !isOffer},
-                    });
-                  }}>
-                  <Text>{isOffer ? 'Sí' : 'No'}</Text>
-                </Pressable>
-              </View>
-              <View>
-                <Text style={styles2.labelInputPr2}>Estado</Text>
-                <Pressable
-                  style={styles2.offerButton}
-                  onPress={() => {
-                    setIsAvailable(!isAvailable);
-                    setProduct({
-                      ...product,
-                      status: isAvailable ? 'No disponible' : 'Disponible',
-                    });
-                  }}>
-                  <Text>{isAvailable ? 'Disponible' : 'No disponible'}</Text>
-                </Pressable>
-              </View>
-            </View>
-            {isOffer && (
-              <TextInput
-                placeholder="Descuento"
-                keyboardType="numeric"
-                maxLength={2}
-                onChangeText={text => {
-                  const discount = parseInt(text, 10);
-                  setProduct({
-                    ...product,
-                    offer: {
-                      isOffer: true,
-                      discount: isNaN(discount) ? 0 : discount,
-                      priceInOffer:
-                        product.price - (product.price * discount) / 100,
-                    },
-                  });
-                }}
-                value={product.offer.discount}
-                style={styles2.inputProductTxt}
-              />
+          )}
+
+          <View>
+            {!infoFetched && (
+              <Pressable style={styles2.btnProduct} onPress={handleSaveProduct}>
+                <Text style={styles2.btnProductTxt}>
+                  {loading ? (
+                    <ActivityIndicator size="small" color="white" />
+                  ) : (
+                    'Confirmar cambios'
+                  )}
+                </Text>
+              </Pressable>
             )}
-            <View>
-              {!infoFetched && (
-                <Pressable
-                  style={styles2.btnProduct}
-                  onPress={handleSaveProduct}>
-                  <Text style={styles2.btnProductTxt}>
-                    {loading ? (
-                      <ActivityIndicator size="small" color="white" />
-                    ) : (
-                      'Confirmar cambios'
-                    )}
-                  </Text>
-                </Pressable>
-              )}
-              {infoFetched && (
-                <Pressable
-                  style={styles2.btnProduct2}
-                  onPress={handleUploadProduct}>
-                  <Text style={styles2.btnProductTxt}>Subir Producto</Text>
-                </Pressable>
-              )}
-            </View>
+            {infoFetched && (
+              <Pressable
+                style={styles2.btnProduct2}
+                onPress={handleUploadProduct}>
+                <Text style={styles2.btnProductTxt}>Subir Producto</Text>
+              </Pressable>
+            )}
           </View>
         </View>
       </ScrollView>
