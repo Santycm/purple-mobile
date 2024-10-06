@@ -8,7 +8,7 @@ const ProductComponent = ({item, state, dispatch}) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('ProductInfo', {product: item, state:state});
+    navigation.navigate('ProductInfo', {product: item, state: state});
   };
 
   const formatPrice = price => {
@@ -19,8 +19,10 @@ const ProductComponent = ({item, state, dispatch}) => {
     }).format(price);
   };
 
-   const isInCart = state.cart.find(product => product.id === item.id || product.product === item.name);
-   const isUserLogged = state.user !== null;
+  const isInCart = state.cart.find(
+    product => product.id === item.id || product.product === item.name,
+  );
+  const isUserLogged = state.user !== null;
 
   return (
     <View style={styles2.cardProduct}>

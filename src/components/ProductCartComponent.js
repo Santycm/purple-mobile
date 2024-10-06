@@ -3,9 +3,7 @@ import {View, Text, Image, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
-
 const ProductCartComponent = ({item, dispatch}) => {
-
   const formatPrice = price => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -27,7 +25,10 @@ const ProductCartComponent = ({item, dispatch}) => {
           {item.description}
         </Text>
         <Text style={AppStyles.cartItemPrice}>
-          {item.offer.isOffer ? formatPrice(item.offer.priceInOffer) : formatPrice(item.price)} x {item.quantity}
+          {item.offer.isOffer
+            ? formatPrice(item.offer.priceInOffer)
+            : formatPrice(item.price)}{' '}
+          x {item.quantity}
         </Text>
         <View style={AppStyles.quantityControls}>
           <Pressable

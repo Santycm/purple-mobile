@@ -5,8 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const CommentComponent = ({comment}) => {
   return (
-    <View
-      style={[styles2.containerRowStart, styles2.containerComment]}>
+    <View style={[styles2.containerRowStart, styles2.containerComment]}>
       <Image
         source={require('../assets/userProfile.webp')}
         style={styles2.imgCommentProfile}

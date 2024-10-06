@@ -4,27 +4,27 @@ import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 
-export const MyProductComponent = ({item , state, dispatch}) => {
+export const MyProductComponent = ({item, state, dispatch}) => {
   const navigation = useNavigation();
 
   const handlePressView = () => {
     navigation.navigate('ProductInfo', {product: item, state: state});
   };
 
-    const truncateText = (text, maxLength) => {
-      if (text.length > maxLength) {
-        return text.substring(0, maxLength) + '...';
-      }
-      return text;
-    };
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  };
 
-    const formatPrice = price => {
-      return new Intl.NumberFormat('es-CO', {
-        style: 'currency',
-        currency: 'COP',
-        minimumFractionDigits: 0,
-      }).format(price);
-    };
+  const formatPrice = price => {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
 
   return (
     <View style={AppStyles.MyProductContainer}>

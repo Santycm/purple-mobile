@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Image, FlatList, Pressable, Text} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
-import { categories } from '../assets/dbCategories.js';
-import { useNavigation } from '@react-navigation/native';
+import {categories} from '../assets/dbCategories.js';
+import {useNavigation} from '@react-navigation/native';
 
 export const InitialCategories = () => {
   const navigation = useNavigation();

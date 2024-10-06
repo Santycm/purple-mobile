@@ -6,7 +6,6 @@ import {styles2} from '../styles/AppStyles2';
 import colombiaData from '../assets/colombia.min.json';
 
 export const InfoUserForm = ({nextStep, userState}) => {
-  
   const [dateTime, setDateTime] = useState(new Date());
   const [show, setShow] = useState(false);
   const [age, setAge] = useState(0);
@@ -33,7 +32,7 @@ export const InfoUserForm = ({nextStep, userState}) => {
       let day = birthDate.getDay();
       let month = birthDate.getMonth();
       let year = birthDate.getFullYear();
-      let birthDateFormated = day + "/" + month + "/" + year;
+      let birthDateFormated = day + '/' + month + '/' + year;
       userState.setBirthDate(birthDateFormated);
       let age = today.getFullYear() - birthDate.getFullYear();
       setAge(age);
@@ -59,7 +58,6 @@ export const InfoUserForm = ({nextStep, userState}) => {
   const showDatepicker = () => {
     setShow(true);
   };
-
 
   return (
     <View style={styles2.formSection}>

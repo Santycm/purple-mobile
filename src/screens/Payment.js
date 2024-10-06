@@ -4,7 +4,6 @@ import CheckBox from '@react-native-community/checkbox';
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UserContext} from '../context/UserContext.js';
-import {dbMarket} from '../assets/dbMarket.js';
 
 export const Payment = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
