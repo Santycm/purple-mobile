@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {styles2} from '../styles/AppStyles2.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
+import {UserContext} from '../context/UserContext';
 
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
+  const [userState, userDispatch] = useContext(UserContext);
 
   const [userName, setUsername] = useState('');
   const [addres, setAddress] = useState('');
