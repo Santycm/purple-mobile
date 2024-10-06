@@ -14,7 +14,6 @@ export const MyProducts = ({navigation}) => {
   const myProducts = userState.dbMarket.find(
     user => user.userName === userState.user.userName,
   ).products;
-  
 
   const renderProductComponent = ({item}) => {
     return (

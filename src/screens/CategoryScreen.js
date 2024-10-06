@@ -3,13 +3,12 @@ import {View, Text, Image, ScrollView} from 'react-native';
 import {styles2} from '../styles/AppStyles2';
 import ProductComponent from '../components/ProductComponent.js';
 
-import { UserContext } from '../context/UserContext.js';
+import {UserContext} from '../context/UserContext.js';
 import {FlatList} from 'react-native-gesture-handler';
 
 const CategoryScreen = ({route, navigation}) => {
-  const {category} = route.params;
-
   const [userState, userDispatch] = useContext(UserContext);
+  const {category} = route.params;
 
   const renderProductComponent = ({item}) => (
     <ProductComponent item={item} state={userState} dispatch={userDispatch} />

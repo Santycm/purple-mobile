@@ -13,6 +13,7 @@ export const Offers = ({navigation}) => {
   const renderProductComponent = ({item}) => (
     <ProductComponent item={item} state={userState} dispatch={userDispatch} />
   );
+
   return (
     <View style={styles2.homeContainer}>
       <ScrollView>
@@ -26,7 +27,11 @@ export const Offers = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={userState.dbMarket.map(user => user.products.filter(product => product.offer.isOffer),).flat()}
+            data={userState.dbMarket
+              .map(user =>
+                user.products.filter(product => product.offer.isOffer),
+              )
+              .flat()}
             renderItem={renderProductComponent}
           />
         </View>

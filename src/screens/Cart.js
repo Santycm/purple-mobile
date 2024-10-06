@@ -4,22 +4,21 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AppStyles from '../styles/AppStyles.js';
 
 import ProductCartComponent from '../components/ProductCartComponent.js';
-import { UserContext } from '../context/UserContext.js';
+import {UserContext} from '../context/UserContext.js';
 
 export const Cart = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
 
   const getTotalItems = cart => {
-    return (
-     cart.reduce((total, product) => total + product.quantity, 0)
-    );
+    return cart.reduce((total, product) => total + product.quantity, 0);
   };
 
   const getTotalPrice = cart => {
     return formatPrice(
       cart.reduce((total, product) => {
-        const price =
-          product.offer.isOffer ? product.offer.priceInOffer : product.price;
+        const price = product.offer.isOffer
+          ? product.offer.priceInOffer
+          : product.price;
         return total + price * product.quantity;
       }, 0),
     );
@@ -69,9 +68,8 @@ export const Cart = ({navigation}) => {
         <Pressable
           style={AppStyles.checkoutButton}
           onPress={() => {
-            navigation.navigate('Delivery'); 
-          }}
-        >
+            navigation.navigate('Delivery');
+          }}>
           <Text style={AppStyles.checkoutButtonText}>Continuar compra</Text>
         </Pressable>
       </View>

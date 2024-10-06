@@ -13,15 +13,18 @@ export const ClientPurchases = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
 
   const renderProductComponent = ({item}) => {
-    return <ProductClientComponent item={item} dispatch={userDispatch} state={userState} />;
+    return (
+      <ProductClientComponent
+        item={item}
+        dispatch={userDispatch}
+        state={userState}
+      />
+    );
   };
-
 
   const clientPurchases = userState.dbMarket.find(
     user => user.userName === userState.user.userName,
   ).clientPurchases;
-
-  console.log(clientPurchases);
 
   return (
     <View style={styles2.bgScreen2}>
@@ -35,7 +38,7 @@ export const ClientPurchases = ({navigation}) => {
       <ScrollView>
         <View style={AppStyles.productContainer}>
           <Text style={styles2.titleTextPageProduct}>Compras de clientes</Text>
-          {clientPurchases.length ===0 && (
+          {clientPurchases.length === 0 && (
             <Text style={styles2.titleTextPageProduct}>
               No se han realizado compras
             </Text>

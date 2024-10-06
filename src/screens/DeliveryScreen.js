@@ -28,7 +28,7 @@ export const DeliveryScreen = ({navigation}) => {
   const handleSaveAddress = () => {
     userState.dbMarket.map(user => {
       if (user.userName === userState.user.userName) {
-        if(user.pointDelivery){
+        if (user.pointDelivery) {
           user.pointDelivery = null;
         }
       }
@@ -59,10 +59,10 @@ export const DeliveryScreen = ({navigation}) => {
   };
 
   const pointsDelivery = [
-    "CALLE 12 # 12-12 Medellín",
-    "CALLE 34 # 34-34 Bogotá",
-    "CALLE 56 # 56-56 Cali",
-  ]
+    'CALLE 12 # 12-12 Medellín',
+    'CALLE 34 # 34-34 Bogotá',
+    'CALLE 56 # 56-56 Cali',
+  ];
 
   return (
     <View style={AppStyles.modalContainerDelivery}>

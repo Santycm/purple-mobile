@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import { View, Text, Image, FlatList, Pressable } from 'react-native';
+import {View, Text, Image, FlatList, Pressable} from 'react-native';
 import AppStyles from '../styles/AppStyles.js';
-import { UserContext } from '../context/UserContext.js';
-import { ProductFavComponent } from '../components/ProductFavComponent.js';
+import {UserContext} from '../context/UserContext.js';
+import {ProductFavComponent} from '../components/ProductFavComponent.js';
 
 export const MyFavorites = () => {
   const [userState, userDispatch] = useContext(UserContext);
@@ -23,8 +23,8 @@ export const MyFavorites = () => {
       dispatch={userDispatch}
     />
   );
-  
-  const formatPrice = (price) => {
+
+  const formatPrice = price => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
       currency: 'COP',

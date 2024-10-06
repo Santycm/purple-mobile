@@ -18,7 +18,7 @@ export const SigIn = () => {
     let userFound = userState.dbMarket.find(userItem => {
       return userItem.userName === user && userItem.password === password;
     });
-    if(userFound){
+    if (userFound) {
       userDispatch({type: 'LOGIN', payload: userFound});
     }
     return userFound;

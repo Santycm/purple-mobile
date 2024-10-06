@@ -12,7 +12,6 @@ export const MyPurchases = ({navigation}) => {
     .filter(item => item.userName === userState.user.userName)
     .flatMap(item => item.purchases);
 
-
   return (
     <View style={AppStyles.container}>
       <View style={AppStyles.header}>

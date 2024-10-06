@@ -6,7 +6,7 @@ import ProductComponent from '../components/ProductComponent.js';
 import {styles2} from '../styles/AppStyles2.js';
 import {FlatList} from 'react-native-gesture-handler';
 
-import { UserContext } from '../context/UserContext.js';
+import {UserContext} from '../context/UserContext.js';
 
 export const Home = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);

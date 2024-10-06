@@ -4,7 +4,7 @@ import CheckBox from '@react-native-community/checkbox';
 import AppStyles from '../styles/AppStyles.js';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UserContext} from '../context/UserContext.js';
-import { dbMarket } from '../assets/dbMarket.js';
+import {dbMarket} from '../assets/dbMarket.js';
 
 export const Payment = ({navigation}) => {
   const [userState, userDispatch] = useContext(UserContext);
@@ -49,11 +49,14 @@ export const Payment = ({navigation}) => {
     return text;
   };
 
-
   const handleAddressView = () => {
-    const isAddress = userState.dbMarket.find(user => user.userName === userState.user.userName).address
+    const isAddress = userState.dbMarket.find(
+      user => user.userName === userState.user.userName,
+    ).address;
 
-    const isPointDelivery = userState.dbMarket.find(user => user.userName === userState.user.userName).pointDelivery
+    const isPointDelivery = userState.dbMarket.find(
+      user => user.userName === userState.user.userName,
+    ).pointDelivery;
 
     if (isAddress) {
       return (
@@ -66,7 +69,6 @@ export const Payment = ({navigation}) => {
           }
         </Text>
       );
-      
     } else if (isPointDelivery) {
       return (
         <Text style={AppStyles.addressText}>
@@ -89,7 +91,7 @@ export const Payment = ({navigation}) => {
     )
     .map(user => user.name);
 
-    distribuitorsList = new Set(distribuitorsList);
+  distribuitorsList = new Set(distribuitorsList);
 
   const handleFinishPurchase = () => {
     if (!captchaChecked) {
@@ -110,7 +112,7 @@ export const Payment = ({navigation}) => {
       user => user.userName === userState.user.userName,
     ).address;
 
-    if(!isPointDelivery && !isAddress){
+    if (!isPointDelivery && !isAddress) {
       alert('Debes seleccionar un punto de entrega');
       return;
     }
@@ -141,30 +143,30 @@ export const Payment = ({navigation}) => {
       }
 
       //ADD TO CLIENTPURCHASES
-      userDispatch({type:'ADD_CLIENT_PURCHASE', payload: {
-        productP: cartItem.name,
-        img: cartItem.img,
-        date: new Date().toISOString(),
-        price:
-          (cartItem.offer.isOffer
-            ? cartItem.offer.priceInOffer
-            : cartItem.price) * cartItem.quantity,
-        status: 'En tránsito',
-        count: cartItem.quantity,
-        paymentMethod: selectedPayment,
-        distribuitor: userState.dbMarket.find(user =>
-          user.products.some(product => product.id === cartItem.id),
-        ).userName,
-        client: userState.user.name + ' ' + userState.user.lastName
-      }});
+      userDispatch({
+        type: 'ADD_CLIENT_PURCHASE',
+        payload: {
+          productP: cartItem.name,
+          img: cartItem.img,
+          date: new Date().toISOString(),
+          price:
+            (cartItem.offer.isOffer
+              ? cartItem.offer.priceInOffer
+              : cartItem.price) * cartItem.quantity,
+          status: 'En tránsito',
+          count: cartItem.quantity,
+          paymentMethod: selectedPayment,
+          distribuitor: userState.dbMarket.find(user =>
+            user.products.some(product => product.id === cartItem.id),
+          ).userName,
+          client: userState.user.name + ' ' + userState.user.lastName,
+        },
+      });
     });
 
-  
     navigation.navigate('ConfirmPurchase');
     userDispatch({type: 'CLEAR_CART'});
   };
-
-  
 
   return (
     <ScrollView

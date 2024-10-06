@@ -36,7 +36,7 @@ export const ProductForm = ({navigation, route}) => {
   const [productImage, setProductImage] = useState(null);
   const [urlImage, setUrlImage] = useState(null);
   const [product, setProduct] = useState({
-    id:null,
+    id: null,
     img: '',
     name: '',
     description: '',
@@ -80,8 +80,8 @@ export const ProductForm = ({navigation, route}) => {
               priceInOffer: offer.priceInOffer,
             }
           : {discount: 0},
-          comments: productId.comments,
-          questions: productId.questions,
+        comments: productId.comments,
+        questions: productId.questions,
       });
       setSelectedCategory(category);
       setSelectedPaymentMethods(paymentAccepted);

@@ -6,7 +6,6 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
 import {UserContext} from '../context/UserContext';
-import { ClientPurchases } from './ClientPurchases.js';
 
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
@@ -40,7 +39,12 @@ export const SignUp = ({navigation}) => {
   const nameRegex = /^[A-Za-záéíóúÁÉÍÓÚñÑ ]+$/;
 
   const validateFinalForm = () => {
-    if (name === '' || lastName === '' || email === '' || passwordAccount === '') {
+    if (
+      name === '' ||
+      lastName === '' ||
+      email === '' ||
+      passwordAccount === ''
+    ) {
       alert('Por favor llena todos los campos');
       return false;
     }
@@ -82,7 +86,7 @@ export const SignUp = ({navigation}) => {
       return false;
     }
 
-    if(userState.dbMarket.find((user) => user.email === email)){
+    if (userState.dbMarket.find(user => user.email === email)) {
       alert('El correo ya está registrado');
       return false;
     }
@@ -102,7 +106,7 @@ export const SignUp = ({navigation}) => {
       purchases: [],
       clientPurchases: [],
       favoriteProducts: [],
-    })
+    });
 
     return true;
   };

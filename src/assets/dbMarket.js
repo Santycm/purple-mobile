@@ -11,7 +11,6 @@ export let dbMarket = [
     name: 'Santiago',
     lastName: 'Castaño Moreno',
     products: [
-      //Vehicles
       {
         id: 1,
         img: 'https://http2.mlstatic.com/D_NQ_NP_633883-MLU77488828943_072024-O.webp',

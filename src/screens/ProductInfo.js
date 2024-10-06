@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {UserContext} from '../context/UserContext';
 
-import { QuestionComponent } from '../components/QuestionComponent';
-import { CommentComponent } from '../components/CommentComponent';
+import {QuestionComponent} from '../components/QuestionComponent';
+import {CommentComponent} from '../components/CommentComponent';
 
 export const ProductInfo = ({route, navigation}) => {
   const {product} = route.params;
@@ -44,7 +44,14 @@ export const ProductInfo = ({route, navigation}) => {
   const isUserLogged = state.user !== null;
 
   const renderQuestionComponent = ({item}) => {
-    return <QuestionComponent question={item} product={product} state={userState} dispatch={dispatch} />;
+    return (
+      <QuestionComponent
+        question={item}
+        product={product}
+        state={userState}
+        dispatch={dispatch}
+      />
+    );
   };
 
   const renderCommentComponent = ({item}) => {
@@ -52,21 +59,53 @@ export const ProductInfo = ({route, navigation}) => {
   };
 
   const handleSubmitQuestion = () => {
-    if(question === '') return;
-    dispatch({type: 'ADD_QUESTION', payload: {productInfo: product, question, productDistribuitor: state.dbMarket.find(user => user.products.some(prod => prod.id === product.id)).userName}});
+    if (question === '') return;
+    dispatch({
+      type: 'ADD_QUESTION',
+      payload: {
+        productInfo: product,
+        question,
+        productDistribuitor: state.dbMarket.find(user =>
+          user.products.some(prod => prod.id === product.id),
+        ).userName,
+      },
+    });
     setQuestion('');
-    setQuestionList([...questionList, {id:questionList.length+1, user: `${state.user.name} ${state.user.lastName}`, question}]);
-  }
+    setQuestionList([
+      ...questionList,
+      {
+        id: questionList.length + 1,
+        user: `${state.user.name} ${state.user.lastName}`,
+        question,
+      },
+    ]);
+  };
 
   const handleSubmitComment = () => {
-    if(comment === '') return;
-    dispatch({type: 'ADD_COMMENT', payload: {productInf: product, comment, rating, productDistrib: state.dbMarket.find(user => user.products.some(prod => prod.id === product.id)).userName}});
+    if (comment === '') return;
+    dispatch({
+      type: 'ADD_COMMENT',
+      payload: {
+        productInf: product,
+        comment,
+        rating,
+        productDistrib: state.dbMarket.find(user =>
+          user.products.some(prod => prod.id === product.id),
+        ).userName,
+      },
+    });
     setComment('');
     setRating(0);
-    setCommentList([...commentList, {id:commentList.length+1, user: `${state.user.name} ${state.user.lastName}`, comment, rating}]);
-  }
-
-
+    setCommentList([
+      ...commentList,
+      {
+        id: commentList.length + 1,
+        user: `${state.user.name} ${state.user.lastName}`,
+        comment,
+        rating,
+      },
+    ]);
+  };
 
   const getPaymentIcon = payment => {
     switch (payment) {
@@ -120,8 +159,6 @@ export const ProductInfo = ({route, navigation}) => {
       }
     }
   };
-
-  
 
   const loadFavoriteComponent = () => {
     if (isFavorite) {
