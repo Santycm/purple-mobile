@@ -31,7 +31,14 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={userState.dbMarket.map((user) => user.products.filter((product) => product.offer.isOffer)).flat()}
+            data={userState.dbMarket
+              .map(user =>
+                user.products.filter(
+                  product =>
+                    product.offer.isOffer && product.status === 'Disponible',
+                ),
+              )
+              .flat()}
             renderItem={renderProductComponent}
           />
         </View>
@@ -43,7 +50,13 @@ export const Home = ({navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={userState.dbMarket.map((user) => user.products).flat()}
+            data={userState.dbMarket
+              .map(user =>
+                user.products.filter(
+                  product => product.status === 'Disponible',
+                ),
+              )
+              .flat()}
             renderItem={renderProductComponent}
           />
         </View>

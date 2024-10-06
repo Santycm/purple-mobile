@@ -45,7 +45,7 @@ export const ProductInfo = ({route, navigation}) => {
     }).format(price);
   };
 
-  const handleAddFavorite = () => {
+  const handleFavoritePress = () => {
     if (state.user === null) {
       return;
     }
@@ -55,7 +55,12 @@ export const ProductInfo = ({route, navigation}) => {
     );
 
     if (user) {
-      if (!isFavorite) {
+      if (isFavorite) {
+        user.favoriteProducts = user.favoriteProducts.filter(
+          favorite => favorite.id !== product.id,
+        );
+        setIsFavorite(false);
+      } else {
         user.favoriteProducts.push({
           id: product.id,
           name: product.name,
@@ -85,13 +90,13 @@ export const ProductInfo = ({route, navigation}) => {
   const loadFavoriteComponent = () => {
     if (isFavorite) {
       return (
-        <Pressable style={styles2.btnLoveAdded}>
+        <Pressable style={styles2.btnLoveAdded} onPress={handleFavoritePress}>
           <Icon name="heart" size={20} color="white" />
         </Pressable>
       );
     } else {
       return (
-        <Pressable style={styles2.btnLove} onPress={handleAddFavorite}>
+        <Pressable style={styles2.btnLove} onPress={handleFavoritePress}>
           <Icon name="heart" size={20} color="white" />
         </Pressable>
       );

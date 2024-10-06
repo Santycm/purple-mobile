@@ -31,8 +31,19 @@ const CategoryScreen = ({route, navigation}) => {
             scrollEnabled={false}
             numColumns={2}
             style={styles2.sectionBg}
-            data={userState.dbMarket.map((user) => user.products.filter((product) => product.category === category.key)).flat()}
+            data={userState.dbMarket
+              .map(user =>
+                user.products.filter(
+                  product =>
+                    product.category === category.key &&
+                    product.status === 'Disponible',
+                ),
+              )
+              .flat()}
             renderItem={renderProductComponent}
+            ListEmptyComponent={
+              <Text>No hay productos disponibles en esta categoría</Text>
+            }
           />
         </View>
       </ScrollView>

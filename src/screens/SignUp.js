@@ -6,6 +6,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
 import {UserContext} from '../context/UserContext';
+import { ClientPurchases } from './ClientPurchases.js';
 
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
@@ -99,6 +100,8 @@ export const SignUp = ({navigation}) => {
       lastName: lastName,
       products: [],
       purchases: [],
+      clientPurchases: [],
+      favoriteProducts: [],
     })
 
     return true;

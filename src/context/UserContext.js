@@ -151,6 +151,7 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
+      
     case 'UPDATE_PRODUCT_ON_FAVORITE_LIST':
       const updateProductFavorite = action.payload.updateProduct;
 
