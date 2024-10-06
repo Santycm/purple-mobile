@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 const AppStyles = StyleSheet.create({
-  //------------------------- ESTILOS DE EL CARRITO DE COMPRA(CART.JS)-------------------------------------
   container: {
     flex: 1,
     padding: 20,
@@ -133,7 +132,6 @@ const AppStyles = StyleSheet.create({
     fontSize: 18,
   },
 
-  // -------------------------------------ESTILOS DELIVERYSCREEN------------------------------------------
   modalContainerDelivery: {
     flex: 1,
     justifyContent: 'center',
@@ -218,7 +216,6 @@ const AppStyles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  //-------------------------------------ESTILOS ARRIVALDAY -------------------------------
   container: {
     flex: 1,
     backgroundColor: '#000000',
@@ -330,7 +327,6 @@ const AppStyles = StyleSheet.create({
     fontSize: 18,
   },
 
-  //------------------------------------ESTILOS PAYMENT--------------------------------------
   modalContainerPayment: {
     flex: 1,
     justifyContent: 'center',
@@ -395,7 +391,6 @@ const AppStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  //-------------mas de payment ----
 
   scrollViewContainerPaymentScreen: {
     flexGrow: 1,
@@ -550,7 +545,6 @@ const AppStyles = StyleSheet.create({
     fontSize: 18,
   },
 
-  //------------------------------------ESTILOS MyPurchases--------------------------------------
 
   container: {
     flex: 1,
@@ -668,7 +662,6 @@ const AppStyles = StyleSheet.create({
     marginVertical: 5,
   },
 
-  //------------------------------ConfirmPurchase----------------
 
   containerConfirm: {
     flex: 1,
@@ -713,7 +706,6 @@ const AppStyles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  //------------------Estilos HelpSupport---------------------------
   containerHelp: {
     flex: 1,
     backgroundColor: '#000000',
@@ -798,7 +790,6 @@ const AppStyles = StyleSheet.create({
     fontSize: 16,
     marginTop: 5,
   },
-  //Estilos summary
   purchaseSummaryItemScreen: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -866,6 +857,17 @@ const AppStyles = StyleSheet.create({
     padding: 30,
     gap: 20,
   },
+  smallInput:{
+    height:40,
+    borderColor: '#B0B0B0',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    backgroundColor: '#FFFFFF',
+    fontSize: 14,
+    color:'#2B2B2B',
+  }
 });
 
 export default AppStyles;
