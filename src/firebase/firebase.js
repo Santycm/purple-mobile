@@ -1,18 +1,13 @@
-import app from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
+// firebaseConfig.js
+import {initializeApp} from 'firebase/app';
+import {getFirestore} from 'firebase/firestore';
 
 import firebaseConfig from './config';
 
-class Firebase {
-    constructor(){
-        if(!app.apps.length){
-            app.initializeApp(firebaseConfig);
-        }
-        this.db = app.firestore();
-        this.storage = app.storage();
-    }
-};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-const firebase = new Firebase();
-export default firebase;
+// Initialize Firestore
+const db = getFirestore(app);
+
+export { db };

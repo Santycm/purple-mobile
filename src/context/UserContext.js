@@ -1,12 +1,13 @@
-import React, {createContext, useReducer, useContext} from 'react';
+import React, {createContext, useEffect, useReducer} from 'react';
+import {collection, getDocs} from 'firebase/firestore';
 import {dbMarket} from '../assets/dbMarket';
-
+import {db} from '../firebase/firebase';
+import {dbFunctions} from './dbFunctions';
 
 const UserContext = createContext();
 
-
 const initialState = {
-  dbMarket: dbMarket,
+  dbMarket: [],
   user: null,
   cart: [],
   search: '',
@@ -16,6 +17,7 @@ const userReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_USER':
       const {newUser} = action.payload;
+      dbFunctions.addNewUser(db, newUser);
       return {
         ...state,
         dbMarket: [...state.dbMarket, newUser],
@@ -316,13 +318,32 @@ const userReducer = (state, action) => {
           user.favoriteProducts.push(productFav);
         }
       });
-      default:
+    case 'SET_DBMARKET':
+      return {
+        ...state,
+        dbMarket: action.payload,
+      };
+    default:
       return state;
   }
 };
 
 const UserProvider = ({children}) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'dbMarket'));
+        const data = querySnapshot.docs.map(doc => doc.data());
+        dispatch({type: 'SET_DBMARKET', payload: data});
+      } catch (error) {
+        console.log('Error getting documents: ', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <UserContext.Provider value={[state, dispatch]}>

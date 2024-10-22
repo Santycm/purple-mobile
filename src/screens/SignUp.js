@@ -7,7 +7,6 @@ import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
 import {UserContext} from '../context/UserContext';
 
-
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
   const [userState, userDispatch] = useContext(UserContext);
