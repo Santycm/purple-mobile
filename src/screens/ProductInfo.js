@@ -168,13 +168,13 @@ export const ProductInfo = ({route, navigation}) => {
     if (isFavorite) {
       return (
         <Pressable style={styles2.btnLoveAdded} onPress={handleFavoritePress}>
-          <Icon name="heart" size={20} color="white" />
+          <Icon name="heart" size={25} color="black" />
         </Pressable>
       );
     } else {
       return (
         <Pressable style={styles2.btnLove} onPress={handleFavoritePress}>
-          <Icon name="heart" size={20} color="white" />
+          <Icon name="plus" size={25} color="white" />
         </Pressable>
       );
     }
@@ -375,7 +375,7 @@ export const ProductInfo = ({route, navigation}) => {
                 </View>
               ) : (
                 <View>
-                  <Text>Debes iniciar sesión para hacer una pregunta</Text>
+                  <Text>Debes iniciar sesión para hacer un comentario</Text>
                   <Pressable
                     onPress={() => {
                       navigation.navigate('Login');

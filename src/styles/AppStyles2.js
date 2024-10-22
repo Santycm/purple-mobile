@@ -93,18 +93,17 @@ const styles2 = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  containerAnswer:{
+  containerAnswer: {
     flexDirection: 'col',
     gap: 10,
   },
-  textInputAnswer:{
+  textInputAnswer: {
     backgroundColor: 'white',
     borderRadius: 10,
     color: 'black',
-    width:200
-
+    width: 200,
   },
-  btnResponse:{
+  btnResponse: {
     borderRadius: 10,
     borderColor: 'white',
     borderWidth: 1,
@@ -121,17 +120,18 @@ const styles2 = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 40,
-    height: 40,
+    width: 55,
+    height: 55,
   },
   btnLoveAdded: {
-    backgroundColor: 'black',
+    backgroundColor: '#6A0DAD',
     borderRadius: 10,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 40,
-    height: 40,
+    width: 55,
+    height: 55,
+    right: 0,
   },
   iconProfile: {
     backgroundColor: 'white',
