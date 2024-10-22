@@ -55,7 +55,6 @@ const userReducer = (state, action) => {
           return user;
         }),
       };
-
     case 'UPDATE_PURCHASE_STATUS':
       return {
         ...state,
@@ -68,7 +67,6 @@ const userReducer = (state, action) => {
           return user;
         }),
       };
-
     case 'ADD_CLIENT_PURCHASE':
       const {
         distribuitor,
@@ -104,7 +102,6 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
-
     case 'ADD_PRODUCT':
       const {userName, product} = action.payload;
       return {
@@ -151,7 +148,6 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
-      
     case 'UPDATE_PRODUCT_ON_FAVORITE_LIST':
       const updateProductFavorite = action.payload.updateProduct;
 
@@ -223,7 +219,7 @@ const userReducer = (state, action) => {
           )
           .filter(item => item.quantity > 0),
       };
-      case 'ADD_QUESTION':
+    case 'ADD_QUESTION':
       const {productInfo, question, productDistribuitor} = action.payload;
 
       return {
@@ -251,8 +247,9 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
-      case 'ADD_ANSWER':
-      const {questionInfo, answer, productQInfo, productDistri} = action.payload;
+    case 'ADD_ANSWER':
+      const {questionInfo, answer, productQInfo, productDistri} =
+        action.payload;
 
       return {
         ...state,
@@ -276,7 +273,7 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
-      case 'ADD_COMMENT':
+    case 'ADD_COMMENT':
       const {productInf, comment, rating, productDistrib} = action.payload;
 
       return {
@@ -305,7 +302,15 @@ const userReducer = (state, action) => {
             : user,
         ),
       };
-    default:
+    case 'ADD_FAVORITE':
+      const {productFav, userProduct} = action.payload;
+      console.log(productFav);
+      dbMarket.map(user => {
+        if (user.userName === userProduct.userName) {
+          user.favoriteProducts.push(productFav);
+        }
+      });
+      default:
       return state;
   }
 };

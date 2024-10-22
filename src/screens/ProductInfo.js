@@ -146,7 +146,7 @@ export const ProductInfo = ({route, navigation}) => {
         );
         setIsFavorite(false);
       } else {
-        user.favoriteProducts.push({
+        let productFav = {
           id: product.id,
           name: product.name,
           img: product.img,
@@ -154,6 +154,10 @@ export const ProductInfo = ({route, navigation}) => {
           description: product.description,
           status: product.status,
           price: product.price,
+        };
+        dispatch({
+          type: 'ADD_FAVORITE',
+          payload: {productFav: productFav, userProduct: user},
         });
         setIsFavorite(true);
       }
