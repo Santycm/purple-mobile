@@ -7,6 +7,7 @@ import {InfoUserForm} from '../components/InfoUserForm.js';
 import {Accountform} from '../components/AccountForm.js';
 import {UserContext} from '../context/UserContext';
 
+
 export const SignUp = ({navigation}) => {
   const [ShowAccountForm, setShowAccountForm] = useState(false);
   const [userState, userDispatch] = useContext(UserContext);
@@ -91,7 +92,7 @@ export const SignUp = ({navigation}) => {
       return false;
     }
 
-    userState.dbMarket.push({
+    let newUser = {
       userName: userName,
       address: addres,
       birthDate: birthDate,
@@ -106,7 +107,9 @@ export const SignUp = ({navigation}) => {
       purchases: [],
       clientPurchases: [],
       favoriteProducts: [],
-    });
+    }
+
+    userDispatch({ type: 'ADD_USER', payload: {newUser} });
 
     return true;
   };

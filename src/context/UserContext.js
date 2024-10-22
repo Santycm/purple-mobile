@@ -1,8 +1,9 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext, useReducer, useContext} from 'react';
 import {dbMarket} from '../assets/dbMarket';
-import {ClientPurchases} from '../screens/ClientPurchases';
+
 
 const UserContext = createContext();
+
 
 const initialState = {
   dbMarket: dbMarket,
@@ -13,6 +14,12 @@ const initialState = {
 
 const userReducer = (state, action) => {
   switch (action.type) {
+    case 'ADD_USER':
+      const {newUser} = action.payload;
+      return {
+        ...state,
+        dbMarket: [...state.dbMarket, newUser],
+      };
     case 'LOGIN':
       return {
         ...state,
@@ -304,7 +311,6 @@ const userReducer = (state, action) => {
       };
     case 'ADD_FAVORITE':
       const {productFav, userProduct} = action.payload;
-      console.log(productFav);
       dbMarket.map(user => {
         if (user.userName === userProduct.userName) {
           user.favoriteProducts.push(productFav);
