@@ -1,6 +1,7 @@
 import React, {createContext, useEffect, useReducer} from 'react';
-import {collection, getDocs, setDoc, updateDoc, doc} from 'firebase/firestore';
+import {collection, getDocs, setDoc, updateDoc, doc, onSnapshot} from 'firebase/firestore';
 import {db} from '../firebase/firebase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserContext = createContext();
 
@@ -379,10 +380,10 @@ const userReducer = (state, action) => {
       updateDataInFirestore(newStateDispatch.dbMarket);
       return newStateDispatch;
     case 'SET_DBMARKET':
-      return {
-        ...state,
-        dbMarket: action.payload,
-      };
+      return {...state, dbMarket: action.payload};
+    case 'SET_STATE':
+      return {...state, ...action.payload};
+      
     default:
       return state;
   }
@@ -392,18 +393,44 @@ const UserProvider = ({children}) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadState = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'dbMarket'));
-        const data = querySnapshot.docs.map(doc => doc.data());
-        dispatch({type: 'SET_DBMARKET', payload: data});
+        const savedState = await AsyncStorage.getItem('userState');
+        if (savedState) {
+          dispatch({type: 'SET_STATE', payload: JSON.parse(savedState)});
+        }
       } catch (error) {
-        console.log('Error getting documents: ', error);
+        console.error('Error loading state: ', error);
       }
     };
 
-    fetchData();
+    loadState();
+
+    const unsubscribe = onSnapshot(
+      collection(db, 'dbMarket'),
+      querySnapshot => {
+        const data = querySnapshot.docs.map(doc => doc.data());
+        dispatch({type: 'SET_DBMARKET', payload: data});
+      },
+      error => {
+        console.log('Error getting documents: ', error);
+      },
+    );
+
+    return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const saveState = async () => {
+      try {
+        await AsyncStorage.setItem('userState', JSON.stringify(state));
+      } catch (error) {
+        console.error('Error saving state: ', error);
+      }
+    };
+
+    saveState();
+  }, [state]);
 
   return (
     <UserContext.Provider value={[state, dispatch]}>
