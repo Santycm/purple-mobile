@@ -38,6 +38,7 @@ export const MyFavorites = () => {
         <Text style={AppStyles.headerTitle}>Mis Favoritos</Text>
       </View>
       <FlatList
+        inverted={true}
         data={myFavorites}
         renderItem={renderProductComponent}
         contentContainerStyle={AppStyles.listContainer}

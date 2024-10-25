@@ -47,6 +47,7 @@ export const ClientPurchases = ({navigation}) => {
             <View>
               {
                 <FlatList
+                  inverted={true}
                   scrollEnabled={false}
                   data={clientPurchases}
                   renderItem={renderProductComponent}

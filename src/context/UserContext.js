@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useReducer} from 'react';
 import {collection, getDocs, setDoc, updateDoc, doc, onSnapshot} from 'firebase/firestore';
 import {db} from '../firebase/firebase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { dbMarket } from '../assets/dbMarket';
 
 const UserContext = createContext();
 
@@ -72,7 +73,13 @@ const userReducer = (state, action) => {
           user.userName === state.user.userName
             ? {
                 ...user,
-                purchases: [...user.purchases, action.payload],
+                purchases: [
+                  ...user.purchases,
+                  {
+                    ...action.payload,
+                    idProductP: user.purchases.length + 1, 
+                  },
+                ],
               }
             : user,
         ),
@@ -85,7 +92,7 @@ const userReducer = (state, action) => {
         dbMarket: state.dbMarket.map(user => {
           if (user.clientPurchases) {
             user.clientPurchases.map(purchase => {
-              if (purchase.productP === action.payload.product) {
+              if (purchase.idProductP === action.payload.product) {
                 purchase.status = action.payload.status;
               }
             });
@@ -100,7 +107,7 @@ const userReducer = (state, action) => {
         ...state,
         dbMarket: state.dbMarket.map(user => {
           user.purchases.map(purchase => {
-            if (purchase.product === action.payload.product) {
+            if (purchase.idProductP === action.payload.product) {
               purchase.status = action.payload.status;
             }
           });
@@ -130,6 +137,7 @@ const userReducer = (state, action) => {
                 clientPurchases: [
                   ...user.clientPurchases,
                   {
+                    idProductP: user.clientPurchases.length + 1,
                     productP,
                     img,
                     date,
@@ -431,6 +439,8 @@ const UserProvider = ({children}) => {
 
     saveState();
   }, [state]);
+
+
 
   return (
     <UserContext.Provider value={[state, dispatch]}>

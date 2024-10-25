@@ -10,11 +10,11 @@ export const ProductClientComponent = ({item, dispatch, state}) => {
   useEffect(() => {
     dispatch({
       type: 'UPDATE_PURCHASE_STATUS_ONLIST',
-      payload: {product: item.productP, status: selectedState},
+      payload: {product: item.idProductP, status: selectedState},
     });
     dispatch({
       type: 'UPDATE_PURCHASE_STATUS',
-      payload: {product: item.productP, status: selectedState},
+      payload: {product: item.idProductP, status: selectedState},
     });
   }, [selectedState]);
 

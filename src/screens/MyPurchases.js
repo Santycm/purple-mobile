@@ -27,6 +27,7 @@ export const MyPurchases = ({navigation}) => {
       )}
       {userPurchases.length > 0 && (
         <FlatList
+          inverted={true}
           data={userPurchases}
           renderItem={ProductPurchaseComponent}
           contentContainerStyle={AppStyles.listContainer}

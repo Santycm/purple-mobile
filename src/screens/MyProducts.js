@@ -46,6 +46,7 @@ export const MyProducts = ({navigation}) => {
             <Icon name="arrow-right" size={15} color="white" />
           </Pressable>
           <FlatList
+            inverted={true}
             scrollEnabled={false}
             data={myProducts}
             renderItem={renderProductComponent}

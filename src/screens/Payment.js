@@ -164,15 +164,15 @@ export const Payment = ({navigation}) => {
       });
 
       itemsCart.push({
-          title: cartItem.name,
-          description: cartItem.description,
-          quantity: cartItem.quantity,
-          unit_price: cartItem.offer.isOffer
-            ? cartItem.offer.priceInOffer
-            : cartItem.price,
-          category: cartItem.category,
-          image_url: cartItem.img,
-        });
+        title: cartItem.name,
+        description: cartItem.description,
+        quantity: cartItem.quantity,
+        unit_price: cartItem.offer.isOffer
+          ? cartItem.offer.priceInOffer
+          : cartItem.price,
+        category: cartItem.category,
+        image_url: cartItem.img,
+      });
     });
 
     const paymentInfo = {
