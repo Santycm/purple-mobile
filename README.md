@@ -43,3 +43,17 @@ react-native-star-rating
 react-native-swiper
 react-native-vector-icons
 ```
+
+## MERCADO PAGO USER
+```bash
+USERNAME: TESTUSER1616320686
+PASSWORD: Cx4t0LiVQG
+```
+## CREDIT CARD INFO TEST
+```bash
+NUMBER: 3743 781877 552883
+EXPIRE: 11/25
+CV: 1234
+OWNER_NAME: APRO
+OWNER_DOC:123456789 
+```

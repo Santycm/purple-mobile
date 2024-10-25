@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {Home} from './src/screens/Home.js';
 import {Cart} from './src/screens/Cart.js';
@@ -11,7 +11,7 @@ import {Payment} from './src/screens/Payment.js';
 
 import {MyPurchases} from './src/screens/MyPurchases.js';
 import {MyFavorites} from './src/screens/MyFavorites.js';
-import { ClientPurchases } from './src/screens/ClientPurchases.js';
+import {ClientPurchases} from './src/screens/ClientPurchases.js';
 
 import CategoryScreen from './src/screens/CategoryScreen.js';
 
@@ -27,15 +27,19 @@ import {SearchProduct} from './src/screens/SearchProduct.js';
 import {Offers} from './src/screens/Offers.js';
 import {Categories} from './src/screens/Categories.js';
 
-import { MyProducts } from './src/screens/MyProducts.js';
-import { ProductForm } from './src/screens/ProductForm.js';
+import {MyProducts} from './src/screens/MyProducts.js';
+import {ProductForm} from './src/screens/ProductForm.js';
+
+import {PurchaseSuccess} from './src/screens/PurchaseSucces.js';
 
 //Context
 import {UserProvider} from './src/context/UserContext.js';
 
 const Stack = createStackNavigator();
 
+
 export default function App() {
+  
   return (
     <UserProvider>
       <NavigationContainer>
@@ -43,6 +47,11 @@ export default function App() {
           <Stack.Screen
             name="ClientPurchases"
             component={ClientPurchases}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="PurchaseSuccess"
+            component={PurchaseSuccess}
             options={{headerShown: false}}
           />
           <Stack.Screen

@@ -116,6 +116,7 @@ export const Payment = ({navigation}) => {
       return;
     }
 
+    let itemsCart = [];
     userState.cart.forEach(cartItem => {
       const user = userState.user;
 
@@ -161,9 +162,25 @@ export const Payment = ({navigation}) => {
           client: userState.user.name + ' ' + userState.user.lastName,
         },
       });
+
+      itemsCart.push({
+          title: cartItem.name,
+          description: cartItem.description,
+          quantity: cartItem.quantity,
+          unit_price: cartItem.offer.isOffer
+            ? cartItem.offer.priceInOffer
+            : cartItem.price,
+          category: cartItem.category,
+          image_url: cartItem.img,
+        });
     });
 
-    navigation.navigate('ConfirmPurchase');
+    const paymentInfo = {
+      items: itemsCart,
+      payer: userState.user,
+    };
+
+    navigation.navigate('ConfirmPurchase', {paymentInfo: paymentInfo});
     userDispatch({type: 'CLEAR_CART'});
   };
 
